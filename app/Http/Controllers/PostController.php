@@ -31,7 +31,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama'     => 'required',
+            'nama'     => 'required|unique',
             'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',

@@ -1,20 +1,10 @@
 @extends('layouts.admin')
 
-@section('content')
-    <div class="page-heading col-12 col-lg-12">
-        <div class="row">
-            <div class="col-sm-8">
-                <h3>Data Objek</h3>
-            </div>
-            <div class="col-sm-4" style="display: flex; justify-content: flex-end;">
-                <div class="text-gray-600" id="clock2"></div>
-                <p class="text-gray-600">&nbsp; | &nbsp;</p>
-                <div class="text-gray-600" id="clock"></div>
-            </div>
-            <hr>
-        </div>
-    </div>
+@section('nama')
+    Data Objek
+@endsection
 
+@section('content')
     <div class="page-content">
         <section class="row">
             <div class="col-12 col-lg-12">
@@ -34,7 +24,8 @@
                                 @include('admin.includes.modalTambah')
                             </div>
                             <div class="card-body">
-                                <table id="tabel-data" class="table table-bordered table-lg">
+                                {{-- <table id="tabel-data" class="table table-bordered table-lg"> --}}
+                                    <table class="table table-hover table-bordered" id="table-data">
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" id="checkboxesMain"></th>
@@ -90,93 +81,107 @@
                     @include('admin.includes.modalPeta')
                 </div>
             </div>
-            @endsection
+        @endsection
 
-            @push('script')
-                {{-- Sweeet Alert --}}
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#checkboxesMain').on('click', function(e) {
-                            if ($(this).is(':checked', true)) {
-                                $(".checkbox").prop('checked', true);
-                            } else {
-                                $(".checkbox").prop('checked', false);
-                            }
+        @push('style')
+            <!-- Page specific javascripts-->
+            <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css">
+        @endpush
+
+        @push('script')
+            <!-- Data table plugin-->
+            <script type="text/javascript" src=" {{ asset('admin/vali/js/plugins/jquery.dataTables.min.js') }} "></script>
+            <script type="text/javascript">
+                $('#table-data').DataTable({
+            "lengthMenu": [5, 10, 20, 30, 50],
+            "pageLength": 5
+        });
+            </script>
+
+            {{-- Sweeet Alert --}}
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#checkboxesMain').on('click', function(e) {
+                        if ($(this).is(':checked', true)) {
+                            $(".checkbox").prop('checked', true);
+                        } else {
+                            $(".checkbox").prop('checked', false);
+                        }
+                    });
+                    $('.checkbox').on('click', function() {
+                        if ($('.checkbox:checked').length == $('.checkbox').length) {
+                            $('#checkboxesMain').prop('checked', true);
+                        } else {
+                            $('#checkboxesMain').prop('checked', false);
+                        }
+                    });
+                    $('.removeAll').on('click', function(e) {
+                        var studentIdArr = [];
+                        $(".checkbox:checked").each(function() {
+                            studentIdArr.push($(this).attr('data-id'));
                         });
-                        $('.checkbox').on('click', function() {
-                            if ($('.checkbox:checked').length == $('.checkbox').length) {
-                                $('#checkboxesMain').prop('checked', true);
-                            } else {
-                                $('#checkboxesMain').prop('checked', false);
-                            }
-                        });
-                        $('.removeAll').on('click', function(e) {
-                            var studentIdArr = [];
-                            $(".checkbox:checked").each(function() {
-                                studentIdArr.push($(this).attr('data-id'));
+                        if (studentIdArr.length <= 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal!',
+                                text: 'Anda belum memilih data!'
                             });
-                            if (studentIdArr.length <= 0) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Gagal!',
-                                    text: 'Anda belum memilih data!'
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'question',
-                                    title: 'Konfirmasi',
-                                    text: 'Apakah Anda yakin ingin menghapus data terpilih?',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'Ya',
-                                    cancelButtonText: 'Batal'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        var stuId = studentIdArr.join(",");
-                                        $.ajax({
-                                            url: "{{ url('laman/delete-all') }}",
-                                            type: 'DELETE',
-                                            headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                                    'content')
-                                            },
-                                            data: 'ids=' + stuId,
-                                            success: function(data) {
-                                                if (data['status'] == true) {
-                                                    $(".checkbox:checked").each(function() {
-                                                        $(this).parents("tr").remove();
-                                                    });
-                                                    Swal.fire({
-                                                        icon: 'success',
-                                                        title: 'Sukses!',
-                                                        text: data['message']
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            location
-                                                                .reload(); // Merefresh halaman
-                                                        }
-                                                    });
-                                                } else {
-                                                    Swal.fire({
-                                                        icon: 'error',
-                                                        title: 'Oops...',
-                                                        text: 'Error occurred.'
-                                                    });
-                                                }
-                                            },
-                                            error: function(data) {
+                        } else {
+                            Swal.fire({
+                                icon: 'question',
+                                title: 'Konfirmasi',
+                                text: 'Apakah Anda yakin ingin menghapus data terpilih?',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya',
+                                cancelButtonText: 'Batal'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    var stuId = studentIdArr.join(",");
+                                    $.ajax({
+                                        url: "{{ url('laman/delete-all') }}",
+                                        type: 'DELETE',
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                                'content')
+                                        },
+                                        data: 'ids=' + stuId,
+                                        success: function(data) {
+                                            if (data['status'] == true) {
+                                                $(".checkbox:checked").each(function() {
+                                                    $(this).parents("tr").remove();
+                                                });
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    title: 'Sukses!',
+                                                    text: data['message']
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        location
+                                                            .reload(); // Merefresh halaman
+                                                    }
+                                                });
+                                            } else {
                                                 Swal.fire({
                                                     icon: 'error',
                                                     title: 'Oops...',
-                                                    text: data.responseText
+                                                    text: 'Error occurred.'
                                                 });
                                             }
-                                        });
-                                    }
-                                });
-                            }
-                        });
+                                        },
+                                        error: function(data) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: data.responseText
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
                     });
-                </script>
-            @endpush
+                });
+            </script>
+        @endpush

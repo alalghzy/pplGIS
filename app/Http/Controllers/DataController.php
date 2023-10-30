@@ -43,7 +43,7 @@ class DataController extends Controller
         if ($validator->fails()) {
             return back()
                 ->with('failed', 'Data gagal ditambahkan!')
-                // ->withInput()
+                ->withInput()
                 ->withErrors($validator);
         }
 
@@ -54,8 +54,8 @@ class DataController extends Controller
 
         if ($existingPost) {
             return back()
-                // ->withInput()
-                ->with('failed', 'Data koordinat sudah ada!');
+                ->with('failed', 'Data koordinat sudah ada!')
+                ->withInput();
         }
 
         // Create post
@@ -111,8 +111,8 @@ class DataController extends Controller
 
         if ($existingPost) {
             return back()
-                // ->withInput()
-                ->with('failed', 'Data koordinat sudah ada!');
+                ->with('failed', 'Data koordinat sudah ada!')
+                ->withInput();
         }
 
         //get post by ID

@@ -1,18 +1,10 @@
 @extends('layouts.admin')
 
+@section('nama')
+Peta Persebaran
+@endsection
+
 @section('content')
-<div class="page-heading col-12 col-lg-12">
-    <div class="row">
-        <div class="col-sm-8">
-            <h3>Peta Persebaran</h3>
-        </div>
-        <div class="col-sm-4" style="display: flex; justify-content: flex-end;">
-            <div class="text-gray-600" id="clock2"></div><p class="text-gray-600">&nbsp; | &nbsp;</p>
-            <div class="text-gray-600" id="clock"></div>
-        </div>
-        <hr>
-    </div>
-</div>
 <div class="page-content">
     <section class="row">
         <div class="col-12 col-lg-12">

@@ -18,9 +18,9 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.lamanData');
-});
+// Route::get('/', function () {
+//     return view('admin.lamanData');
+// });
 
 // Route Login
 Route::resource('/login', LoginController::class)

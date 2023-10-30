@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin | SIG Pulau Tikus</title>
     <link rel="shortcut icon" href="{{ asset('admin/compiled/svg/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon"
@@ -11,6 +12,26 @@
         type="image/png">
     <link rel="stylesheet" href="{{ asset('admin/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/compiled/css/app-dark.css') }}">
+
+
+    <style>
+        .text-gray-600 {
+            /* Gaya awal div */
+            float: right;
+            /* Atur div ke sebelah kanan */
+            display: block;
+            /* Tampilkan div sebagai blok saat layar besar */
+        }
+
+        @media (max-width: 1200px) {
+            .text-gray-600 {
+                display: none;
+                /* Sembunyikan div ketika layar mengecil */
+            }
+        }
+    </style>
+
+    @stack('style')
 </head>
 
 <body>
@@ -63,8 +84,8 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title" style="margin-bottom: -7px">Dashboard Admin</li>
-                        <hr>
+                        {{-- <li class="sidebar-title" style="margin-bottom: -7px">Dashboard Admin</li>
+                        <hr> --}}
                         <li class="sidebar-item {{ Route::is('admin.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
@@ -100,79 +121,24 @@
         <div id="main" class="layout-navbar navbar-fixed">
             <header>
                 <nav class="navbar navbar-expand navbar-light navbar-top">
-                    <div class="container-fluid">
-                        <a href="#" class="burger-btn d-block">
-                            <i class="bi bi-justify fs-3"></i>
+                    <div class="container-fluid ">
+                        <a href="#" class="burger-btn d-block me-auto">
+                            <i class="bi bi-justify fs-3"></i> <strong
+                                style="font-size: 20px;">@yield('nama')</strong>
                         </a>
-
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mb-lg-0">
-                                <li class="nav-item dropdown me-1">
-                                    <a class="nav-link active dropdown-toggle text-gray-600" href="#"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class='bi bi-envelope bi-sub fs-4'></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <h6 class="dropdown-header">Mail</h6>
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">No new mail</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown me-3">
-                                    <a class="nav-link active dropdown-toggle text-gray-600" href="#"
-                                        data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                        <i class='bi bi-bell bi-sub fs-4'></i>
-                                        <span class="badge badge-notification bg-danger">7</span>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end notification-dropdown"
-                                        aria-labelledby="dropdownMenuButton">
-                                        <li class="dropdown-header">
-                                            <h6>Notifications</h6>
-                                        </li>
-                                        <li class="dropdown-item notification-item">
-                                            <a class="d-flex align-items-center" href="#">
-                                                <div class="notification-icon bg-primary">
-                                                    <i class="bi bi-cart-check"></i>
-                                                </div>
-                                                <div class="notification-text ms-4">
-                                                    <p class="notification-title font-bold">Successfully check out</p>
-                                                    <p class="notification-subtitle font-thin text-sm">Order ID #256
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="dropdown-item notification-item">
-                                            <a class="d-flex align-items-center" href="#">
-                                                <div class="notification-icon bg-success">
-                                                    <i class="bi bi-file-earmark-check"></i>
-                                                </div>
-                                                <div class="notification-text ms-4">
-                                                    <p class="notification-title font-bold">Homework submitted</p>
-                                                    <p class="notification-subtitle font-thin text-sm">Algebra math
-                                                        homework</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <p class="text-center py-2 mb-0"><a href="#">See all
-                                                    notification</a></p>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="dropdown">
+                            <div class="dropdown ms-auto">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
-                                        <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">John Ducky</h6>
-                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
-                                        </div>
+                                        <div class="text-gray-600" id="clock2"></div>
+                                        <p class="text-gray-600">&nbsp; | &nbsp;</p>
+                                        <div class="text-gray-600" id="clock"></div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
                                                 <img src="{{ asset('admin/compiled/jpg/1.jpg') }}">
@@ -229,6 +195,12 @@
     <script src="{{ asset('admin/compiled/js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+    {{-- PureCounter --}}
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+    <script>
+        new PureCounter();
+    </script>
+
     {{-- Sweet Alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -268,8 +240,7 @@
                 icon: 'error',
                 title: 'Gagal!',
                 text: "{{ Session::get('failed') }}",
-                showConfirmButton: false,
-                timer: 1500
+                showConfirmButton: true,
             });
         @endif
 
@@ -278,7 +249,7 @@
                 icon: 'success',
                 title: 'Sukses!',
                 text: "{{ Session::get('message') }}",
-                showConfirmButton: false,
+                showConfirmButton: true,
                 timer: 1500
             });
         @endif
