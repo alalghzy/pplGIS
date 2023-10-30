@@ -35,7 +35,7 @@
 </head>
 
 <body>
-    <script src="assets/static/js/initTheme.js"></script>
+    <script src=" {{ asset('admin/static/js/initTheme.js') }} "></script>
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
@@ -249,8 +249,8 @@
                 icon: 'success',
                 title: 'Sukses!',
                 text: "{{ Session::get('message') }}",
-                showConfirmButton: true,
-                timer: 1500
+                showConfirmButton: false,
+                timer: 2000
             });
         @endif
     </script>

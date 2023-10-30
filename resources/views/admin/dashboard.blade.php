@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('nama')
-Dashboard Admin
+    Dashboard Admin
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@ Dashboard Admin
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon purple mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="Coral"
                                                 width="30" height="30">
@@ -28,7 +28,7 @@ Dashboard Admin
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Karang</h6>
                                         <h6 class="font-extrabold mb-0 purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="100" data-purecounter-duration="2"></h6>
+                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="2"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -70,13 +70,11 @@ Dashboard Admin
                         <center><b>PULAU TIKUS KOTA BENGKULU</b> </center>
                     </h2>
                     <h2>
-                        <center><a href=""><button class="btn btn-primary" type="button"
-                                    href="../index.php">Lihat Web</button></a></center>
+                        <center><a href=""><button class="btn btn-primary" type="button" href="/">Lihat
+                                    Web</button></a></center>
                     </h2>
-
                 </div>
-            @endsection
-
-            @push('script')
-
-            @endpush
+            </div>
+        <section>
+    </div>
+@endsection

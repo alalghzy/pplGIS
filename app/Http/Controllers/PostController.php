@@ -31,16 +31,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'nama'     => 'required|unique',
             'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',
         ]);
 
+        //upload image
+        $image = $request->file('image');
+        $image->storeAs('public/posts', $image->hashName());
 
         //create post
         Post::create([
             'nama'     => $request->nama,
+            'image'     => $image->hashName(),
             'deskripsi'     => $request->deskripsi,
             'latitude'   => $request->latitude,
             'longitude'   => $request->longitude,

@@ -14,7 +14,19 @@
                     @csrf
 
                     <div class="form-group">
-                        <label class="font-weight-bold">Nama</label>
+                                <label class="font-weight-bold mb-1">GAMBAR</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+
+                                <!-- error message untuk title -->
+                                @error('image')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                    <div class="form-group">
+                        <label class="font-weight-bold mb-1">Nama</label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
                             value="{{ old('nama') }}" placeholder="">
 
@@ -27,7 +39,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-bold">Deskripsi</label>
+                        <label class="font-weight-bold mb-1">Deskripsi</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5" placeholder="">{{ old('deskripsi') }}</textarea>
 
                         <!-- error message untuk deskripsi -->
@@ -39,7 +51,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-bold">Latitude</label>
+                        <label class="font-weight-bold mb-1">Latitude</label>
                         <input type="text" class="form-control @error('latitude') is-invalid @enderror"
                             name="latitude" value="{{ old('latitude') }}" placeholder="">
 
@@ -52,7 +64,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="font-weight-bold">Longitude</label>
+                        <label class="font-weight-bold mb-1">Longitude</label>
                         <input type="text" class="form-control @error('longitude') is-invalid @enderror"
                             name="longitude" value="{{ old('longitude') }}" placeholder="">
 

@@ -17,6 +17,7 @@ class Post extends Model
 
     protected $fillable = [
         'nama',
+        'image',
         'deskripsi',
         'latitude',
         'longitude',

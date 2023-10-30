@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
 
 class DataController extends Controller
 {
@@ -35,10 +37,15 @@ class DataController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama'      => 'required|min:5',
+            'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'deskripsi' => 'required|min:5',
             'latitude'  => 'required|min:5',
             'longitude' => 'required|min:5',
         ]);
+
+        //upload image
+        $image = $request->file('image');
+        $image->storeAs('public/posts', $image->hashName());
 
         if ($validator->fails()) {
             return back()
@@ -58,12 +65,13 @@ class DataController extends Controller
                 ->withInput();
         }
 
-        // Create post
+        //create post
         Post::create([
-            'nama'       => $request->nama,
-            'deskripsi'  => $request->deskripsi,
+            'nama'     => $request->nama,
+            'image'     => $image->hashName(),
+            'deskripsi'     => $request->deskripsi,
             'latitude'   => $request->latitude,
-            'longitude'  => $request->longitude,
+            'longitude'   => $request->longitude,
         ]);
 
         // Redirect to index
@@ -99,31 +107,53 @@ class DataController extends Controller
         //validate form
         $this->validate($request, [
             'nama'     => 'required',
+            'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
             'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',
         ]);
 
-        // Cek jika latitude dan longitude sama
-        $existingPost = Post::where('latitude', $request->latitude)
-            ->where('longitude', $request->longitude)
-            ->first();
+        // // Cek jika latitude dan longitude sama
+        // $existingPost = Post::where('latitude', $request->latitude)
+        //     ->where('longitude', $request->longitude)
+        //     ->first();
 
-        if ($existingPost) {
-            return back()
-                ->with('failed', 'Data koordinat sudah ada!')
-                ->withInput();
-        }
+        // if ($existingPost) {
+        //     return back()
+        //         ->with('failed', 'Data koordinat sudah ada!')
+        //         ->withInput();
+        // }
 
         //get post by ID
         $post = Post::findOrFail($id);
 
-        $post->update([
-            'nama'     => $request->nama,
-            'deskripsi'     => $request->deskripsi,
-            'latitude'   => $request->latitude,
-            'longitude'   => $request->longitude,
-        ]);
+        //check if image is uploaded
+        if ($request->hasFile('image')) {
+
+            //upload new image
+            $image = $request->file('image');
+            $image->storeAs('public/posts', $image->hashName());
+
+            //delete old image
+            Storage::delete('public/posts/' . $post->image);
+
+            //update post with new image
+            $post->update([
+                'image'         => $image->hashName(),
+                'nama'          => $request->nama,
+                'deskripsi'     => $request->deskripsi,
+                'latitude'      => $request->latitude,
+                'longitude'     => $request->longitude,
+            ]);
+        } else {
+
+            $post->update([
+                'nama'     => $request->nama,
+                'deskripsi'     => $request->deskripsi,
+                'latitude'   => $request->latitude,
+                'longitude'   => $request->longitude,
+            ]);
+        }
 
         //redirect to index
         return redirect()->route('tabel.index')->with('message', 'Data berhasil diedit!');

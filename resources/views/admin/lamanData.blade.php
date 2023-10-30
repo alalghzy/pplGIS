@@ -48,19 +48,26 @@
                                                 <td>{{ $post->latitude }}</td>
                                                 <td>{{ $post->longitude }}</td>
                                                 <td class="text-center" style="width: 200px">
-                                                    <button type="button" class="btn btn-sm btn-primary mb-2"
+                                                    <button type="button" class="btn btn btn-dark"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalLihat-{{ $post->id_post }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn btn-primary"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalEdit-{{ $post->id_post }}"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data">
                                                         <i class="bi bi-pencil-square fs-6"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger mb-2"
+                                                    <button type="button" class="btn btn btn-danger"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#hapusdata-{{ $post->id_post }}"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus data">
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Data">
                                                         <i class="bi bi-trash fs-6"></i>
                                                     </button>
                                                 </td>
+                                                @include('admin.includes.modalLihat')
                                                 @include('admin.includes.modalEdit')
                                                 @include('admin.includes.modalHapus')
                                             </tr>
