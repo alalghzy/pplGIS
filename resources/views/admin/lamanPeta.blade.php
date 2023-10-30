@@ -46,7 +46,6 @@
                                                 },
                                             @endforeach
                                         ];
-
                                         for (var i = 0; i < locations.length; i++) {
                                             (function() {
                                                 var location = locations[i];
@@ -56,11 +55,9 @@
                                                     title: location.title,
                                                     icon: '{{ asset('img/location.png') }}'
                                                 });
-
                                                 var infowindow = new google.maps.InfoWindow({
                                                     content: location.title
                                                 });
-
                                                 // Tambahkan event listener untuk menampilkan modal saat marker diklik
                                                 marker.addListener('click', function() {
                                                     var id_post = location.idPost;
@@ -70,15 +67,15 @@
                                             })();
                                         }
                                     }
-
                                     // Memanggil fungsi initialize setelah peta API Google Maps dimuat
                                     google.maps.event.addDomListener(window, 'load', initialize);
                                 </script>
                             </div>
                         </div>
                     </div>
+                    @include('admin.includes.modalPeta')
                 </section>
-                @include('admin.includes.modalPeta')
+
 
             </div>
             @endsection

@@ -216,7 +216,8 @@
                         <p>2023 &copy; SIG Pulau Tikus</p>
                     </div>
                     <div class="float-end">
-                        <a href="https://github.com/alalghzy" style=""><i class="fa-brands fa-square-github fa-bounce fa-2xl"></i>&ensp;alalghzy</a>
+                        <a href="https://github.com/alalghzy" style=""><i
+                                class="fa-brands fa-square-github fa-bounce fa-2xl"></i>&ensp;alalghzy</a>
                     </div>
                 </div>
             </footer>
@@ -226,6 +227,72 @@
     <script src="{{ asset('admin/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('admin/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin/compiled/js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    {{-- Sweet Alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Tangkap elemen tautan "Logout"
+            const logoutLink = document.getElementById("logout-link");
+
+            // Tambahkan event listener untuk mengkonfirmasi logout saat tautan diklik
+            logoutLink.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Konfirmasi Logout",
+                    text: "Apakah Anda yakin ingin logout?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Logout",
+                    cancelButtonText: "Batal",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger",
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ route('logout') }}";
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        @if (Session::has('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ Session::get('failed') }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+
+        @if (Session::has('message'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: "{{ Session::get('message') }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    </script>
+
+    @if ($message = Session::get('success'))
+        <script>
+            Swal.fire(
+                'Kamu berhasil login!',
+                '',
+                'success'
+            )
+        </script>
+    @endif
 
     {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/f28fac3438.js" crossorigin="anonymous"></script>

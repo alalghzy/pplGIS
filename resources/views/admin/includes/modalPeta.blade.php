@@ -7,7 +7,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{ $item->nama }}</h5>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"><i
-                            data-feather="x"></i></button>
+                            class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body">
                     <table class="table table-sm">
