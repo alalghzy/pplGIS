@@ -1,0 +1,182 @@
+@extends('layouts.admin')
+
+@section('content')
+    <div class="page-heading col-12 col-lg-12">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>Data Objek</h3>
+            </div>
+            <div class="col-sm-4" style="display: flex; justify-content: flex-end;">
+                <div class="text-gray-600" id="clock2"></div>
+                <p class="text-gray-600">&nbsp; | &nbsp;</p>
+                <div class="text-gray-600" id="clock"></div>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Tabel Data</h4>
+                                <hr>
+                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Tambah data"><i class="bi bi-plus-square fs-5"></i> &ensp;Tambah
+                                    Data</button><button class="btn btn-danger btn-sm removeAll ms-3"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Hapus semua data yang dipilih"><i class="bi bi-trash fs-5"></i> Hapus Data
+                                    Terpilih</button>
+                                @include('admin.includes.modalTambah')
+                            </div>
+                            <div class="card-body">
+                                <table id="tabel-data" class="table table-bordered table-lg">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="checkboxesMain"></th>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Deskripsi</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th style="text-align: center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    @if ($posts->count())
+                                        @foreach ($posts as $key => $post)
+                                            <tr id="tr_{{ $post->id_post }}">
+                                                <td><input type="checkbox" class="checkbox" data-id="{{ $post->id_post }}">
+                                                </td>
+                                                <td>{{ ++$key }}</td>
+                                                <td>{{ $post->nama }}</td>
+                                                <td>{{ $post->deskripsi }}</td>
+                                                <td>{{ $post->latitude }}</td>
+                                                <td>{{ $post->longitude }}</td>
+                                                <td class="text-center" style="width: 200px">
+                                                    <button type="button" class="btn btn-sm btn-primary mb-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalEdit-{{ $post->id_post }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
+                                                        <i class="bi bi-pencil-square fs-6"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger mb-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#hapusdata-{{ $post->id_post }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus data">
+                                                        <i class="bi bi-trash fs-6"></i>
+                                                    </button>
+                                                </td>
+                                                @include('admin.includes.modalEdit')
+                                                @include('admin.includes.modalHapus')
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <div class="alert alert-danger">
+                                            Data belum tersedia, silahkan &ensp;<button style="font-size: 10px;"
+                                                type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#modalCreate" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Edit data"><i class="bi bi-plus-square "></i>
+                                                Tambah Data</button> &ensp;!
+                                        </div>
+                                    @endif
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    @include('admin.includes.modalPeta')
+                </div>
+            </div>
+            @endsection
+
+            @push('script')
+                {{-- Sweeet Alert --}}
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#checkboxesMain').on('click', function(e) {
+                            if ($(this).is(':checked', true)) {
+                                $(".checkbox").prop('checked', true);
+                            } else {
+                                $(".checkbox").prop('checked', false);
+                            }
+                        });
+                        $('.checkbox').on('click', function() {
+                            if ($('.checkbox:checked').length == $('.checkbox').length) {
+                                $('#checkboxesMain').prop('checked', true);
+                            } else {
+                                $('#checkboxesMain').prop('checked', false);
+                            }
+                        });
+                        $('.removeAll').on('click', function(e) {
+                            var studentIdArr = [];
+                            $(".checkbox:checked").each(function() {
+                                studentIdArr.push($(this).attr('data-id'));
+                            });
+                            if (studentIdArr.length <= 0) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal!',
+                                    text: 'Anda belum memilih data!'
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'question',
+                                    title: 'Konfirmasi',
+                                    text: 'Apakah Anda yakin ingin menghapus data terpilih?',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Ya',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        var stuId = studentIdArr.join(",");
+                                        $.ajax({
+                                            url: "{{ url('laman/delete-all') }}",
+                                            type: 'DELETE',
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                                    'content')
+                                            },
+                                            data: 'ids=' + stuId,
+                                            success: function(data) {
+                                                if (data['status'] == true) {
+                                                    $(".checkbox:checked").each(function() {
+                                                        $(this).parents("tr").remove();
+                                                    });
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'Sukses!',
+                                                        text: data['message']
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            location
+                                                                .reload(); // Merefresh halaman
+                                                        }
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Oops...',
+                                                        text: 'Error occurred.'
+                                                    });
+                                                }
+                                            },
+                                            error: function(data) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Oops...',
+                                                    text: data.responseText
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+            @endpush
