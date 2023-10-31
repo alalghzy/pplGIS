@@ -37,42 +37,74 @@ class DataController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama'      => 'required|min:5',
-            'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
             'deskripsi' => 'required|min:5',
             'latitude'  => 'required|min:5',
             'longitude' => 'required|min:5',
         ]);
+//check if image is uploaded
+if ($request->hasFile('image')) {
 
-        //upload image
-        $image = $request->file('image');
-        $image->storeAs('public/posts', $image->hashName());
+            //upload image
+            $image = $request->file('image');
+            $image->storeAs('public/posts', $image->hashName());
 
-        if ($validator->fails()) {
-            return back()
-                ->with('failed', 'Data gagal ditambahkan!')
-                ->withInput()
-                ->withErrors($validator);
-        }
+            if ($validator->fails()) {
+                return back()
+                    ->with('failed', 'Data gagal ditambahkan!')
+                    ->withInput()
+                    ->withErrors($validator);
+            }
 
-        // Cek jika latitude dan longitude sama
-        $existingPost = Post::where('latitude', $request->latitude)
-            ->where('longitude', $request->longitude)
-            ->first();
+            // Cek jika latitude dan longitude sama
+            $existingPost = Post::where('latitude', $request->latitude)
+                ->where('longitude', $request->longitude)
+                ->first();
 
-        if ($existingPost) {
-            return back()
-                ->with('failed', 'Data koordinat sudah ada!')
-                ->withInput();
-        }
+            if ($existingPost) {
+                return back()
+                    ->with('failed', 'Data koordinat sudah ada!')
+                    ->withInput();
+            }
 
-        //create post
-        Post::create([
-            'nama'     => $request->nama,
-            'image'     => $image->hashName(),
-            'deskripsi'     => $request->deskripsi,
-            'latitude'   => $request->latitude,
-            'longitude'   => $request->longitude,
-        ]);
+            //create post
+            Post::create([
+                'nama'     => $request->nama,
+                'image'     => $image->hashName(),
+                'deskripsi'     => $request->deskripsi,
+                'latitude'   => $request->latitude,
+                'longitude'   => $request->longitude,
+            ]);
+} else {
+
+    if ($validator->fails()) {
+        return back()
+            ->with('failed', 'Data gagal ditambahkan!')
+            ->withInput()
+            ->withErrors($validator);
+    }
+
+    // Cek jika latitude dan longitude sama
+    $existingPost = Post::where('latitude', $request->latitude)
+        ->where('longitude', $request->longitude)
+        ->first();
+
+    if ($existingPost) {
+        return back()
+            ->with('failed', 'Data koordinat sudah ada!')
+            ->withInput();
+    }
+
+    //create post
+    Post::create([
+        'nama'     => $request->nama,
+        'image'     => 'Tidak ada gambar',
+        'deskripsi'     => $request->deskripsi,
+        'latitude'   => $request->latitude,
+        'longitude'   => $request->longitude,
+    ]);
+}
+
 
         // Redirect to index
         return back()->with('message', 'Data berhasil ditambahkan!');

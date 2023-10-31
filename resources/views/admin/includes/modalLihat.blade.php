@@ -14,7 +14,7 @@
                         <div class="col-md-12">
                             <div class="card border-0 shadow-sm rounded">
                                 <div class="card-body">
-                                    <img src="{{ asset('storage/posts/' . $post->image) }}" class="w-100 rounded">
+                                    <img src="{{ asset('storage/posts/' . $post->image) }}" class="w-100 rounded" alt="{{$post->image}}">
                                     <hr>
                                     <h4>{{ $post->nama }}</h4>
                                     <p class="tmt-3">
