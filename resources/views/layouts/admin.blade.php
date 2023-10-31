@@ -176,7 +176,7 @@
                 @yield('content')
 
             </div>
-            <footer>
+            <footer class="fixed-bottom me-1">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2023 &copy; SIG Pulau Tikus</p>
