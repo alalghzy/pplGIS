@@ -27,6 +27,9 @@
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+    <!-- Datatables CSS-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css">
+
     <style>
         #hero {
             background: url('https://ksmtour.com/media/images/articles7/pulau-tikus-bengkulu.jpg');
@@ -222,6 +225,15 @@
 
     {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/f28fac3438.js" crossorigin="anonymous"></script>
+
+    {{-- Datatables --}}
+    <script type="text/javascript" src=" {{ asset('admin/vali/js/plugins/jquery.dataTables.min.js') }} "></script>
+    <script type="text/javascript">
+        $('#table-data').DataTable({
+    "lengthMenu": [5, 10, 20, 30, 50],
+    "pageLength": 5
+});
+    </script>
 
 </body>
 
