@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Lihat Data {{$post->nama}}</h5>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
-                    <i data-feather="x"></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div class="modal-body" >
