@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Lihat Data {{$post->nama}}</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Informasi Data</h5>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -14,19 +14,32 @@
                         <div class="col-md-12">
                             <div class="card border-0 shadow-sm rounded">
                                 <div class="card-body">
-                                    <img src="{{ asset('storage/posts/' . $post->image) }}" class="w-100 rounded" alt="{{$post->image}}">
+                                    <center><img src="{{ asset('storage/posts/' . $post->image) }}" class="rounded " style="" alt="{{$post->image}}"></center>
                                     <hr>
-                                    <h4>{{ $post->nama }}</h4>
-                                    <p class="tmt-3">
+                                    <h4>{{ $post->nama }}<hr></h4>
+                                    <p>
                                         {!! $post->deskripsi !!}
-                                        {{ $post->latitude }}
-                                                {{ $post->longitude }}
                                     </p>
+                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                        <button type="button" class="btn btn-danger">Latitude</button>
+                                        <button type="button" class="btn btn-primary">{{ $post->latitude }}</button>
+                                      </div>
+                                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                        <button type="button" class="btn btn-danger">Longitude</button>
+                                        <button type="button" class="btn btn-primary">{{ $post->longitude }}</button>
+                                      </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="submit" class="btn btn-warning shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Selengkapnya">
+                    <a style="color: white" href="">
+                        <i class="fa-solid fa-angles-right" style="color: black;"></i>
+                    </a>
+                </button>
             </div>
         </div>
     </div>
