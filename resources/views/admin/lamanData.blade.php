@@ -47,7 +47,7 @@
                                                 <td>{{ $post->deskripsi }}</td>
                                                 <td>{{ $post->latitude }}</td>
                                                 <td>{{ $post->longitude }}</td>
-                                                <td class="text-center" style="width: 200px">
+                                                <td class="text-center" style="width: 140px">
                                                     <button type="button" class="btn btn btn-dark"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalLihat-{{ $post->id_post }}"

@@ -84,8 +84,8 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        {{-- <li class="sidebar-title" style="margin-bottom: -7px">Dashboard Admin</li>
-                        <hr> --}}
+                        <li class="sidebar-title" style="margin-bottom: -7px">Dashboard Admin</li>
+                        <hr>
                         <li class="sidebar-item {{ Route::is('admin.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
@@ -107,13 +107,13 @@
                                 <span>Peta Persebaran</span>
                             </a>
                         </li>
-                        <hr>
+                        {{-- <hr>
                         <li class="sidebar-item {{ Route::is('logout') ? 'active' : '' }}">
                             <a id="logout-link" href="{{ route('logout') }}" class='sidebar-link'>
                                 <i class="bi bi-door-closed-fill"></i>
                                 <span>Logout</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -123,8 +123,7 @@
                 <nav class="navbar navbar-expand navbar-light navbar-top">
                     <div class="container-fluid ">
                         <a href="#" class="burger-btn d-block me-auto">
-                            <i class="bi bi-justify fs-3"></i> <strong
-                                style="font-size: 20px;">@yield('nama')</strong>
+                            <i class="bi bi-justify fs-3"></i>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -149,22 +148,17 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                                     style="min-width: 11rem;">
                                     <li>
-                                        <h6 class="dropdown-header">Hello, John!</h6>
+                                        <center>
+                                            <h6 class="dropdown-header">
+                                                <span class="badge bg-primary">Administrator</span>
+                                            </h6>
+                                        </center>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-person me-2"></i> My
-                                            Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-gear me-2"></i>
-                                            Settings</a></li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-wallet me-2"></i>
-                                            Wallet</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
+                                    <hr>
+                                    <li><a id="logout-link" class="dropdown-item" href="{{ route('logout') }}">
+                                            <i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout
+                                        </a>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -172,11 +166,13 @@
                 </nav>
             </header>
             <div id="main-content">
-
+                <h3>
+                    <strong style="">@yield('nama')</strong>
+                </h3>
                 @yield('content')
 
             </div>
-            <footer class="fixed-bottom me-1">
+            <footer class="me-1">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2023 &copy; SIG Pulau Tikus</p>

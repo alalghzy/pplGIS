@@ -1,73 +1,66 @@
 @extends('layouts.admin')
 
 @section('nama')
-Peta Persebaran
+    Peta Persebaran
 @endsection
 
 @section('content')
-<div class="page-content">
-    <section class="row">
-        <div class="col-12 col-lg-12">
-            <div class="row">
-                <section>
-                    <div class="col-12 col-xl-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4></h4>
-                            </div>
-                            <div id="map" style="width:100%;height:500px;">
-                                <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
-                                <script>
-                                    function initialize() {
-                                        var mapOptions = {
-                                            zoom: 18,
-                                            center: new google.maps.LatLng(-3.838195020251307, 102.1797480229322),
-                                            // -3.760280003973284, 102.27250601387755
-                                            disableDefaultUI: false,
-                                            mapTypeId: 'satellite'
-                                        };
-                                        var mapElement = document.getElementById('map');
-                                        var map = new google.maps.Map(mapElement, mapOptions);
-                                        var locations = [
-                                            @foreach ($posts as $item)
-                                                {
-                                                    latitude: {{ $item->latitude }},
-                                                    longitude: {{ $item->longitude }},
-                                                    idPost: {{ $item->id_post }},
-                                                    title: "{{ $item->nama }}"
-                                                },
-                                            @endforeach
-                                        ];
-                                        for (var i = 0; i < locations.length; i++) {
-                                            (function() {
-                                                var location = locations[i];
-                                                var marker = new google.maps.Marker({
-                                                    position: new google.maps.LatLng(location.latitude, location.longitude),
-                                                    map: map,
-                                                    title: location.title,
-                                                    icon: '{{ asset('img/location.png') }}'
-                                                });
-                                                var infowindow = new google.maps.InfoWindow({
-                                                    content: location.title
-                                                });
-                                                // Tambahkan event listener untuk menampilkan modal saat marker diklik
-                                                marker.addListener('click', function() {
-                                                    var id_post = location.idPost;
-                                                    $('#locationTitle-' + id_post).text(this.title);
-                                                    $('#locationModal-' + id_post).modal('show');
-                                                });
-                                            })();
+
+                    <section>
+                        <div class="col-12 col-xl-12">
+                            <div class="card">
+                                <div id="map" style="width:100%;height:500px;">
+                                    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
+                                    <script>
+                                        function initialize() {
+                                            var mapOptions = {
+                                                zoom: 18,
+                                                center: new google.maps.LatLng(-3.838195020251307, 102.1797480229322),
+                                                // -3.760280003973284, 102.27250601387755
+                                                disableDefaultUI: false,
+                                                mapTypeId: 'satellite'
+                                            };
+                                            var mapElement = document.getElementById('map');
+                                            var map = new google.maps.Map(mapElement, mapOptions);
+                                            var locations = [
+                                                @foreach ($posts as $item)
+                                                    {
+                                                        latitude: {{ $item->latitude }},
+                                                        longitude: {{ $item->longitude }},
+                                                        idPost: {{ $item->id_post }},
+                                                        title: "{{ $item->nama }}"
+                                                    },
+                                                @endforeach
+                                            ];
+                                            for (var i = 0; i < locations.length; i++) {
+                                                (function() {
+                                                    var location = locations[i];
+                                                    var marker = new google.maps.Marker({
+                                                        position: new google.maps.LatLng(location.latitude, location.longitude),
+                                                        map: map,
+                                                        title: location.title,
+                                                        icon: '{{ asset('img/location.png') }}'
+                                                    });
+                                                    var infowindow = new google.maps.InfoWindow({
+                                                        content: location.title
+                                                    });
+                                                    // Tambahkan event listener untuk menampilkan modal saat marker diklik
+                                                    marker.addListener('click', function() {
+                                                        var id_post = location.idPost;
+                                                        $('#locationTitle-' + id_post).text(this.title);
+                                                        $('#locationModal-' + id_post).modal('show');
+                                                    });
+                                                })();
+                                            }
                                         }
-                                    }
-                                    // Memanggil fungsi initialize setelah peta API Google Maps dimuat
-                                    google.maps.event.addDomListener(window, 'load', initialize);
-                                </script>
+                                        // Memanggil fungsi initialize setelah peta API Google Maps dimuat
+                                        google.maps.event.addDomListener(window, 'load', initialize);
+                                    </script>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @include('admin.includes.modalPeta')
-                </section>
+                        @include('admin.includes.modalPeta')
+                    </section>
 
 
-            </div>
             @endsection
