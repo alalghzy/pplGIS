@@ -166,11 +166,8 @@
                 </nav>
             </header>
             <div id="main-content">
-                <h3>
-                    <strong style="">@yield('nama')</strong>
-                </h3>
+                @yield('nama')
                 @yield('content')
-
             </div>
             <footer class="me-1">
                 <div class="footer clearfix mb-0 text-muted">
