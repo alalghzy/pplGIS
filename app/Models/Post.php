@@ -21,5 +21,6 @@ class Post extends Model
         'deskripsi',
         'latitude',
         'longitude',
+        'kedalaman'
     ];
 }

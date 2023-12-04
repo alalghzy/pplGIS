@@ -12,25 +12,21 @@
         type="image/png">
     <link rel="stylesheet" href="{{ asset('admin/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/compiled/css/app-dark.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
 
     <style>
         .text-gray-600 {
-            /* Gaya awal div */
             float: right;
-            /* Atur div ke sebelah kanan */
             display: block;
-            /* Tampilkan div sebagai blok saat layar besar */
         }
 
         @media (max-width: 1200px) {
             .text-gray-600 {
                 display: none;
-                /* Sembunyikan div ketika layar mengecil */
             }
         }
     </style>
-
     @stack('style')
 </head>
 
@@ -94,11 +90,28 @@
                         </li>
                         <li class="sidebar-title" style="margin-bottom: -7px">Menu Navigasi</li>
                         <hr>
-                        <li class="sidebar-item {{ Route::is('tabel.index') ? 'active' : '' }}">
-                            <a href="{{ route('tabel.index') }}" class='sidebar-link'>
-                                <i class="bi bi-folder-fill"></i>
-                                <span>Data Objek</span>
+
+                        <li class="sidebar-item has-sub {{ Route::is('tabel.*', ) ? 'active' : '' }}">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Manajemen Data</span>
                             </a>
+
+                            <ul class="submenu">
+
+                                <li class="submenu-item ">
+                                    <a href="" class="submenu-link">Pengguna</a>
+                                </li>
+
+                                <li class="submenu-item {{ Route::is('tabel.index') ? 'active' : '' }}">
+                                    <a href="{{ route('tabel.index') }}" class="submenu-link">Stasiun</a>
+                                </li>
+
+                                <li class="submenu-item">
+                                    <a href="" class="submenu-link">Terumbu Karang</a>
+                                </li>
+
+                            </ul>
                         </li>
 
                         <li class="sidebar-item {{ Route::is('peta.index') ? 'active' : '' }}">
@@ -107,6 +120,7 @@
                                 <span>Peta Persebaran</span>
                             </a>
                         </li>
+
                         {{-- <hr>
                         <li class="sidebar-item {{ Route::is('logout') ? 'active' : '' }}">
                             <a id="logout-link" href="{{ route('logout') }}" class='sidebar-link'>
@@ -130,14 +144,13 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <div class="dropdown ms-auto">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
-                                        <div class="text-gray-600" id="clock2"></div>
+                                        {{-- <div class="text-gray-600" id="clock2"></div>
                                         <p class="text-gray-600">&nbsp; | &nbsp;</p>
-                                        <div class="text-gray-600" id="clock"></div>
+                                        <div class="text-gray-600" id="clock"></div> --}}
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
                                                 <img src="{{ asset('admin/compiled/jpg/1.jpg') }}">
@@ -145,18 +158,20 @@
                                         </div>
                                     </div>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
-                                    style="min-width: 11rem;">
+                                <ul class="dropdown-menu dropdown-menu-end p-1" aria-labelledby="dropdownMenuButton"
+                                    style="min-width: 8rem;">
                                     <li>
-                                        <center>
-                                            <h6 class="dropdown-header">
-                                                <span class="badge bg-primary">Administrator</span>
-                                            </h6>
-                                        </center>
+                                        <span class="dropdown-header badge bg-primary dropdown-item"
+                                            style="font-size: 11px; color: white">Administrator</span>
                                     </li>
                                     <hr>
+                                    <li>
+                                        <a href="" class="dropdown-item">
+                                            <i class="icon-mid bi bi-person me-2"></i> Profil
+                                        </a>
+                                    </li>
                                     <li><a id="logout-link" class="dropdown-item" href="{{ route('logout') }}">
-                                            <i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout
+                                            <i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar
                                         </a>
                                     </li>
                                 </ul>
@@ -169,7 +184,11 @@
                 @yield('nama')
                 @yield('content')
             </div>
-            <footer class="me-1">
+
+            <div style="height: ">
+
+            </div>
+            <footer class="">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2023 &copy; SIG Pulau Tikus</p>

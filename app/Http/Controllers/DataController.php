@@ -25,14 +25,28 @@ class DataController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function deleteImage(string $id)
     {
-        //
+        // Get post by ID
+        $post = Post::findOrFail($id);
+
+        // Check if the post has an associated image
+        if ($post->image) {
+            // Delete the image file
+            Storage::delete('public/posts/' . $post->image);
+
+            // Update the post to remove the reference to the deleted image
+            $post->update(['image' => '']);
+
+            // Redirect back or to any other route as needed
+            return redirect()->back()->with('message', 'Gambar berhasil dihapus!');
+        }
+
+        // If no image is associated, redirect with a message
+        return redirect()->back()->with('message', 'Data tidak memiliki gambar!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -41,6 +55,7 @@ class DataController extends Controller
             'deskripsi' => 'required|min:5',
             'latitude'  => 'required|min:5',
             'longitude' => 'required|min:5',
+            'kedalaman' => 'required',
         ]);
 //check if image is uploaded
 if ($request->hasFile('image')) {
@@ -74,6 +89,7 @@ if ($request->hasFile('image')) {
                 'deskripsi'     => $request->deskripsi,
                 'latitude'   => $request->latitude,
                 'longitude'   => $request->longitude,
+                'kedalaman'   => $request->kedalaman,
             ]);
 } else {
 
@@ -98,10 +114,11 @@ if ($request->hasFile('image')) {
     //create post
     Post::create([
         'nama'     => $request->nama,
-        'image'     => 'Tidak ada gambar',
+        'image'     => '',
         'deskripsi'     => $request->deskripsi,
         'latitude'   => $request->latitude,
         'longitude'   => $request->longitude,
+        'kedalaman'   => $request->kedalaman,
     ]);
 }
 
@@ -143,6 +160,7 @@ if ($request->hasFile('image')) {
             'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',
+            'kedalaman' => 'required',
         ]);
 
         // // Cek jika latitude dan longitude sama
@@ -176,6 +194,7 @@ if ($request->hasFile('image')) {
                 'deskripsi'     => $request->deskripsi,
                 'latitude'      => $request->latitude,
                 'longitude'     => $request->longitude,
+                'kedalaman'     => $request->kedalaman,
             ]);
         } else {
 
@@ -184,6 +203,7 @@ if ($request->hasFile('image')) {
                 'deskripsi'     => $request->deskripsi,
                 'latitude'   => $request->latitude,
                 'longitude'   => $request->longitude,
+                'kedalaman'  => $request->kedalaman,
             ]);
         }
 

@@ -33,15 +33,22 @@ Route::resource('/', HomeController::class)
 
 // Route Auth
 Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], function () {
+
     // Route Laman Admin
     Route::resource('/admin', PostController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
+
     // Route Laman Tabel
-    Route::resource('/tabel', DataController::class)
-    ->except('create',);
+    Route::resource('/tabel', DataController::class);
+
     // Route Laman Peta
     Route::resource('/peta', PetaController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
+
+    // Hapus selected data
     Route::delete('delete-all', [PostController::class, 'destroy']);
+
+    // Hapus gambar di Edit Data
+    Route::get('/delete-image/{id}', [DataController::class, 'deleteImage'])->name('delete.image');
 });
 

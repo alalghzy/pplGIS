@@ -14,10 +14,14 @@
                         <div class="col-md-12">
                             <div class="card border-0 shadow-sm rounded">
                                 <div class="card-body">
-                                    <center><img src="{{ asset('storage/posts/' . $post->image) }}"
-                                            class="rounded shadow-lg mb-4" style="max-width: 500px"
-                                            alt="{{ $post->image }}">
-                                    </center>
+
+                                    @if ($post->image != '')
+                                        <center><img src="{{ asset('storage/posts/' . $post->image) }}"
+                                                class="rounded shadow-lg mb-4" style="max-width: 500px"
+                                                alt="{{ $post->image }}">
+                                        </center>
+                                    @endif
+
                                     <h4>
                                         {{ $post->nama }}
                                     </h4>

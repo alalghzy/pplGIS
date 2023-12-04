@@ -13,10 +13,37 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="form-group">
-                        <label class="font-weight-bold mb-1">GAMBAR</label>
-                        <input type="file" class="form-control" name="image">
-                    </div>
+                    @if ($post->image != '')
+                        <center><img src="{{ asset('storage/posts/' . $post->image) }}" class="rounded shadow-lg mb-4"
+                                style="max-width: 500px" alt="{{ $post->image }}">
+                        </center>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-group col-11">
+                                    <label class="font-weight-bold">Gambar</label>
+                                    <input type="file" class="form-control" name="image">
+                                </div>
+                                <div class="col-1">
+                                    <br>
+                                    <a href="{{ route('delete.image', ['id' => $post->id_post]) }}"
+                                        onclick="return confirm('Apakah Anda ingin menghapus gambar {{ $post->nama }}?')">
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Hapus Gambar">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="form-group col-12">
+                            <label class="font-weight-bold">Gambar</label>
+                            <input type="file" class="form-control" name="image">
+                        </div>
+                    @endif
+
+
 
                     <div class="form-group">
                         <label for="nama" class="font-weight-bold mb-1">Nama</label>
@@ -26,7 +53,7 @@
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group edit">
                         <label for="deskripsi" class="font-weight-bold mb-1">Deskripsi</label>
                         <textarea id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5"
                             placeholder="Masukkan Deskripsi Mangrove">{{ old('deskripsi', $post->deskripsi) }}</textarea>
@@ -49,6 +76,15 @@
                             class="form-control @error('longitude') is-invalid @enderror" name="longitude"
                             value="{{ old('longitude', $post->longitude) }}" placeholder="Masukkan Longitude Mangrove">
                         @error('longitude')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="kedalaman" class="font-weight-bold mb-1">Kedalaman</label>
+                        <input type="text" id="kedalaman"
+                            class="form-control @error('kedalaman') is-invalid @enderror" name="kedalaman"
+                            value="{{ old('kedalaman', $post->kedalaman) }}" placeholder="Masukkan kedalaman Mangrove">
+                        @error('kedalaman')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>

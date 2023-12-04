@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
 @section('nama')
-<div class="page-title">
-    <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Objek</h3>
-            <p class="text-subtitle text-muted">Laman Admin untuk manipulasi data.</p>
-        </div>
-        <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/laman/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data Objek</li>
-                </ol>
-            </nav>
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Data Stasiun</h3>
+                <p class="text-subtitle text-muted"><em>Laman data stasiun tutupan komunitas karang.</em></p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/laman/admin"><i class="bi bi-house"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Objek</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('content')
@@ -27,8 +27,6 @@
                     <div class="col-12 col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Tabel Data</h4>
-                                <hr>
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tambah data"><i class="bi bi-plus-square fs-5"></i> &ensp;Tambah
@@ -38,17 +36,17 @@
                                     Terpilih</button>
                                 @include('admin.includes.modalTambah')
                             </div>
-                            <div class="card-body">
-                                {{-- <table id="tabel-data" class="table table-bordered table-lg"> --}}
-                                    <table class="table table-hover table-bordered" id="table-data">
-                                    <thead>
+                            <div class="card-body table-responsive p-3">
+                                <table class="table table-hover table-bordered" id="table-data">
+                                    <thead class="table-primary">
                                         <tr>
                                             <th><input type="checkbox" id="checkboxesMain"></th>
-                                            <th>No</th>
+                                            {{-- <th>No</th> --}}
                                             <th>Nama</th>
                                             <th>Deskripsi</th>
                                             <th>Latitude</th>
                                             <th>Longitude</th>
+                                            <th>Kedalaman</th>
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -57,30 +55,38 @@
                                             <tr id="tr_{{ $post->id_post }}">
                                                 <td><input type="checkbox" class="checkbox" data-id="{{ $post->id_post }}">
                                                 </td>
-                                                <td>{{ ++$key }}</td>
+                                                {{-- <td>{{ ++$key }}</td> --}}
                                                 <td>{{ $post->nama }}</td>
                                                 <td>{{ $post->deskripsi }}</td>
                                                 <td>{{ $post->latitude }}</td>
                                                 <td>{{ $post->longitude }}</td>
+                                                <td>{{ $post->kedalaman }}</td>
                                                 <td class="text-center" style="width: 140px">
-                                                    <button type="button" class="btn btn btn-dark"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#modalLihat-{{ $post->id_post }}"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data">
-                                                        <i class="bi bi-eye"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn btn-primary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#modalEdit-{{ $post->id_post }}"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data">
-                                                        <i class="bi bi-pencil-square fs-6"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn btn-danger"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#hapusdata-{{ $post->id_post }}"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Data">
-                                                        <i class="bi bi-trash fs-6"></i>
-                                                    </button>
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="btn-group fs-5">
+                                                            <button type="button" class="btn btn btn-dark"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#modalLihat-{{ $post->id_post }}"
+                                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Lihat Data">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn btn-primary"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#modalEdit-{{ $post->id_post }}"
+                                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Edit Data">
+                                                                <i class="bi bi-pencil-square fs-6"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn btn-danger"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#hapusdata-{{ $post->id_post }}"
+                                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Hapus Data">
+                                                                <i class="bi bi-trash fs-6"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 @include('admin.includes.modalLihat')
                                                 @include('admin.includes.modalEdit')
@@ -92,7 +98,8 @@
                                             Data belum tersedia, silahkan &ensp;<button style="font-size: 10px;"
                                                 type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#modalCreate" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Edit data"><i class="bi bi-plus-square "></i>
+                                                data-bs-placement="top" title="Edit data"><i
+                                                    class="bi bi-plus-square "></i>
                                                 Tambah Data</button> &ensp;!
                                         </div>
                                     @endif
@@ -115,9 +122,9 @@
             <script type="text/javascript" src=" {{ asset('admin/vali/js/plugins/jquery.dataTables.min.js') }} "></script>
             <script type="text/javascript">
                 $('#table-data').DataTable({
-            "lengthMenu": [5, 10, 20, 30, 50],
-            "pageLength": 5
-        });
+                    "lengthMenu": [5, 10, 20, 30, 50],
+                    "pageLength": 5
+                });
             </script>
 
             {{-- Sweeet Alert --}}

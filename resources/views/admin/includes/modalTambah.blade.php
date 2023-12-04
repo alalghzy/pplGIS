@@ -76,6 +76,19 @@
                         @enderror
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold mb-1">Kedalaman</label>
+                        <input type="text" class="form-control @error('kedalaman') is-invalid @enderror"
+                            name="kedalaman" value="{{ old('kedalaman') }}" placeholder="">
+
+                        <!-- error message untuk kedalaman -->
+                        @error('kedalaman')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
                     <div class="modal-footer justify-content-end">
                         <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal"><i
                                 class="fa-solid fa-angle-left"></i> Kembali</button>

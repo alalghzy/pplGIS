@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('latitude');
             $table->string('longitude');
+            $table->string('kedalaman');
             $table->timestamps();
         });
     }

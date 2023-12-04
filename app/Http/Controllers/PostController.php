@@ -31,11 +31,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
             'nama'     => 'required|unique',
             'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',
+            'kedalaman'   => 'required',
         ]);
 
         //upload image
@@ -49,6 +50,7 @@ class PostController extends Controller
             'deskripsi'     => $request->deskripsi,
             'latitude'   => $request->latitude,
             'longitude'   => $request->longitude,
+            'kedalaman'   => $request->kedalaman,
         ]);
 
         //redirect to index
