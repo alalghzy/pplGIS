@@ -53,14 +53,6 @@
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group edit">
-                        <label for="deskripsi" class="font-weight-bold mb-1">Deskripsi</label>
-                        <textarea id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5"
-                            placeholder="Masukkan Deskripsi Mangrove">{{ old('deskripsi', $post->deskripsi) }}</textarea>
-                        @error('deskripsi')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="form-group">
                         <label for="latitude" class="font-weight-bold mb-1">Latitude</label>
                         <input type="text" id="latitude"

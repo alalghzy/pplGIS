@@ -39,18 +39,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-bold mb-1">Deskripsi</label>
-                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5" placeholder="">{{ old('deskripsi') }}</textarea>
-
-                        <!-- error message untuk deskripsi -->
-                        @error('deskripsi')
-                            <div class="alert alert-danger mt-2">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
                         <label class="font-weight-bold mb-1">Latitude</label>
                         <input type="text" class="form-control @error('latitude') is-invalid @enderror"
                             name="latitude" value="{{ old('latitude') }}" placeholder="">

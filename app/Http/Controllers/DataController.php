@@ -50,12 +50,11 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama'      => 'required|min:5',
+            'nama'      => 'required|unique:posts,nama',
             'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
-            'deskripsi' => 'required|min:5',
-            'latitude'  => 'required|min:5',
-            'longitude' => 'required|min:5',
-            'kedalaman' => 'required',
+            'latitude'  => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'kedalaman' => 'required|numeric',
         ]);
 //check if image is uploaded
 if ($request->hasFile('image')) {
@@ -86,7 +85,6 @@ if ($request->hasFile('image')) {
             Post::create([
                 'nama'     => $request->nama,
                 'image'     => $image->hashName(),
-                'deskripsi'     => $request->deskripsi,
                 'latitude'   => $request->latitude,
                 'longitude'   => $request->longitude,
                 'kedalaman'   => $request->kedalaman,
@@ -115,7 +113,6 @@ if ($request->hasFile('image')) {
     Post::create([
         'nama'     => $request->nama,
         'image'     => '',
-        'deskripsi'     => $request->deskripsi,
         'latitude'   => $request->latitude,
         'longitude'   => $request->longitude,
         'kedalaman'   => $request->kedalaman,
@@ -155,12 +152,11 @@ if ($request->hasFile('image')) {
     {
         //validate form
         $this->validate($request, [
-            'nama'     => 'required',
+            'nama'     => 'required|unique:posts,nama',
             'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
-            'deskripsi'     => 'required',
-            'latitude'   => 'required',
-            'longitude'   => 'required',
-            'kedalaman' => 'required',
+            'latitude'   => 'required|numeric',
+            'longitude'   => 'required|numeric',
+            'kedalaman' => 'required|numeric',
         ]);
 
         // // Cek jika latitude dan longitude sama
@@ -191,7 +187,6 @@ if ($request->hasFile('image')) {
             $post->update([
                 'image'         => $image->hashName(),
                 'nama'          => $request->nama,
-                'deskripsi'     => $request->deskripsi,
                 'latitude'      => $request->latitude,
                 'longitude'     => $request->longitude,
                 'kedalaman'     => $request->kedalaman,
@@ -200,7 +195,6 @@ if ($request->hasFile('image')) {
 
             $post->update([
                 'nama'     => $request->nama,
-                'deskripsi'     => $request->deskripsi,
                 'latitude'   => $request->latitude,
                 'longitude'   => $request->longitude,
                 'kedalaman'  => $request->kedalaman,

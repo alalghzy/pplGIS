@@ -15,7 +15,6 @@ return new class extends Migration
             $table->increments('id_post');
             $table->string('image');
             $table->string('nama');
-            $table->text('deskripsi');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('kedalaman');

@@ -25,18 +25,15 @@
                                     <h4>
                                         {{ $post->nama }}
                                     </h4>
-                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-danger">Latitude</button>
-                                        <button type="button" class="btn btn-primary">{{ $post->latitude }}</button>
-                                    </div>
-                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-danger">Longitude</button>
-                                        <button type="button" class="btn btn-primary">{{ $post->longitude }}</button>
-                                    </div>
                                     <hr>
-                                    <p>
-                                        {!! $post->deskripsi !!}
-                                    </p>
+                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                        <button type="button" class="btn btn-primary">Latitude</button>
+                                        <button type="button" class="btn btn-primary">{{ $post->latitude }}</button>
+                                        <button type="button" class="btn btn-danger">Longitude</button>
+                                        <button type="button" class="btn btn-danger">{{ $post->longitude }}</button>
+                                        <button type="button" class="btn btn-success">Kedalaman</button>
+                                        <button type="button" class="btn btn-success">{{ $post->kedalaman }}</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

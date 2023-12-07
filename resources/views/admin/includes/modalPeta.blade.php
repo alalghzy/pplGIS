@@ -18,7 +18,6 @@
                     <table class="table table-sm">
                         <thead>
                             <tr class="text-start">
-                                <th scope="col">Deskripsi</th>
                                 <th class="text-center" scope="col">Latitude</th>
                                 <th class="text-center" scope="col">Longitude</th>
                             </tr>

@@ -33,7 +33,6 @@ class PetaController extends Controller
     {
         $this->validate($request, [
             'nama'     => 'required',
-            'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',
         ]);
@@ -42,7 +41,6 @@ class PetaController extends Controller
         //create post
         Peta::create([
             'nama'     => $request->nama,
-            'deskripsi'     => $request->deskripsi,
             'latitude'   => $request->latitude,
             'longitude'   => $request->longitude,
         ]);
@@ -81,7 +79,6 @@ class PetaController extends Controller
         //validate form
         $this->validate($request, [
             'nama'     => 'required',
-            'deskripsi'     => 'required',
             'latitude'   => 'required',
             'longitude'   => 'required',
         ]);
@@ -91,7 +88,6 @@ class PetaController extends Controller
 
         $post->update([
             'nama'     => $request->nama,
-            'deskripsi'     => $request->deskripsi,
             'latitude'   => $request->latitude,
             'longitude'   => $request->longitude,
         ]);

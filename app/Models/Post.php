@@ -13,14 +13,14 @@ class Post extends Model
 
     protected $primaryKey = 'id_post';
 
-    protected $guarded = [];
+    protected $guarded = ['id_post'];
 
-    protected $fillable = [
-        'nama',
-        'image',
-        'deskripsi',
-        'latitude',
-        'longitude',
-        'kedalaman'
-    ];
+    // protected $fillable = [
+    //     'nama',
+    //     'image',
+    //     'deskripsi',
+    //     'latitude',
+    //     'longitude',
+    //     'kedalaman'
+    // ];
 }
