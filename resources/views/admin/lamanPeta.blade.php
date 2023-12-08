@@ -201,37 +201,37 @@
                             // Gantilah dengan logika sesuai kebutuhan Anda
                             if (kedalaman <= 3) {
                                 return L.icon({
-                                    iconUrl: '{{ asset('img/location.png') }}',
-                                    iconSize: [32, 32],
-                                    iconAnchor: [16, 32],
+                                    iconUrl: '{{ asset('img/3.png') }}',
+                                    iconSize: [20, 27],
+                                    iconAnchor: [0, 0],
                                     popupAnchor: [0, -32]
                                 });
                             } else if (kedalaman >= 4 && kedalaman <= 6) {
                                 return L.icon({
-                                    iconUrl: '{{ asset('img/pin.png') }}',
-                                    iconSize: [32, 32],
-                                    iconAnchor: [16, 32],
+                                    iconUrl: '{{ asset('img/6.png') }}',
+                                    iconSize: [20, 27],
+                                    iconAnchor: [0, 0],
                                     popupAnchor: [0, -32]
                                 });
                             } else if (kedalaman >= 7 && kedalaman <= 9) {
                                 return L.icon({
-                                    iconUrl: '{{ asset('img/Lamp-icon.png') }}',
-                                    iconSize: [32, 32],
-                                    iconAnchor: [16, 32],
+                                    iconUrl: '{{ asset('img/9.png') }}',
+                                    iconSize: [20, 27],
+                                    iconAnchor: [0, 0],
                                     popupAnchor: [0, -32]
                                 });
                             } else if (kedalaman >= 10 && kedalaman <= 12) {
                                 return L.icon({
-                                    iconUrl: '{{ asset('home/img/profile-img.jpg') }}',
-                                    iconSize: [32, 32],
-                                    iconAnchor: [16, 32],
+                                    iconUrl: '{{ asset('img/12.png') }}',
+                                    iconSize: [20, 27],
+                                    iconAnchor: [0, 0],
                                     popupAnchor: [0, -32]
                                 });
                             } else {
                                 return L.icon({
                                     iconUrl: '{{ asset('img/pin.png') }}',
-                                    iconSize: [32, 32],
-                                    iconAnchor: [16, 32],
+                                    iconSize: [20, 27],
+                                    iconAnchor: [0, 0],
                                     popupAnchor: [0, -32]
                                 });
                             }
@@ -239,10 +239,9 @@
 
                         window.onload = initialize;
                     </script>
-
                 </div>
                 <div class="row">
-                    <div class="m-2" id="tileLayerButtons">
+                    <div class="mt-1 ms-1 mb-1 col-md-3" id="tileLayerButtons">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="tileLayerSwitch" checked>
                             <label class="form-check-label" for="tileLayerSwitch">Satellite View</label>
