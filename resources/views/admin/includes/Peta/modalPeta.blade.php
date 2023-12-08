@@ -10,11 +10,13 @@
                             class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body">
-
-                    <div class="card-body">
-                        <img src="{{ asset('storage/posts/' . $item->image) }}" class="rounded" style="">
-                    </div>
-
+                    @if ($item->image != '')
+                        <center>
+                            <div class="card-body">
+                                <img src="{{ asset('storage/posts/' . $item->image) }}" class="rounded" style="">
+                            </div>
+                        </center>
+                    @endif
                     <table class="table table-sm">
                         <thead>
                             <tr class="text-start">
@@ -24,7 +26,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $item->deskripsi }}</td>
                                 <td class="text-center">{{ $item->latitude }}</td>
                                 <td class="text-center">{{ $item->longitude }}</td>
                             </tr>

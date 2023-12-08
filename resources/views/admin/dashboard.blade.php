@@ -4,8 +4,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Dashboard Admin</h3>
-                <p class="text-subtitle text-muted">Tampilan awal Admin.</p>
+                <h3>Dashboard</h3>
+                <p class="text-subtitle text-muted"></p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -35,7 +35,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Data Pengguna</h6>
                                         <h6 class="font-extrabold mb-0 purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="2"></h6>
+                                            data-purecounter-end="{{ $users }}" data-purecounter-duration="1"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                    <div class="col-md-4 col-lg-11 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon green mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" id="Box"  width="30" height="30">
                                                 <switch>
@@ -62,7 +62,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Data Stasiun</h6>
                                         <h6 class="font-extrabold mb-0  purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="2"></h6>
+                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Data Terumbu Karang</h6>
                                         <h6 class="font-extrabold mb-0  purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="2"></h6>
+                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></h6>
                                     </div>
                                 </div>
                             </div>

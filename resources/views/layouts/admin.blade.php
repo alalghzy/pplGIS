@@ -80,10 +80,10 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title" style="margin-bottom: -7px">Dashboard Admin</li>
+                        <li class="sidebar-title" style="margin-bottom: -7px">Dashboard</li>
                         <hr>
-                        <li class="sidebar-item {{ Route::is('admin.index') ? 'active' : '' }}">
-                            <a href="{{ route('admin.index') }}" class='sidebar-link'>
+                        <li class="sidebar-item {{ Route::is('dashboard.index') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -91,7 +91,7 @@
                         <li class="sidebar-title" style="margin-bottom: -7px">Menu Navigasi</li>
                         <hr>
 
-                        <li class="sidebar-item has-sub {{ Route::is('stasiun.*', 'data-pengguna.*' ) ? 'active' : '' }}">
+                        <li class="sidebar-item has-sub {{ Route::is('stasiun.*', 'data-pengguna.*', 'karang.*' ) ? 'active' : '' }}">
                             <a href="#" class="sidebar-link">
                                 <i class="bi bi-grid-1x2-fill"></i>
                                 <span>Manajemen Data</span>
@@ -107,8 +107,8 @@
                                     <a href="{{ route('stasiun.index') }}" class="submenu-link">Stasiun</a>
                                 </li>
 
-                                <li class="submenu-item">
-                                    <a href="" class="submenu-link">Terumbu Karang</a>
+                                <li class="submenu-item {{ Route::is('karang.index') ? 'active' : '' }}">
+                                    <a href="{{ route('karang.index') }}" class="submenu-link">Terumbu Karang</a>
                                 </li>
 
                             </ul>
@@ -118,6 +118,13 @@
                             <a href="{{ route('peta.index') }}" class='sidebar-link'>
                                 <i class="bi bi-map-fill"></i>
                                 <span>Peta Persebaran</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item ">
+                            <a href="" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-break-fill"></i>
+                                <span>Cetak Laporan</span>
                             </a>
                         </li>
 
