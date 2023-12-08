@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('tabel.update', $post->id_post) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('stasiun.update', $post->id_post) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

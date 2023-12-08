@@ -12,7 +12,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary shadow-sm" data-bs-dismiss="modal"><i
                         class="fa-solid fa-angle-left"></i> Kembali</button>
-                <form action="{{ route('tabel.destroy', $post->id_post) }}" method="POST">
+                <form action="{{ route('stasiun.destroy', $post->id_post) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger shadow-sm"> <i class="fa-solid fa-trash-can"></i>

@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('tabel.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('stasiun.store') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 

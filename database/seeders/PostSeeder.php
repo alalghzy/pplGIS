@@ -17,15 +17,15 @@ class PostSeeder extends Seeder
         $postsData = [
             [
                 'nama'      => 'Stasiun 1',
-                'latitude'  => '-3.8249033185862666',
-                'longitude' => '102.16513061758329',
+                'latitude'  => '-3.8249197093011498',
+                'longitude' => '102.16513234033364',
                 'kedalaman' => '10',
                 'image'     => '',
             ],
             [
                 'nama'      => 'Stasiun 2',
-                'latitude'  => '-3.8249033185862666',
-                'longitude' => '102.16513061758329',
+                'latitude'  => '-3.825149268882268',
+                'longitude' => '102.16596656105001',
                 'kedalaman' => '10',
                 'image'     => '',
             ],

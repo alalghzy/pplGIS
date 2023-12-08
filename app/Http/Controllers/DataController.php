@@ -19,7 +19,7 @@ class DataController extends Controller
         //get posts
         $posts = Post::latest()->get();
 
-        return view('admin.lamanData', compact('posts'));
+        return view('admin.lamanStasiun', compact('posts'));
     }
 
     /**
@@ -152,7 +152,7 @@ if ($request->hasFile('image')) {
     {
         //validate form
         $this->validate($request, [
-            'nama'     => 'required|unique:posts,nama',
+            'nama'     => 'required',
             'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
             'latitude'   => 'required|numeric',
             'longitude'   => 'required|numeric',
@@ -202,7 +202,7 @@ if ($request->hasFile('image')) {
         }
 
         //redirect to index
-        return redirect()->route('tabel.index')->with('message', 'Data berhasil diedit!');
+        return redirect()->route('stasiun.index')->with('message', 'Data berhasil diedit!');
     }
 
     /**
@@ -218,7 +218,7 @@ if ($request->hasFile('image')) {
         $post->delete();
 
         //redirect to index
-        return redirect()->route('tabel.index')->with('message', 'Data berhasil dihapus!');
+        return redirect()->route('stasiun.index')->with('message', 'Data berhasil dihapus!');
     }
 
     // public function multipleDelete(Request $request)

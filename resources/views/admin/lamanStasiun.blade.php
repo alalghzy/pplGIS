@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Data Stasiun</h3>
-                <p class="text-subtitle text-muted"><em>Laman data pengguna tutupan komunitas karang.</em></p>
+                <p class="text-subtitle text-muted"><em>Laman data stasiun tutupan komunitas karang.</em></p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -34,7 +34,7 @@
                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Hapus semua data yang dipilih"><i class="bi bi-trash fs-5"></i> Hapus Data
                                     Terpilih</button>
-                                @include('admin.includes.modalTambah')
+                                @include('admin.includes.Stasiun.modalTambah')
                             </div>
                             <div class="card-body table-responsive p-3">
                                 <table class="table table-hover table-bordered" id="table-data">
@@ -86,9 +86,9 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                @include('admin.includes.modalLihat')
-                                                @include('admin.includes.modalEdit')
-                                                @include('admin.includes.modalHapus')
+                                                @include('admin.includes.Stasiun.modalLihat')
+                                                @include('admin.includes.Stasiun.modalEdit')
+                                                @include('admin.includes.Stasiun.modalHapus')
                                             </tr>
                                         @endforeach
                                     @else
@@ -105,7 +105,6 @@
                             </div>
                         </div>
                     </div>
-                    @include('admin.includes.modalPeta')
                 </div>
             </div>
         @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
@@ -31,15 +32,17 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::resource('/', HomeController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-// Route Auth
 Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], function () {
 
     // Route Laman Admin
     Route::resource('/admin', PostController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-    // Route Laman Tabel
-    Route::resource('/tabel', DataController::class);
+    // Route Data Pengguna
+    Route::resource('/data-pengguna', UserController::class);
+
+    // Route Stasiun
+    Route::resource('/stasiun', DataController::class);
 
     // Route Laman Peta
     Route::resource('/peta', PetaController::class)

@@ -4,8 +4,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Stasiun</h3>
-                <p class="text-subtitle text-muted"><em>Laman data stasiun tutupan komunitas karang.</em></p>
+                <h3>Data Pengguna</h3>
+                <p class="text-subtitle text-muted"><em>Laman data pengguna SIG Pulau Tikus.</em></p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -34,51 +34,49 @@
                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Hapus semua data yang dipilih"><i class="bi bi-trash fs-5"></i> Hapus Data
                                     Terpilih</button>
-                                @include('admin.includes.modalTambah')
+                                {{-- @include('admin.includes.users.modalTambah') --}}
                             </div>
                             <div class="card-body table-responsive p-3">
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th><input type="checkbox" id="checkboxesMain"></th>
+                                            <th style="width: 20px"><input type="checkbox" id="checkboxesMain"></th>
                                             {{-- <th>No</th> --}}
                                             <th>Nama</th>
-                                            <th>Latitude</th>
-                                            <th>Longitude</th>
-                                            <th>Kedalaman (meter)</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    @if ($posts->count())
-                                        @foreach ($posts as $key => $post)
-                                            <tr id="tr_{{ $post->id_post }}">
-                                                <td><input type="checkbox" class="checkbox" data-id="{{ $post->id_post }}">
+                                    @if ($users->count())
+                                        @foreach ($users as $key => $post)
+                                            <tr id="tr_{{ $post->id }}">
+                                                <td style="width: 20px"><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
                                                 </td>
                                                 {{-- <td>{{ ++$key }}</td> --}}
-                                                <td>{{ $post->nama }}</td>
-                                                <td>{{ $post->latitude }}</td>
-                                                <td>{{ $post->longitude }}</td>
-                                                <td>{{ $post->kedalaman }}</td>
+                                                <td>{{ $post->name }}</td>
+                                                <td>{{ $post->email }}</td>
+                                                <td>Peran Saya</td>
                                                 <td class="text-center" style="width: 140px">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="btn-group fs-5">
                                                             <button type="button" class="btn btn btn-dark"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#modalLihat-{{ $post->id_post }}"
+                                                                data-bs-target="#modalLihat-{{ $post->id }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="Lihat Data">
                                                                 <i class="bi bi-eye"></i>
                                                             </button>
                                                             <button type="button" class="btn btn btn-primary"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#modalEdit-{{ $post->id_post }}"
+                                                                data-bs-target="#modalEdit-{{ $post->id }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="Edit Data">
                                                                 <i class="bi bi-pencil-square fs-6"></i>
                                                             </button>
                                                             <button type="button" class="btn btn btn-danger"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#hapusdata-{{ $post->id_post }}"
+                                                                data-bs-target="#hapusdata-{{ $post->id }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="Hapus Data">
                                                                 <i class="bi bi-trash fs-6"></i>
@@ -86,9 +84,9 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                @include('admin.includes.modalLihat')
-                                                @include('admin.includes.modalEdit')
-                                                @include('admin.includes.modalHapus')
+                                                {{-- @include('admin.includes.users.modalLihat')
+                                                @include('admin.includes.users.modalEdit')
+                                                @include('admin.includes.users.modalHapus') --}}
                                             </tr>
                                         @endforeach
                                     @else
@@ -105,7 +103,6 @@
                             </div>
                         </div>
                     </div>
-                    @include('admin.includes.modalPeta')
                 </div>
             </div>
         @endsection

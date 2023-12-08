@@ -91,7 +91,7 @@
                         <li class="sidebar-title" style="margin-bottom: -7px">Menu Navigasi</li>
                         <hr>
 
-                        <li class="sidebar-item has-sub {{ Route::is('tabel.*', ) ? 'active' : '' }}">
+                        <li class="sidebar-item has-sub {{ Route::is('stasiun.*', 'data-pengguna.*' ) ? 'active' : '' }}">
                             <a href="#" class="sidebar-link">
                                 <i class="bi bi-grid-1x2-fill"></i>
                                 <span>Manajemen Data</span>
@@ -99,12 +99,12 @@
 
                             <ul class="submenu">
 
-                                <li class="submenu-item ">
-                                    <a href="" class="submenu-link">Pengguna</a>
+                                <li class="submenu-item {{ Route::is('data-pengguna.index') ? 'active' : '' }}">
+                                    <a href="{{ route('data-pengguna.index') }}" class="submenu-link">Pengguna</a>
                                 </li>
 
-                                <li class="submenu-item {{ Route::is('tabel.index') ? 'active' : '' }}">
-                                    <a href="{{ route('tabel.index') }}" class="submenu-link">Stasiun</a>
+                                <li class="submenu-item {{ Route::is('stasiun.index') ? 'active' : '' }}">
+                                    <a href="{{ route('stasiun.index') }}" class="submenu-link">Stasiun</a>
                                 </li>
 
                                 <li class="submenu-item">
@@ -188,14 +188,16 @@
             <div style="height: ">
 
             </div>
-            <footer class="">
+            <footer class="fixed-bottom">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2023 &copy; SIG Pulau Tikus</p>
+                        {{-- <p>2023 &copy; SIG Pulau Tikus</p> --}}
                     </div>
                     <div class="float-end">
-                        <a href="https://github.com/alalghzy" style=""><i
-                                class="fa-brands fa-square-github fa-bounce fa-2xl"></i>&ensp;alalghzy</a>
+                        {{-- <a href="https://github.com/alalghzy" style="">
+                            <i class="fa-brands fa-square-github fa-bounce fa-2xl"></i>&ensp;alalghzy
+                        </a> --}}
+                        <p>2023 &copy; SIG Pulau Tikus</p>
                     </div>
                 </div>
             </footer>
