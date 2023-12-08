@@ -157,7 +157,7 @@
                         </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.index') }}" class="nav-link scrollto">
+                    <a href="{{ route('dashboard.index') }}" class="nav-link scrollto">
                         <i class="bi bi-person-gear"></i> <span>Login Admin</span></a>
                 </li>
             </ul>
