@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Karang;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,7 +18,8 @@ class DashboardController extends Controller
         //get posts
         $users = User::count();
         $posts = Post::count();
-        return view('admin.dashboard', compact('posts', 'users'))->with('success', 'Kamu berhasil Login!');
+        $karangs = Karang::count();
+        return view('admin.dashboard', compact('posts', 'users', 'karangs'))->with('success', 'Kamu berhasil Login!');
     }
 
     /**

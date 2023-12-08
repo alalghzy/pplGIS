@@ -13,8 +13,8 @@ class KarangController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
-        return view('admin.lamanKarang', compact('posts'));
+        $karangs = Karang::latest()->get();
+        return view('admin.lamanKarang', compact('karangs'));
     }
 
     /**

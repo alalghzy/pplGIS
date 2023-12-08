@@ -87,7 +87,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Data Terumbu Karang</h6>
                                         <h6 class="font-extrabold mb-0  purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></h6>
+                                            data-purecounter-end="{{ $karangs }}" data-purecounter-duration="1"></h6>
                                     </div>
                                 </div>
                             </div>

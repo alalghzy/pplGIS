@@ -40,25 +40,29 @@
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th><input type="checkbox" id="checkboxesMain"></th>
-                                            {{-- <th>No</th> --}}
-                                            <th>Nama</th>
-                                            <th>Latitude</th>
-                                            <th>Longitude</th>
-                                            <th>Kedalaman (meter)</th>
+                                            <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>
+                                            <th style="width: 10px">No</th>
+                                            <th>Nama Terumbu Karang</th>
+                                            <th>Nama Stasiun</th>
+                                            <th>Status</th>
+                                            <th>Jenis Marga</th>
+                                            <th>User</th>
+                                            <th>Waktu</th>
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    @if ($posts->count())
-                                        @foreach ($posts as $key => $post)
+                                    @if ($karangs->count())
+                                        @foreach ($karangs as $key => $post)
                                             <tr id="tr_{{ $post->id }}">
-                                                <td><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
+                                                <td style="width: 10px"><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
                                                 </td>
-                                                {{-- <td>{{ ++$key }}</td> --}}
+                                                <td style="width: 10px">{{ $loop->iteration }}</td>
                                                 <td>{{ $post->nama }}</td>
-                                                <td>{{ $post->latitude }}</td>
-                                                <td>{{ $post->longitude }}</td>
-                                                <td>{{ $post->kedalaman }}</td>
+                                                <td>{{ $post->post->nama }}</td>
+                                                <td>{{ $post->status }}</td>
+                                                <td>{{ $post->jenis_marga }}</td>
+                                                <td>{{ $post->user->name }}</td>
+                                                <td>{{ $post->tanggal }}</td>
                                                 <td class="text-center" style="width: 140px">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="btn-group fs-5">

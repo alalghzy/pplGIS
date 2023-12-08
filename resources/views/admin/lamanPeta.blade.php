@@ -88,16 +88,37 @@
                 <div class="m-1">
 
                 </div>
-                <div class="rounded" id="map" style="height:550px;">
+                <div class="rounded" id="map" style="height:450px;">
 
                     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
                     <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
                     <script>
                         function initialize() {
-                            var map = L.map('map').setView([-3.838195020251307, 102.1797480229322], 17);
+                            var map = L.map('map', {
+                                center: [-3.838195020251307, 102.1797480229322],
+                                zoom: 17,
+                                scrollWheelZoom: false // Aktifkan zoom dengan kombinasi Ctrl + scroll
+                            });
 
                             var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 attribution: '&copy; OpenStreetMap contributors'
+                            });
+
+                            // Tambahkan event listener untuk menangani zoom hanya ketika tombol Ctrl ditekan
+                            var isCtrlPressed = false;
+
+                            document.addEventListener('keydown', function(event) {
+                                if (event.key === 'Control') {
+                                    isCtrlPressed = true;
+                                    map.scrollWheelZoom.enable(); // Aktifkan zoom dengan scroll
+                                }
+                            });
+
+                            document.addEventListener('keyup', function(event) {
+                                if (event.key === 'Control') {
+                                    isCtrlPressed = false;
+                                    map.scrollWheelZoom.disable(); // Nonaktifkan zoom dengan scroll
+                                }
                             });
 
                             mapLink = '<a href="https://github.com/alalghzy">alalghzy</a>';
