@@ -138,7 +138,7 @@ if ($request->hasFile('image')) {
      */
     public function edit(string $id)
     {
-        // Find post by 'id_post' or throw an exception if not found
+        // Find post by 'id' or throw an exception if not found
         $post = Post::findOrFail($id);
 
         // Render view with post
@@ -224,7 +224,7 @@ if ($request->hasFile('image')) {
     public function delete_all(Request $request)
     {
         $ids = $request->ids;
-    $deletedRows = Post::whereIn('id_post', explode(",", $ids))->delete();
+    $deletedRows = Post::whereIn('id', explode(",", $ids))->delete();
 
     if ($deletedRows > 0) {
         return response()->json(['status' => true, 'message' => 'Data berhasil dihapus!']);

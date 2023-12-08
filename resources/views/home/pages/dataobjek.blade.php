@@ -19,7 +19,7 @@
                 </thead>
                 @if ($posts->count())
                     @foreach ($posts as $key => $post)
-                        <tr id="tr_{{ $post->id_post }}">
+                        <tr id="tr_{{ $post->id }}">
                             <td>{{ ++$key }}</td>
                             <td>{{ $post->nama }}</td>
                             <td>{{ $post->deskripsi }}</td>
@@ -28,7 +28,7 @@
                             <td class="text-center" style="width: 200px">
                                 <button type="button" class="btn btn btn-dark"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#modalLihat-{{ $post->id_post }}"
+                                    data-bs-target="#modalLihat-{{ $post->id }}"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data">
                                     <i class="bi bi-eye"></i>
                                 </button>

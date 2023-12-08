@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('karangs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id');
+            $table->foreignId('user_id');
+            $table->string('nama');
+            $table->string('status');
+            $table->string('jenis_marga');
+            $table->timestamp('tanggal')->nullable();
             $table->timestamps();
         });
     }

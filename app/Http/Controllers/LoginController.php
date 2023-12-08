@@ -58,7 +58,7 @@ class LoginController extends Controller
         ];
 
         if(Auth::attempt($data)){
-            return redirect()->route('admin.index')->with('success' , 'Kamu berhasil login!');
+            return redirect()->route('dashboard.index')->with('success' , 'Kamu berhasil login!');
         }else{
             return redirect()->route('login.index')->with('failed','Email atau kata sandi salah!');
         }

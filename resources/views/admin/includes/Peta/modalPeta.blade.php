@@ -1,5 +1,5 @@
 @foreach ($posts as $item)
-    <div class="modal fade" id="locationModal-{{ $item->id_post }}" tabindex="-1" role="dialog"
+    <div class="modal fade" id="locationModal-{{ $item->id }}" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable modal-lg text-start"
             role="document">

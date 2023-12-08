@@ -28,7 +28,7 @@
                                     {
                                         latitude: {{ $item->latitude }},
                                         longitude: {{ $item->longitude }},
-                                        idPost: {{ $item->id_post }},
+                                        idPost: {{ $item->id }},
                                         title: "{{ $item->nama }}"
                                     },
                                 @endforeach
@@ -47,9 +47,9 @@
                                     });
                                     // Tambahkan event listener untuk menampilkan modal saat marker diklik
                                     marker.addListener('click', function() {
-                                        var id_post = location.idPost;
-                                        $('#locationTitle-' + id_post).text(this.title);
-                                        $('#locationModal-' + id_post).modal('show');
+                                        var id = location.idPost;
+                                        $('#locationTitle-' + id).text(this.title);
+                                        $('#locationModal-' + id).modal('show');
                                     });
                                 })();
                             }
@@ -61,7 +61,7 @@
             </div>
         </div>
         @foreach ($posts as $item)
-            <div class="modal fade" id="locationModal-{{ $item->id_post }}" tabindex="-1" role="dialog"
+            <div class="modal fade" id="locationModal-{{ $item->id }}" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable modal-lg text-start"
                     role="document">

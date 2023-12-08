@@ -23,4 +23,9 @@ class Post extends Model
     //     'longitude',
     //     'kedalaman'
     // ];
+
+    public function karangs()
+    {
+        return $this->hasMany(Karang::class);
+    }
 }

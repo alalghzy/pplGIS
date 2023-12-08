@@ -1,4 +1,4 @@
-<div class="modal fade" id="hapusdata-{{ $post->id_post }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="hapusdata-{{ $post->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -12,7 +12,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary shadow-sm" data-bs-dismiss="modal"><i
                         class="fa-solid fa-angle-left"></i> Kembali</button>
-                <form action="{{ route('stasiun.destroy', $post->id_post) }}" method="POST">
+                <form action="{{ route('stasiun.destroy', $post->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger shadow-sm"> <i class="fa-solid fa-trash-can"></i>

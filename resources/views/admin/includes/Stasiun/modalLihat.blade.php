@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalLihat-{{ $post->id_post }}" tabindex="-1" role="dialog"
+<div class="modal fade" id="modalLihat-{{ $post->id }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">

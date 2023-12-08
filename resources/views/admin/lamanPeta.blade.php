@@ -47,7 +47,7 @@
                                     {
                                         latitude: {{ $item->latitude }},
                                         longitude: {{ $item->longitude }},
-                                        idPost: {{ $item->id_post }},
+                                        idPost: {{ $item->id }},
                                         title: "{{ $item->nama }}"
                                     },
                                 @endforeach
@@ -66,9 +66,9 @@
                                     });
                                     // Tambahkan event listener untuk menampilkan modal saat marker diklik
                                     marker.addListener('click', function() {
-                                        var id_post = location.idPost;
-                                        $('#locationTitle-' + id_post).text(this.title);
-                                        $('#locationModal-' + id_post).modal('show');
+                                        var id = location.idPost;
+                                        $('#locationTitle-' + id).text(this.title);
+                                        $('#locationModal-' + id).modal('show');
                                     });
                                 })();
                             }
@@ -143,7 +143,7 @@
                                         latitude: {{ $item->latitude }},
                                         longitude: {{ $item->longitude }},
                                         kedalaman: {{ $item->kedalaman }},
-                                        idPost: {{ $item->id_post }},
+                                        idPost: {{ $item->id }},
                                         title: "<center><b>{{ $item->nama }}</b> ({{ $item->kedalaman }} meter) <br/> {{ $item->latitude }}, {{ $item->longitude }}</center>",
                                     },
                                 @endforeach
@@ -169,9 +169,9 @@
 
                         function createMarkerClickHandler(location) {
                             return function(e) {
-                                var id_post = location.idPost;
-                                $('#locationTitle-' + id_post).text(e.target.getPopup().getContent());
-                                $('#locationModal-' + id_post).modal('show');
+                                var id = location.idPost;
+                                $('#locationTitle-' + id).text(e.target.getPopup().getContent());
+                                $('#locationModal-' + id).modal('show');
                             };
                         }
 

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalEdit-{{ $post->id_post }}" tabindex="-1" role="dialog"
+<div class="modal fade" id="modalEdit-{{ $post->id }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('stasiun.update', $post->id_post) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('stasiun.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="col-1">
                                     <br>
-                                    <a href="{{ route('delete.image', ['id' => $post->id_post]) }}"
+                                    <a href="{{ route('delete.image', ['id' => $post->id]) }}"
                                         onclick="return confirm('Apakah Anda ingin menghapus gambar {{ $post->nama }}?')">
                                         <button type="button" class="btn btn-danger" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Hapus Gambar">

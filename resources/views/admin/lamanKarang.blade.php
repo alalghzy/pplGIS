@@ -51,8 +51,8 @@
                                     </thead>
                                     @if ($posts->count())
                                         @foreach ($posts as $key => $post)
-                                            <tr id="tr_{{ $post->id_post }}">
-                                                <td><input type="checkbox" class="checkbox" data-id="{{ $post->id_post }}">
+                                            <tr id="tr_{{ $post->id }}">
+                                                <td><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
                                                 </td>
                                                 {{-- <td>{{ ++$key }}</td> --}}
                                                 <td>{{ $post->nama }}</td>
@@ -64,21 +64,21 @@
                                                         <div class="btn-group fs-5">
                                                             <button type="button" class="btn btn btn-dark"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#modalLihat-{{ $post->id_post }}"
+                                                                data-bs-target="#modalLihat-{{ $post->id }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="Lihat Data">
                                                                 <i class="bi bi-eye"></i>
                                                             </button>
                                                             <button type="button" class="btn btn btn-primary"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#modalEdit-{{ $post->id_post }}"
+                                                                data-bs-target="#modalEdit-{{ $post->id }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="Edit Data">
                                                                 <i class="bi bi-pencil-square fs-6"></i>
                                                             </button>
                                                             <button type="button" class="btn btn btn-danger"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#hapusdata-{{ $post->id_post }}"
+                                                                data-bs-target="#hapusdata-{{ $post->id }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="Hapus Data">
                                                                 <i class="bi bi-trash fs-6"></i>

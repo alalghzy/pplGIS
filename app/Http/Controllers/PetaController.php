@@ -64,7 +64,7 @@ class PetaController extends Controller
      */
     public function edit(string $id)
     {
-        // Find post by 'id_post' or throw an exception if not found
+        // Find post by 'id' or throw an exception if not found
         $post = Peta::findOrFail($id);
 
         // Render view with post
