@@ -11,9 +11,9 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $primaryKey = 'id_post';
+    protected $primaryKey = 'id';
 
-    protected $guarded = ['id_post'];
+    protected $guarded = ['id'];
 
     // protected $fillable = [
     //     'nama',

@@ -1,137 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Admin</title>
-
-    <!-- Favicons -->
-    <link href="{{ asset('admin/static/images/logo/favicon.png') }}" rel="icon">
-    <link href="{{ asset('admin/static/images/logo/favicon.png') }}" rel="apple-touch-icon">
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href=" {{ asset('auth/plugins/fontawesome-free/css/all.min.css') }} ">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('auth/css/adminlte.min.css') }} ">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('auth/css/main.css') }} ">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>SIG Pulau Tikus</title>
 
     <style>
-        .login-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 470px; /* Sesuaikan dengan lebar maksimum login box */
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.card {
-    border: none; /* Menghapus border kartu */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan kartu */
-}
+        .topic:hover {
+            color: rgb(255, 158, 48);
+            text-decoration: none;
+        }
 
-a:hover {
-    color: #0300a7;
-}
+        .login-content .login-box.flipped {
+            min-height: 320px;
+        }
 
-a:hover svg {
-    fill: #96007d;
-}
+        .login-content .login-box {
+            position: relative;
+            min-width: 350px;
+            min-height: 410px;
+            background-color: #fff;
+            -webkit-box-shadow: 0px 29px 147.5px 102.5px rgba(0, 0, 0, 0.05), 0px 29px 95px 0px rgba(0, 0, 0, 0.16);
+            box-shadow: 0px 29px 147.5px 102.5px rgba(0, 0, 0, 0.05), 0px 29px 95px 0px rgba(0, 0, 0, 0.16);
+            -webkit-perspective: 800px;
+            perspective: 800px;
+            -webkit-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
 
-
-
+        .material-half-bg .cover {
+            background-color: #075d3d;
+            height: 50vh;
+        }
     </style>
 </head>
 
-<body class="login-page">
-    <div class="login-box container-sm ">
-        <div class="card card-outline card-info">
-            <div class="card-header text-center">
-                <a href="{{ route('index') }}" class="h1">
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="coral" width="45" height="45"><path d="M40.67,32.43c-3,2.54-7.13,2.62-9.93,2.27a23.17,23.17,0,0,1,7-4.9C47.93,25.28,47,11,46.94,10.84c-.09-2.53-4.18-2.42-4,.3,0,.1.61,9.34-4.69,13.69a11.87,11.87,0,0,0-3.34-8,23.93,23.93,0,0,0,5-9.33,2,2,0,1,0-3.88-1,19.94,19.94,0,0,1-4.09,7.68c-3-3.65-1.05-10.6-1-10.68a2,2,0,0,0-3.83-1.14c-.14.46-3.34,11.45,3.8,16.22,3.74,2.49,3.58,6.72,3.33,8.48a27.9,27.9,0,0,0-8.06,6.72,28.43,28.43,0,0,0-1-5.38,16.65,16.65,0,0,0,2.76-6A2,2,0,1,0,24,21.61a13.8,13.8,0,0,1-.82,2.32c-1.89-3.12-3-3.19-5.5-6.06A17.55,17.55,0,0,0,22,6a2,2,0,0,0-2.34-2c-3.18.53-.06,4.89-4.37,10.51A17.31,17.31,0,0,1,13,8.75,2,2,0,0,0,10.74,7c-4.14.49.25,8.69,2.6,11.85,2.14,4.28,8.76,4.51,8.89,17.53a44.78,44.78,0,0,0-10.08-6.61A7.91,7.91,0,0,0,14,25a2,2,0,1,0-4,.08,4.73,4.73,0,0,1-1.37,2.72C3.82,23.74,5,16,5,11A2,2,0,0,0,2.34,9.1C.73,9.61,1,11.36,1,13,1,18.15.17,27.64,7.85,32.1c1.2.8,4.51,1.78,9.28,5.31,2.57,1.91,1.33,4.62.61,7A2,2,0,0,0,19.66,47h8.62a2,2,0,0,0,1.92-2.57l-1.36-4.51a1,1,0,0,1,1.1-1.28c4.65.64,9.5,0,13.17-3A2,2,0,1,0,40.67,32.43Z" data-name="30. Coral"></path></svg> --}}
-                    <b>SIG Pulau Tikus</b>
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="coral" width="45" height="45"><path d="M40.67,32.43c-3,2.54-7.13,2.62-9.93,2.27a23.17,23.17,0,0,1,7-4.9C47.93,25.28,47,11,46.94,10.84c-.09-2.53-4.18-2.42-4,.3,0,.1.61,9.34-4.69,13.69a11.87,11.87,0,0,0-3.34-8,23.93,23.93,0,0,0,5-9.33,2,2,0,1,0-3.88-1,19.94,19.94,0,0,1-4.09,7.68c-3-3.65-1.05-10.6-1-10.68a2,2,0,0,0-3.83-1.14c-.14.46-3.34,11.45,3.8,16.22,3.74,2.49,3.58,6.72,3.33,8.48a27.9,27.9,0,0,0-8.06,6.72,28.43,28.43,0,0,0-1-5.38,16.65,16.65,0,0,0,2.76-6A2,2,0,1,0,24,21.61a13.8,13.8,0,0,1-.82,2.32c-1.89-3.12-3-3.19-5.5-6.06A17.55,17.55,0,0,0,22,6a2,2,0,0,0-2.34-2c-3.18.53-.06,4.89-4.37,10.51A17.31,17.31,0,0,1,13,8.75,2,2,0,0,0,10.74,7c-4.14.49.25,8.69,2.6,11.85,2.14,4.28,8.76,4.51,8.89,17.53a44.78,44.78,0,0,0-10.08-6.61A7.91,7.91,0,0,0,14,25a2,2,0,1,0-4,.08,4.73,4.73,0,0,1-1.37,2.72C3.82,23.74,5,16,5,11A2,2,0,0,0,2.34,9.1C.73,9.61,1,11.36,1,13,1,18.15.17,27.64,7.85,32.1c1.2.8,4.51,1.78,9.28,5.31,2.57,1.91,1.33,4.62.61,7A2,2,0,0,0,19.66,47h8.62a2,2,0,0,0,1.92-2.57l-1.36-4.51a1,1,0,0,1,1.1-1.28c4.65.64,9.5,0,13.17-3A2,2,0,1,0,40.67,32.43Z" data-name="30. Coral"></path></svg> --}}
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="login-box-msg">Masuk sebagai Admin</p>
-
-                <form action="{{ route('login.store') }}" method="post">
-                    @csrf
-                    <div class="input-group mb-2">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="color: red">
-                        @error('email')
-                            <small>{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="input-group mb-2">
-                        <input type="password" name="password" class="form-control" placeholder="Kata sandi">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="color: red">
-                        @error('password')
-                            <small>{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block mt-1">Masuk</button>
-                        </div>
-
-                        <!-- /.col -->
-                    </div>
-                </form>
-            </div>
-            <!-- /.card-body -->
+<body>
+    <section class="material-half-bg">
+        <div class="cover"></div>
+    </section>
+    <section class="login-content">
+        <div class="logo">
+            <h1
+                style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+                <a href="/" style="color: white; text-decoration: none"><strong><span class="topic"><i
+                                class="bi-back"></i> SIG Pulau Tikus</span></strong>
+            </h1></a>
         </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.login-box -->
+        @if (session('sukses'))
+            <div class="bs-component">
+                <div class="alert alert-dismissible alert-success">
+                    <button class="btn-close" type="button" data-bs-dismiss="alert"></button>{{ session('sukses') }}
+                </div>
+            </div>
+        @endif
+        @if (session('eror'))
+            <div class="bs-component">
+                <div class="alert alert-dismissible alert-danger">
+                    <button class="btn-close" type="button" data-bs-dismiss="alert"></button>{{ session('eror') }}
+                </div>
+            </div>
+        @endif
+        <div class="login-box">
+            <form class="login-form" action="{{ route('login.store') }}" method="POST">
+                @csrf
+                <h3 class="login-head"><i class="bi bi-person me-2"></i>Login Akun</h3>
+                <div class="mb-1">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" value="{{ old('email') }}"
+                        class="form-control @error('email') is-invalid @enderror"
+                        placeholder="Masukkan email yang valid" autofocus>
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-1">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" value="{{ old('password') }}"
+                        class="form-control mb @error('password') is-invalid @enderror" placeholder="Masukkan password">
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <div class="utility">
+                        <p class="semibold-text mb-2"><a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalRegister">Daftar Akun</a></p>
+                        <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Lupa Password?</a></p>
+                    </div>
+                </div>
+                <div class="mb-3 btn-container d-grid">
+                    <button class="btn btn-primary btn-block"><i class="bi bi-box-arrow-in-right me-2 fs-5"></i>
+                        Login</button>
+                </div>
+            </form>
+            <form class="forget-form" action="{{ route('send_request_reset') }}" method="POST">
+                @csrf
+                <h3 class="login-head"><i class="bi bi-person-lock me-2"></i>Lupa Password</h3>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                        type="email" name="email" placeholder="Masukkan email akun">
+                </div>
+                <div class="mb-3 btn-container d-grid">
+                    <button class="btn btn-primary btn-block"><i class="bi bi-unlock me-2 fs-5"></i>Reset</button>
+                </div>
+                <div class="mb-5 mt-3">
+                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i
+                                class="bi bi-chevron-left me-1"></i> Kembali ke Login Akun</a></p>
+                </div>
+            </form>
+        </div>
+        @include('auth.includes.modalRegister')
+    </section>
+    <!-- Essential javascripts for application to work-->
+    <script src=" {{ asset('auth/js/jquery-3.7.0.min.js') }} "></script>
+    <script src="{{ asset('auth/js/bootstrap.min.js') }}  "></script>
+    <script src="{{ asset('auth/js/main.js') }}  "></script>
+    <script type="text/javascript">
+        // Login Page Flipbox control
+        $('.login-content [data-toggle="flip"]').click(function() {
+            $('.login-box').toggleClass('flipped');
+            return false;
+        });
+    </script>
 
-    <!-- Sweet Alert-->
+    {{-- Sweet Alert 2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if ($message = Session::get('failed'))
-        <script>
-            Swal.fire(
-                'Tidak Bisa Login!',
-                'Email atau password Anda salah!',
-                'error'
-            )
-        </script>
-    @endif
-
-    @if ($message = Session::get('success'))
-        <script>
+    <script>
+        @if (Session::has('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Login!',
+                text: "{{ Session::get('failed') }}",
+                showConfirmButton: true,
+            });
+        @elseif (Session::has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: "{{ Session::get('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif ($message = Session::get('logout'))
             Swal.fire(
                 'Kamu Telah Logout!',
                 '',
                 'warning'
             )
-        </script>
-    @endif
-
-
+        @endif
+    </script>
 </body>
 
 </html>

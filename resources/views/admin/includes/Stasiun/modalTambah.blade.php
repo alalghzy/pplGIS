@@ -14,21 +14,21 @@
                     @csrf
 
                     <div class="form-group">
-                                <label class="font-weight-bold mb-1">GAMBAR</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                        <label class="font-weight-bold mb-1">GAMBAR</label>
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
 
-                                <!-- error message untuk title -->
-                                @error('image')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                        <!-- error message untuk title -->
+                        @error('image')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
                             </div>
+                        @enderror
+                    </div>
 
                     <div class="form-group">
-                        <label class="font-weight-bold mb-1">Nama</label>
+                        <label class="font-weight-bold mb-1">Nama Stasiun</label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                            value="{{ old('nama') }}" placeholder="">
+                            value="{{ old('nama') }}" placeholder="Masukkan nama stasiun">
 
                         <!-- error message untuk nama -->
                         @error('nama')
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label class="font-weight-bold mb-1">Latitude</label>
                         <input type="text" class="form-control @error('latitude') is-invalid @enderror"
-                            name="latitude" value="{{ old('latitude') }}" placeholder="">
+                            name="latitude" value="{{ old('latitude') }}" placeholder="Masukkan koordinat lintang">
 
                         <!-- error message untuk latitude -->
                         @error('latitude')
@@ -54,7 +54,7 @@
                     <div class="form-group mb-3">
                         <label class="font-weight-bold mb-1">Longitude</label>
                         <input type="text" class="form-control @error('longitude') is-invalid @enderror"
-                            name="longitude" value="{{ old('longitude') }}" placeholder="">
+                            name="longitude" value="{{ old('longitude') }}" placeholder="Masukkan koordinat bujur">
 
                         <!-- error message untuk longitude -->
                         @error('longitude')
@@ -65,9 +65,9 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="font-weight-bold mb-1">Kedalaman</label>
+                        <label class="font-weight-bold mb-1">Kedalaman (meter)</label>
                         <input type="text" class="form-control @error('kedalaman') is-invalid @enderror"
-                            name="kedalaman" value="{{ old('kedalaman') }}" placeholder="">
+                            name="kedalaman" value="{{ old('kedalaman') }}" placeholder="Masukkan kedalaman stasiun">
 
                         <!-- error message untuk kedalaman -->
                         @error('kedalaman')

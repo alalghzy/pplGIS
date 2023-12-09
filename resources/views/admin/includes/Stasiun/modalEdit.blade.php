@@ -46,9 +46,9 @@
 
 
                     <div class="form-group">
-                        <label for="nama" class="font-weight-bold mb-1">Nama</label>
+                        <label for="nama" class="font-weight-bold mb-1">Nama Stasiun</label>
                         <input type="text" id="nama" class="form-control @error('nama') is-invalid @enderror"
-                            name="nama" value="{{ old('nama', $post->nama) }}" placeholder="Masukkan Nama Mangrove">
+                            name="nama" value="{{ old('nama', $post->nama) }}" placeholder="Masukkan nama stasiun">
                         @error('nama')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
@@ -57,7 +57,7 @@
                         <label for="latitude" class="font-weight-bold mb-1">Latitude</label>
                         <input type="text" id="latitude"
                             class="form-control @error('latitude') is-invalid @enderror" name="latitude"
-                            value="{{ old('latitude', $post->latitude) }}" placeholder="Masukkan Latitude Mangrove">
+                            value="{{ old('latitude', $post->latitude) }}" placeholder="Masukkan koordinat lintang">
                         @error('latitude')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
@@ -66,25 +66,27 @@
                         <label for="longitude" class="font-weight-bold mb-1">Longitude</label>
                         <input type="text" id="longitude"
                             class="form-control @error('longitude') is-invalid @enderror" name="longitude"
-                            value="{{ old('longitude', $post->longitude) }}" placeholder="Masukkan Longitude Mangrove">
+                            value="{{ old('longitude', $post->longitude) }}" placeholder="Masukkan koordinat bujur">
                         @error('longitude')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="kedalaman" class="font-weight-bold mb-1">Kedalaman</label>
+                        <label for="kedalaman" class="font-weight-bold mb-1">Kedalaman (meter)</label>
                         <input type="text" id="kedalaman"
                             class="form-control @error('kedalaman') is-invalid @enderror" name="kedalaman"
-                            value="{{ old('kedalaman', $post->kedalaman) }}" placeholder="Masukkan kedalaman Mangrove">
+                            value="{{ old('kedalaman', $post->kedalaman) }}" placeholder="Masukkan kedalaman stasiun">
                         @error('kedalaman')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="modal-footer justify-content-end">
-                        <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal"><i
-                                class="fa-solid fa-angle-left"></i> Kembali</button>
-                        <button type="submit" class="btn btn-primary shadow-sm"><i
-                                class="fa-solid fa-pen-to-square"></i> Edit</button>
+                        <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-angle-left"></i> Kembali
+                        </button>
+                        <button type="submit" class="btn btn-primary shadow-sm">
+                            <i class="fa-solid fa-check"></i> Simpan
+                        </button>
                     </div>
                 </form>
             </div>

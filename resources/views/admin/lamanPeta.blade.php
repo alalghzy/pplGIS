@@ -197,14 +197,12 @@
                         }
 
                         function getIcon(kedalaman) {
-                            // Menyesuaikan ikon berdasarkan kedalaman
-                            // Gantilah dengan logika sesuai kebutuhan Anda
                             if (kedalaman <= 3) {
                                 return L.icon({
                                     iconUrl: '{{ asset('img/3.png') }}',
                                     iconSize: [20, 27],
                                     iconAnchor: [0, 0],
-                                    popupAnchor: [0, -32]
+                                    popupAnchor: [0, 0]
                                 });
                             } else if (kedalaman >= 4 && kedalaman <= 6) {
                                 return L.icon({
@@ -229,7 +227,7 @@
                                 });
                             } else {
                                 return L.icon({
-                                    iconUrl: '{{ asset('img/pin.png') }}',
+                                    iconUrl: '{{ asset('img/location.png') }}',
                                     iconSize: [20, 27],
                                     iconAnchor: [0, 0],
                                     popupAnchor: [0, -32]

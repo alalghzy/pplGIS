@@ -24,38 +24,45 @@ use App\Http\Controllers\PostController;
 //     return view('admin.lamanData');
 // });
 
-// Route Login
+// Route Authenticate
 Route::resource('/login', LoginController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update',);
+Route::post('proses_register', [LoginController::class, 'proses_register'])->name('proses_register');
+Route::post('proses_login', [LoginController::class, 'proses_login'])->name('proses_login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route Home
+// Route Lupa Password
+Route::post('/forget_password', [LoginController::class, 'send_request_reset'])->name('send_request_reset');
+Route::get('/password/reset{token}', [LoginController::class, 'reset_password'])->name('reset_password');
+Route::post('/password/reset', [LoginController::class, 'update_password'])->name('password_reset');
+
+// Route Langding Page
 Route::resource('/', HomeController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
 Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], function () {
 
-    // Route Dashboard
+    Route::group(['middleware' => 'status:Administrator'], function () {
+        Route::resource('/data-pengguna', UserController::class);
+    });
+
     Route::resource('/dashboard', DashboardController::class)
         ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-    // Route Data Pengguna
-    Route::resource('/data-pengguna', UserController::class);
-
-    // Route Stasiun
     Route::resource('/stasiun', PostController::class);
 
-    // Route Peta
     Route::resource('/peta', PetaController::class)
         ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-    // Route Karang
     Route::resource('/karang', KarangController::class)
         ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-    // Hapus selected data
-    Route::delete('delete-all', [PostController::class, 'delete_all']);
+    Route::delete('/delete-all-users', [UserController::class, 'delete_all']);
+    Route::delete('/delete-all-stasiuns', [PostController::class, 'delete_all']);
 
-    // Hapus gambar di Edit Data
     Route::get('/delete-image/{id}', [PostController::class, 'deleteImage'])->name('delete.image');
 });
+
+// Route profile
+Route::get('profil/{id}', [UserController::class, 'profil'])->name('profil');
+Route::post('update_profil/{id}', [UserController::class, 'update_profil'])->name('update_profil');

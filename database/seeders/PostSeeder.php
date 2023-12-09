@@ -21,6 +21,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.16513234033364',
                 'kedalaman' => '10',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 2',
@@ -28,6 +29,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.16596656105001',
                 'kedalaman' => '10',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 3',
@@ -35,6 +37,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.1821998996779',
                 'kedalaman' => '7',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 4',
@@ -42,6 +45,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.1821989106438',
                 'kedalaman' => '7',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 5',
@@ -49,6 +53,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.18219971547123',
                 'kedalaman' => '3',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 6',
@@ -56,6 +61,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.18203280482658',
                 'kedalaman' => '3',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 7',
@@ -63,6 +69,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.18496659729925',
                 'kedalaman' => '10',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
             [
                 'nama'      => 'Stasiun 8',
@@ -70,6 +77,7 @@ class PostSeeder extends Seeder
                 'longitude' => '102.17558127889303',
                 'kedalaman' => '5',
                 'image'     => '',
+                'pengguna'  => 'admin'
             ],
         ];
         foreach ($postsData as $postData) {

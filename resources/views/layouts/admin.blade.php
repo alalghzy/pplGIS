@@ -91,25 +91,35 @@
                         <li class="sidebar-title" style="margin-bottom: -7px">Menu Navigasi</li>
                         <hr>
 
-                        <li class="sidebar-item has-sub {{ Route::is('stasiun.*', 'data-pengguna.*', 'karang.*' ) ? 'active' : '' }}">
+                        <li
+                            class="sidebar-item has-sub {{ Route::is('stasiun.*', 'data-pengguna.*', 'karang.*') ? 'active' : '' }}">
                             <a href="#" class="sidebar-link">
                                 <i class="bi bi-grid-1x2-fill"></i>
                                 <span>Manajemen Data</span>
                             </a>
 
                             <ul class="submenu">
+                                @if (auth()->user()->status == 'Administrator')
+                                    <li class="submenu-item {{ Route::is('data-pengguna.index') ? 'active' : '' }}">
+                                        <a href="{{ route('data-pengguna.index') }}" class="submenu-link">Pengguna</a>
+                                    </li>
 
-                                <li class="submenu-item {{ Route::is('data-pengguna.index') ? 'active' : '' }}">
-                                    <a href="{{ route('data-pengguna.index') }}" class="submenu-link">Pengguna</a>
-                                </li>
+                                    <li class="submenu-item {{ Route::is('stasiun.index') ? 'active' : '' }}">
+                                        <a href="{{ route('stasiun.index') }}" class="submenu-link">Stasiun</a>
+                                    </li>
 
-                                <li class="submenu-item {{ Route::is('stasiun.index') ? 'active' : '' }}">
-                                    <a href="{{ route('stasiun.index') }}" class="submenu-link">Stasiun</a>
-                                </li>
+                                    <li class="submenu-item {{ Route::is('karang.index') ? 'active' : '' }}">
+                                        <a href="{{ route('karang.index') }}" class="submenu-link">Terumbu Karang</a>
+                                    </li>
+                                @else
+                                    <li class="submenu-item {{ Route::is('stasiun.index') ? 'active' : '' }}">
+                                        <a href="{{ route('stasiun.index') }}" class="submenu-link">Stasiun</a>
+                                    </li>
 
-                                <li class="submenu-item {{ Route::is('karang.index') ? 'active' : '' }}">
-                                    <a href="{{ route('karang.index') }}" class="submenu-link">Terumbu Karang</a>
-                                </li>
+                                    <li class="submenu-item {{ Route::is('karang.index') ? 'active' : '' }}">
+                                        <a href="{{ route('karang.index') }}" class="submenu-link">Terumbu Karang</a>
+                                    </li>
+                                @endif
 
                             </ul>
                         </li>
@@ -124,7 +134,7 @@
                         <li class="sidebar-item ">
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-break-fill"></i>
-                                <span>Cetak Laporan</span>
+                                <span>Laporan</span>
                             </a>
                         </li>
 
@@ -169,7 +179,7 @@
                                     style="min-width: 8rem;">
                                     <li>
                                         <span class="dropdown-header badge bg-primary dropdown-item"
-                                            style="font-size: 11px; color: white">Administrator</span>
+                                            style="font-size: 11px; color: white">{{ auth()->user()->status }}</span>
                                     </li>
                                     <hr>
                                     <li>

@@ -24,6 +24,7 @@
 
                                     <h4>
                                         {{ $post->nama }}
+                                        <br><span style="font-size: 13px; color: darkgray;"> Diupdate oleh {{$post->pengguna}} pada {{$post->updated_at}}</span>
                                     </h4>
                                     <hr>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">

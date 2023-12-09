@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Data Stasiun</h3>
-                <p class="text-subtitle text-muted">Laman data stasiun tutupan komunitas karang.</p>
+                <p class="text-subtitle text-muted">Laman manajemen data stasiun tutupan komunitas karang.</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/laman/admin"><i class="bi bi-house"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Objek</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Manajemen Data / Data Stasiun</li>
                     </ol>
                 </nav>
             </div>
@@ -29,20 +29,22 @@
                             <div class="card-header">
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Tambah data"><i class="bi bi-plus-square fs-5"></i> &ensp;Tambah
-                                    Data</button><button class="btn btn-danger btn-sm removeAll ms-3"
-                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Hapus semua data yang dipilih"><i class="bi bi-trash fs-5"></i> Hapus Data
-                                    Terpilih</button>
+                                    title="Tambah data">
+                                    <i class="bi bi-plus-square fs-5"></i> &ensp;Tambah Data
+                                </button>
+                                <button class="btn btn-danger btn-sm removeAll ms-3" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Hapus semua data yang dipilih">
+                                    <i class="bi bi-trash fs-5"></i> Hapus Banyak Data
+                                </button>
                                 @include('admin.includes.Stasiun.modalTambah')
                             </div>
                             <div class="card-body table-responsive p-3">
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th><input type="checkbox" id="checkboxesMain"></th>
-                                            {{-- <th>No</th> --}}
-                                            <th>Nama</th>
+                                            <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>
+                                            {{-- <th style="width: 10px">No</th> --}}
+                                            <th>Nama Stasiun</th>
                                             <th>Latitude</th>
                                             <th>Longitude</th>
                                             <th>Kedalaman (meter)</th>
@@ -52,9 +54,9 @@
                                     @if ($posts->count())
                                         @foreach ($posts as $key => $post)
                                             <tr id="tr_{{ $post->id }}">
-                                                <td><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
+                                                <td style="width: 10px"><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
                                                 </td>
-                                                {{-- <td>{{ ++$key }}</td> --}}
+                                                {{-- <td style="width: 10px">{{ $loop->iteration }}</td> --}}
                                                 <td>{{ $post->nama }}</td>
                                                 <td>{{ $post->latitude }}</td>
                                                 <td>{{ $post->longitude }}</td>
@@ -166,7 +168,7 @@
                                 if (result.isConfirmed) {
                                     var stuId = studentIdArr.join(",");
                                     $.ajax({
-                                        url: "{{ url('laman/delete-all') }}",
+                                        url: "{{ url('laman/delete-all-stasiuns') }}",
                                         type: 'DELETE',
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

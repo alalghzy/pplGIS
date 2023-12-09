@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('status', ['SuperAdmin','Admin','Pembimbing','Petani']);
+            $table->enum('status', ['Administrator','Pembimbing','Petani'])->default('Petani');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

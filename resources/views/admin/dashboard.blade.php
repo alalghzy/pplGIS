@@ -23,24 +23,28 @@
         <section class="row">
             <div class="col-12 col-lg-12">
                 <div class="row justify-content-start">
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldProfile"></i>
+
+                    @if (auth()->user()->status == 'Administrator')
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                            <div class="stats-icon purple mb-2">
+                                                <i class="iconly-boldProfile"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Data Pengguna</h6>
-                                        <h6 class="font-extrabold mb-0 purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $users }}" data-purecounter-duration="1"></h6>
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                            <h6 class="text-muted font-semibold">Data Pengguna</h6>
+                                            <h6 class="font-extrabold mb-0 purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $users }}" data-purecounter-duration="1">
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
@@ -48,7 +52,8 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-11 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon green mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" id="Box"  width="30" height="30">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" id="Box"
+                                                width="30" height="30">
                                                 <switch>
                                                     <g fill="#fcfcfc" class="color000000 svgShape">
                                                         <path

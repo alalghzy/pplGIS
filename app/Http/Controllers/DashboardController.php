@@ -15,12 +15,14 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        //get posts
-        $users = User::count();
-        $posts = Post::count();
-        $karangs = Karang::count();
-        return view('admin.dashboard', compact('posts', 'users', 'karangs'))->with('success', 'Kamu berhasil Login!');
+        $users      = User::whereIn('status', ['Petani', 'Pembimbing'])->count();
+        $posts      = Post::count();
+        $karangs    = Karang::count();
+
+        return view('admin.dashboard', compact('posts', 'users', 'karangs'))
+            ->with('success', 'Kamu berhasil Login!');
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,9 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //get posts
         $posts = Post::latest()->get();
-
         return view('admin.lamanStasiun', compact('posts'));
     }
 
@@ -27,39 +26,35 @@ class PostController extends Controller
      */
     public function deleteImage(string $id)
     {
-        // Get post by ID
+
         $post = Post::findOrFail($id);
 
-        // Check if the post has an associated image
         if ($post->image) {
-            // Delete the image file
+
             Storage::delete('public/posts/' . $post->image);
 
-            // Update the post to remove the reference to the deleted image
             $post->update(['image' => '']);
 
-            // Redirect back or to any other route as needed
             return redirect()->back()->with('message', 'Gambar berhasil dihapus!');
         }
 
-        // If no image is associated, redirect with a message
         return redirect()->back()->with('message', 'Data tidak memiliki gambar!');
     }
 
 
     public function store(Request $request)
     {
+        $user = Auth::user()->name;
         $validator = Validator::make($request->all(), [
             'nama'      => 'required|unique:posts,nama',
             'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
             'latitude'  => 'required|numeric',
             'longitude' => 'required|numeric',
-            'kedalaman' => 'required|numeric',
+            'kedalaman' => 'required|numeric|min:0',
         ]);
-//check if image is uploaded
-if ($request->hasFile('image')) {
 
-            //upload image
+        if ($request->hasFile('image')) {
+
             $image = $request->file('image');
             $image->storeAs('public/posts', $image->hashName());
 
@@ -70,7 +65,6 @@ if ($request->hasFile('image')) {
                     ->withErrors($validator);
             }
 
-            // Cek jika latitude dan longitude sama
             $existingPost = Post::where('latitude', $request->latitude)
                 ->where('longitude', $request->longitude)
                 ->first();
@@ -81,156 +75,135 @@ if ($request->hasFile('image')) {
                     ->withInput();
             }
 
-            //create post
             Post::create([
-                'nama'     => $request->nama,
-                'image'     => $image->hashName(),
-                'latitude'   => $request->latitude,
-                'longitude'   => $request->longitude,
-                'kedalaman'   => $request->kedalaman,
+                'nama'          => $request->nama,
+                'image'         => $image->hashName(),
+                'latitude'      => $request->latitude,
+                'longitude'     => $request->longitude,
+                'kedalaman'     => $request->kedalaman,
+                'pengguna'      => $user,
             ]);
-} else {
+        } else {
 
-    if ($validator->fails()) {
-        return back()
-            ->with('failed', 'Data gagal ditambahkan!')
-            ->withInput()
-            ->withErrors($validator);
-    }
+            if ($validator->fails()) {
+                return back()
+                    ->with('failed', 'Data gagal ditambahkan!')
+                    ->withInput()
+                    ->withErrors($validator);
+            }
 
-    // Cek jika latitude dan longitude sama
-    $existingPost = Post::where('latitude', $request->latitude)
-        ->where('longitude', $request->longitude)
-        ->first();
+            $existingPost = Post::where('latitude', $request->latitude)
+                ->where('longitude', $request->longitude)
+                ->first();
 
-    if ($existingPost) {
-        return back()
-            ->with('failed', 'Data koordinat sudah ada!')
-            ->withInput();
-    }
+            if ($existingPost) {
+                return back()
+                    ->with('failed', 'Data koordinat sudah ada!')
+                    ->withInput();
+            }
 
-    //create post
-    Post::create([
-        'nama'     => $request->nama,
-        'image'     => '',
-        'latitude'   => $request->latitude,
-        'longitude'   => $request->longitude,
-        'kedalaman'   => $request->kedalaman,
-    ]);
-}
+            Post::create([
+                'nama'           => $request->nama,
+                'image'          => '',
+                'latitude'       => $request->latitude,
+                'longitude'      => $request->longitude,
+                'kedalaman'      => $request->kedalaman,
+                'pengguna'       => $user,
+            ]);
+        }
 
-
-        // Redirect to index
         return back()->with('message', 'Data berhasil ditambahkan!');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        // Find post by 'id' or throw an exception if not found
-        $post = Post::findOrFail($id);
-
-        // Render view with post
-        return view('admin.lamanTabel', compact('post'));
+        //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //validate form
-        $this->validate($request, [
-            'nama'     => 'required',
+        $user = Auth::user()->name;
+
+        $validator = Validator::make($request->all(), [
+            'nama'      => 'required|unique:posts,nama,' . $id,
             'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
-            'latitude'   => 'required|numeric',
-            'longitude'   => 'required|numeric',
-            'kedalaman' => 'required|numeric',
+            'latitude'  => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'kedalaman' => 'required|numeric|min:0',
         ]);
 
-        // // Cek jika latitude dan longitude sama
-        // $existingPost = Post::where('latitude', $request->latitude)
-        //     ->where('longitude', $request->longitude)
-        //     ->first();
+        if ($validator->fails()) {
+            return back()
+                ->with('failed', 'Data gagal ditambahkan!')
+                ->withInput()
+                ->withErrors($validator);
+        }
 
-        // if ($existingPost) {
-        //     return back()
-        //         ->with('failed', 'Data koordinat sudah ada!')
-        //         ->withInput();
-        // }
+        $existingPost = Post::where('latitude', $request->latitude)
+            ->where('longitude', $request->longitude)
+            ->where('id', '!=', $id)
+            ->first();
 
-        //get post by ID
+        if ($existingPost) {
+            return back()
+                ->with('failed', 'Data koordinat sudah ada!')
+                ->withInput();
+        }
+
         $post = Post::findOrFail($id);
 
-        //check if image is uploaded
         if ($request->hasFile('image')) {
 
-            //upload new image
             $image = $request->file('image');
             $image->storeAs('public/posts', $image->hashName());
 
-            //delete old image
             Storage::delete('public/posts/' . $post->image);
 
-            //update post with new image
             $post->update([
                 'image'         => $image->hashName(),
                 'nama'          => $request->nama,
                 'latitude'      => $request->latitude,
                 'longitude'     => $request->longitude,
                 'kedalaman'     => $request->kedalaman,
+                'pengguna'      => $user,
             ]);
         } else {
 
             $post->update([
-                'nama'     => $request->nama,
-                'latitude'   => $request->latitude,
-                'longitude'   => $request->longitude,
-                'kedalaman'  => $request->kedalaman,
+                'nama'          => $request->nama,
+                'latitude'      => $request->latitude,
+                'longitude'     => $request->longitude,
+                'kedalaman'     => $request->kedalaman,
+                'pengguna'      => $user,
             ]);
         }
 
-        //redirect to index
         return redirect()->route('stasiun.index')->with('message', 'Data berhasil diedit!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //get post by ID
         $post = Post::findOrFail($id);
 
-
-        //delete post
         $post->delete();
 
-        //redirect to index
         return redirect()->route('stasiun.index')->with('message', 'Data berhasil dihapus!');
     }
 
     public function delete_all(Request $request)
     {
         $ids = $request->ids;
-    $deletedRows = Post::whereIn('id', explode(",", $ids))->delete();
+        $deletedRows = Post::whereIn('id', explode(",", $ids))->delete();
 
-    if ($deletedRows > 0) {
-        return response()->json(['status' => true, 'message' => 'Data berhasil dihapus!']);
-    } else {
-        return response()->json(['status' => false, 'message' => 'Data tidak ditemukan atau gagal dihapus.']);
-    }
-
+        if ($deletedRows > 0) {
+            return response()->json(['status' => true, 'message' => 'Data berhasil dihapus!']);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Data tidak ditemukan atau gagal dihapus.']);
+        }
     }
 }
