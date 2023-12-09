@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->whereIn('status', ['Petani', 'Pembimbing'])->paginate(50);
-        return view('admin.lamanPengguna', compact('users'));
+        return view('dist.lamanPengguna', compact('users'));
     }
 
     /**

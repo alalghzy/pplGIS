@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $posts      = Post::count();
         $karangs    = Karang::count();
 
-        return view('admin.dashboard', compact('posts', 'users', 'karangs'))
+        return view('dist.dashboard', compact('posts', 'users', 'karangs'))
             ->with('success', 'Kamu berhasil Login!');
     }
 

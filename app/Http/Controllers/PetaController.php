@@ -15,7 +15,7 @@ class PetaController extends Controller
         //get posts
         $posts = Peta::latest()->paginate(10);
         //render view with posts
-        return view('admin.lamanPeta', compact('posts'));
+        return view('dist.lamanPeta', compact('posts'));
     }
 
     /**
@@ -68,7 +68,7 @@ class PetaController extends Controller
         $post = Peta::findOrFail($id);
 
         // Render view with post
-        return view('admin.index', compact('post'));
+        return view('dist.index', compact('post'));
     }
 
     /**

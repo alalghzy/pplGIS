@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @push('style')
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        @include('admin.includes.modalPeta')
+        @include('dist.includes.modalPeta')
     </section> --}}
 
     <section>
@@ -249,6 +249,6 @@
             </div>
         </div>
 
-        @include('admin.includes.Peta.modalPeta')
+        @include('dist.includes.Peta.modalPeta')
     </section>
 @endsection

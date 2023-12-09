@@ -14,7 +14,7 @@ class KarangController extends Controller
     public function index()
     {
         $karangs = Karang::latest()->get();
-        return view('admin.lamanKarang', compact('karangs'));
+        return view('dist.lamanKarang', compact('karangs'));
     }
 
     /**

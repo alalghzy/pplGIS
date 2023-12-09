@@ -1,18 +1,17 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('nama')
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Pengguna</h3>
-                <p class="text-subtitle text-muted">Laman manajemen data pengguna SIG Pulau Tikus.</p>
+                <h3>Data Stasiun</h3>
+                <p class="text-subtitle text-muted">Laman manajemen data stasiun tutupan komunitas karang.</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">Manajemen Data / Data Pengguna</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Manajemen Data / Data Stasiun</li>
                     </ol>
                 </nav>
             </div>
@@ -37,33 +36,41 @@
                                     data-bs-placement="top" title="Hapus semua data yang dipilih">
                                     <i class="bi bi-trash fs-5"></i> Hapus Banyak Data
                                 </button>
-                                @include('admin.includes.Pengguna.modalTambah')
+                                @include('dist.includes.Stasiun.modalTambah')
                             </div>
                             <div class="card-body table-responsive p-3">
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th style="width: 20px"><input type="checkbox" id="checkboxesMain"></th>
-                                            <th style="width: 20px">No</th>
-                                            <th>Nama Pengguna</th>
-                                            <th>Email</th>
-                                            <th>Status Akun</th>
+                                            <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>
+                                            {{-- <th style="width: 10px">No</th> --}}
+                                            <th>Nama Stasiun</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th>Kedalaman (meter)</th>
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    @if ($users->count())
-                                        @foreach ($users as $key => $post)
+                                    @if ($posts->count())
+                                        @foreach ($posts as $key => $post)
                                             <tr id="tr_{{ $post->id }}">
-                                                <td style="width: 20px"><input type="checkbox" class="checkbox"
-                                                        data-id="{{ $post->id }}">
+                                                <td style="width: 10px"><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
                                                 </td>
-                                                <td style="width: 20px">{{ $loop->iteration }}</td>
-                                                <td>{{ $post->name }}</td>
-                                                <td>{{ $post->email }}</td>
-                                                <td>{{ $post->status }}</td>
+                                                {{-- <td style="width: 10px">{{ $loop->iteration }}</td> --}}
+                                                <td>{{ $post->nama }}</td>
+                                                <td>{{ $post->latitude }}</td>
+                                                <td>{{ $post->longitude }}</td>
+                                                <td>{{ $post->kedalaman }}</td>
                                                 <td class="text-center" style="width: 140px">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="btn-group fs-5">
+                                                            <button type="button" class="btn btn btn-dark"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#modalLihat-{{ $post->id }}"
+                                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Lihat Data">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
                                                             <button type="button" class="btn btn btn-primary"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#modalEdit-{{ $post->id }}"
@@ -81,8 +88,9 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                @include('admin.includes.Pengguna.modalEdit')
-                                                @include('admin.includes.Pengguna.modalHapus')
+                                                @include('dist.includes.Stasiun.modalLihat')
+                                                @include('dist.includes.Stasiun.modalEdit')
+                                                @include('dist.includes.Stasiun.modalHapus')
                                             </tr>
                                         @endforeach
                                     @else
@@ -90,7 +98,8 @@
                                             Data belum tersedia, silahkan &ensp;<button style="font-size: 10px;"
                                                 type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#modalCreate" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Edit data"><i class="bi bi-plus-square "></i>
+                                                data-bs-placement="top" title="Edit data"><i
+                                                    class="bi bi-plus-square "></i>
                                                 Tambah Data</button> &ensp;!
                                         </div>
                                     @endif
@@ -159,7 +168,7 @@
                                 if (result.isConfirmed) {
                                     var stuId = studentIdArr.join(",");
                                     $.ajax({
-                                        url: "{{ url('laman/delete-all-users') }}",
+                                        url: "{{ url('laman/delete-all-stasiuns') }}",
                                         type: 'DELETE',
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

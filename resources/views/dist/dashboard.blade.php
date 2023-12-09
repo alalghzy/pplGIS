@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('nama')
     <div class="page-title">
@@ -25,7 +25,7 @@
                 <div class="row justify-content-start">
 
                     @if (auth()->user()->status == 'Administrator')
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-4 col-md-6">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -35,10 +35,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <h6 class="text-muted font-semibold">Data Pengguna</h6>
-                                            <h6 class="font-extrabold mb-0 purecounter" data-purecounter-start="0"
+                                            <button class="btn btn-warning">Data Pengguna</button>
+                                            <button class=" btn btn-primary font-semibold purecounter" data-purecounter-start="0"
                                                 data-purecounter-end="{{ $users }}" data-purecounter-duration="1">
-                                            </h6>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                         </div>
                     @endif
 
-                    <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -65,16 +65,16 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Data Stasiun</h6>
-                                        <h6 class="font-extrabold mb-0  purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></h6>
+                                        <button class="btn btn-warning ">Data Stasiun</button>
+                                        <button class="btn btn-success font-semibold purecounter" data-purecounter-start="0"
+                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -90,9 +90,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Data Terumbu Karang</h6>
-                                        <h6 class="font-extrabold mb-0  purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $karangs }}" data-purecounter-duration="1"></h6>
+                                        <button class="btn btn-warning ">Data Terumbu Karang</button>
+                                        <button class="btn btn-danger font-semibold purecounter" data-purecounter-start="0"
+                                            data-purecounter-end="{{ $karangs }}" data-purecounter-duration="1"></button>
                                     </div>
                                 </div>
                             </div>
