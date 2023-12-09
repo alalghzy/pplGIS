@@ -44,6 +44,28 @@
                 display: none;
             }
         }
+
+        #map {
+            width: 100%;
+            height: 450px;
+            z-index: 1;
+            /* Atur nilai z-index */
+            position: relative;
+            /* Diperlukan untuk menggunakan z-index */
+        }
+
+        #overlayElement {
+            /* Gaya untuk elemen yang berada di depan peta */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Contoh latar belakang semi-transparan */
+            z-index: 2;
+            /* Nilai z-index yang lebih tinggi */
+        }
     </style>
     @stack('style')
 </head>
@@ -223,7 +245,7 @@
             <div style="height: ">
 
             </div>
-            <footer class="fixed-bottom">
+            <footer class="">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         {{-- <p>2023 &copy; SIG Pulau Tikus</p> --}}
@@ -367,8 +389,6 @@
     </script>
 
     @stack('script')
-
-
 
 </body>
 

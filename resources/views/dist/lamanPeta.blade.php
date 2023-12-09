@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        @include('dist.includes.modalPeta')
+        @include('dist.includes.Peta.modalPeta')
     </section> --}}
 
     <section>
