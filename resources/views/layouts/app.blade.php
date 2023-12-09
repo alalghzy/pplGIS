@@ -210,7 +210,7 @@
                                         <div class="text-gray-600" id="clock"></div> --}}
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="{{ asset('admin/compiled/jpg/1.jpg') }}">
+                                                <img id="userImage" src="{{ asset(Auth::user()->profil) }}" alt="" style="object-fit: cover;">
                                             </div>
                                         </div>
                                     </div>
@@ -223,7 +223,7 @@
                                     </li>
                                     <hr>
                                     <li>
-                                        <a href="" class="dropdown-item">
+                                        <a href="{{ route('profil', ['id'=>auth()->user()->id]) }}" class="dropdown-item">
                                             <i class="icon-mid bi bi-person me-2"></i> Profil
                                         </a>
                                     </li>
@@ -242,9 +242,6 @@
                 @yield('content')
             </div>
 
-            <div style="height: ">
-
-            </div>
             <footer class="">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">

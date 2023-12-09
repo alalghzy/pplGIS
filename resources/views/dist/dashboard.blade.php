@@ -35,7 +35,11 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <button class="btn btn-warning">Data Pengguna</button>
+                                            <a href="{{ route('data-pengguna.index') }}">
+                                                <button class="btn btn-warning">
+                                                    Data Pengguna
+                                                </button>
+                                            </a>
                                             <button class=" btn btn-primary font-semibold purecounter" data-purecounter-start="0"
                                                 data-purecounter-end="{{ $users }}" data-purecounter-duration="1">
                                             </button>
@@ -65,7 +69,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <button class="btn btn-warning ">Data Stasiun</button>
+                                        <a href="{{ route('stasiun.index') }}">
+                                            <button class="btn btn-warning ">
+                                                Data Stasiun
+                                            </button>
+                                        </a>
                                         <button class="btn btn-success font-semibold purecounter" data-purecounter-start="0"
                                             data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></button>
                                     </div>
@@ -90,7 +98,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <button class="btn btn-warning ">Data Terumbu Karang</button>
+                                        <a href="{{ route('karang.index') }}">
+                                            <button class="btn btn-warning ">
+                                                Data Terumbu Karang
+                                            </button>
+                                        </a>
+
                                         <button class="btn btn-danger font-semibold purecounter" data-purecounter-start="0"
                                             data-purecounter-end="{{ $karangs }}" data-purecounter-duration="1"></button>
                                     </div>

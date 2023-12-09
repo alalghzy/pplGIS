@@ -25,63 +25,6 @@
 @endsection
 
 @section('content')
-    {{-- <section>
-        <div class="col-12 col-xl-12">
-            <div class="card">
-                <div id="map" style="width:100%;height:500px;">
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHjsOSG5_OHakhsKWBg9pwaG_EKZXZkfI&callback=initMap">
-                    </script>
-                    <script>
-                        function initialize() {
-                            var mapOptions = {
-                                zoom: 18,
-                                center: new google.maps.LatLng(-3.838195020251307, 102.1797480229322),
-                                // -3.760280003973284, 102.27250601387755
-                                disableDefaultUI: false,
-                                mapTypeId: 'satellite'
-                            };
-                            var mapElement = document.getElementById('map');
-                            var map = new google.maps.Map(mapElement, mapOptions);
-                            var locations = [
-                                @foreach ($posts as $item)
-                                    {
-                                        latitude: {{ $item->latitude }},
-                                        longitude: {{ $item->longitude }},
-                                        idPost: {{ $item->id }},
-                                        title: "{{ $item->nama }}"
-                                    },
-                                @endforeach
-                            ];
-                            for (var i = 0; i < locations.length; i++) {
-                                (function() {
-                                    var location = locations[i];
-                                    var marker = new google.maps.Marker({
-                                        position: new google.maps.LatLng(location.latitude, location.longitude),
-                                        map: map,
-                                        title: location.title,
-                                        icon: '{{ asset('img/location.png') }}'
-                                    });
-                                    var infowindow = new google.maps.InfoWindow({
-                                        content: location.title
-                                    });
-                                    // Tambahkan event listener untuk menampilkan modal saat marker diklik
-                                    marker.addListener('click', function() {
-                                        var id = location.idPost;
-                                        $('#locationTitle-' + id).text(this.title);
-                                        $('#locationModal-' + id).modal('show');
-                                    });
-                                })();
-                            }
-                        }
-                        // Memanggil fungsi initialize setelah peta API Google Maps dimuat
-                        google.maps.event.addDomListener(window, 'load', initialize);
-                    </script>
-                </div>
-            </div>
-        </div>
-        @include('dist.includes.Peta.modalPeta')
-    </section> --}}
-
     <section>
         <div class="col-12 col-xl-12">
             <div class="card">
@@ -97,7 +40,7 @@
                             var map = L.map('map', {
                                 center: [-3.838195020251307, 102.1797480229322],
                                 zoom: 17,
-                                scrollWheelZoom: false // Aktifkan zoom dengan kombinasi Ctrl + scroll
+                                scrollWheelZoom: true // Aktifkan zoom dengan kombinasi Ctrl + scroll
                             });
 
                             var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -201,36 +144,36 @@
                                 return L.icon({
                                     iconUrl: '{{ asset('img/3.png') }}',
                                     iconSize: [20, 27],
-                                    iconAnchor: [0, 0],
-                                    popupAnchor: [0, 0]
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [-6, -32]
                                 });
                             } else if (kedalaman >= 4 && kedalaman <= 6) {
                                 return L.icon({
                                     iconUrl: '{{ asset('img/6.png') }}',
                                     iconSize: [20, 27],
-                                    iconAnchor: [0, 0],
-                                    popupAnchor: [0, -32]
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [-6, -32]
                                 });
                             } else if (kedalaman >= 7 && kedalaman <= 9) {
                                 return L.icon({
                                     iconUrl: '{{ asset('img/9.png') }}',
                                     iconSize: [20, 27],
-                                    iconAnchor: [0, 0],
-                                    popupAnchor: [0, -32]
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [-6, -32]
                                 });
                             } else if (kedalaman >= 10 && kedalaman <= 12) {
                                 return L.icon({
                                     iconUrl: '{{ asset('img/12.png') }}',
                                     iconSize: [20, 27],
-                                    iconAnchor: [0, 0],
-                                    popupAnchor: [0, -32]
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [-6, -32]
                                 });
                             } else {
                                 return L.icon({
                                     iconUrl: '{{ asset('img/location.png') }}',
                                     iconSize: [20, 27],
-                                    iconAnchor: [0, 0],
-                                    popupAnchor: [0, -32]
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [-6, -32]
                                 });
                             }
                         }

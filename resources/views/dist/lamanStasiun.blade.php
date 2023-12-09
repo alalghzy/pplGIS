@@ -10,7 +10,8 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a>
+                        </li>
                         <li class="breadcrumb-item active" aria-current="page">Manajemen Data / Data Stasiun</li>
                     </ol>
                 </nav>
@@ -30,7 +31,7 @@
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tambah data">
-                                    <i class="bi bi-plus-square fs-5"></i> &ensp;Tambah Data
+                                    <i class="bi bi-plus-square fs-5"></i> Tambah Data
                                 </button>
                                 <button class="btn btn-danger btn-sm removeAll ms-3" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Hapus semua data yang dipilih">
@@ -54,7 +55,8 @@
                                     @if ($posts->count())
                                         @foreach ($posts as $key => $post)
                                             <tr id="tr_{{ $post->id }}">
-                                                <td style="width: 10px"><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
+                                                <td style="width: 10px"><input type="checkbox" class="checkbox"
+                                                        data-id="{{ $post->id }}">
                                                 </td>
                                                 {{-- <td style="width: 10px">{{ $loop->iteration }}</td> --}}
                                                 <td>{{ $post->nama }}</td>
@@ -98,8 +100,7 @@
                                             Data belum tersedia, silahkan &ensp;<button style="font-size: 10px;"
                                                 type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#modalCreate" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Edit data"><i
-                                                    class="bi bi-plus-square "></i>
+                                                data-bs-placement="top" title="Edit data"><i class="bi bi-plus-square "></i>
                                                 Tambah Data</button> &ensp;!
                                         </div>
                                     @endif
@@ -109,107 +110,108 @@
                     </div>
                 </div>
             </div>
-        @endsection
+    </div>
+@endsection
 
-        @push('style')
-            <!-- Page specific javascripts-->
-            <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css">
-        @endpush
+@push('style')
+    <!-- Page specific javascripts-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css">
+@endpush
 
-        @push('script')
-            <!-- Data table plugin-->
-            <script type="text/javascript" src=" {{ asset('admin/vali/js/plugins/jquery.dataTables.min.js') }} "></script>
-            <script type="text/javascript">
-                $('#table-data').DataTable({
-                    "lengthMenu": [5, 10, 20, 30, 50],
-                    "pageLength": 5
+@push('script')
+    <!-- Data table plugin-->
+    <script type="text/javascript" src=" {{ asset('admin/vali/js/plugins/jquery.dataTables.min.js') }} "></script>
+    <script type="text/javascript">
+        $('#table-data').DataTable({
+            "lengthMenu": [5, 10, 20, 30, 50],
+            "pageLength": 5
+        });
+    </script>
+
+    {{-- Sweeet Alert --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#checkboxesMain').on('click', function(e) {
+                if ($(this).is(':checked', true)) {
+                    $(".checkbox").prop('checked', true);
+                } else {
+                    $(".checkbox").prop('checked', false);
+                }
+            });
+            $('.checkbox').on('click', function() {
+                if ($('.checkbox:checked').length == $('.checkbox').length) {
+                    $('#checkboxesMain').prop('checked', true);
+                } else {
+                    $('#checkboxesMain').prop('checked', false);
+                }
+            });
+            $('.removeAll').on('click', function(e) {
+                var studentIdArr = [];
+                $(".checkbox:checked").each(function() {
+                    studentIdArr.push($(this).attr('data-id'));
                 });
-            </script>
-
-            {{-- Sweeet Alert --}}
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#checkboxesMain').on('click', function(e) {
-                        if ($(this).is(':checked', true)) {
-                            $(".checkbox").prop('checked', true);
-                        } else {
-                            $(".checkbox").prop('checked', false);
-                        }
+                if (studentIdArr.length <= 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Anda belum memilih data!'
                     });
-                    $('.checkbox').on('click', function() {
-                        if ($('.checkbox:checked').length == $('.checkbox').length) {
-                            $('#checkboxesMain').prop('checked', true);
-                        } else {
-                            $('#checkboxesMain').prop('checked', false);
-                        }
-                    });
-                    $('.removeAll').on('click', function(e) {
-                        var studentIdArr = [];
-                        $(".checkbox:checked").each(function() {
-                            studentIdArr.push($(this).attr('data-id'));
-                        });
-                        if (studentIdArr.length <= 0) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal!',
-                                text: 'Anda belum memilih data!'
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'question',
-                                title: 'Konfirmasi',
-                                text: 'Apakah Anda yakin ingin menghapus data terpilih?',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Ya',
-                                cancelButtonText: 'Batal'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    var stuId = studentIdArr.join(",");
-                                    $.ajax({
-                                        url: "{{ url('laman/delete-all-stasiuns') }}",
-                                        type: 'DELETE',
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                                'content')
-                                        },
-                                        data: 'ids=' + stuId,
-                                        success: function(data) {
-                                            if (data['status'] == true) {
-                                                $(".checkbox:checked").each(function() {
-                                                    $(this).parents("tr").remove();
-                                                });
-                                                Swal.fire({
-                                                    icon: 'success',
-                                                    title: 'Sukses!',
-                                                    text: data['message']
-                                                }).then((result) => {
-                                                    if (result.isConfirmed) {
-                                                        location
-                                                            .reload(); // Merefresh halaman
-                                                    }
-                                                });
-                                            } else {
-                                                Swal.fire({
-                                                    icon: 'error',
-                                                    title: 'Oops...',
-                                                    text: 'Error occurred.'
-                                                });
+                } else {
+                    Swal.fire({
+                        icon: 'question',
+                        title: 'Konfirmasi',
+                        text: 'Apakah Anda yakin ingin menghapus data terpilih?',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var stuId = studentIdArr.join(",");
+                            $.ajax({
+                                url: "{{ url('laman/delete-all-stasiuns') }}",
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                data: 'ids=' + stuId,
+                                success: function(data) {
+                                    if (data['status'] == true) {
+                                        $(".checkbox:checked").each(function() {
+                                            $(this).parents("tr").remove();
+                                        });
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Sukses!',
+                                            text: data['message']
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                location
+                                                    .reload(); // Merefresh halaman
                                             }
-                                        },
-                                        error: function(data) {
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Oops...',
-                                                text: data.responseText
-                                            });
-                                        }
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: 'Error occurred.'
+                                        });
+                                    }
+                                },
+                                error: function(data) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: data.responseText
                                     });
                                 }
                             });
                         }
                     });
-                });
-            </script>
-        @endpush
+                }
+            });
+        });
+    </script>
+@endpush

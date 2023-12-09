@@ -31,7 +31,7 @@
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tambah data">
-                                    <i class="bi bi-plus-square fs-5"></i> &ensp;Tambah Data
+                                    <i class="bi bi-plus-square fs-5"></i> Tambah Data
                                 </button>
                                 <button class="btn btn-danger btn-sm removeAll ms-3" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Hapus semua data yang dipilih">

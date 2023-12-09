@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -114,50 +115,118 @@ class UserController extends Controller
     public function profil($id)
     {
         $data = User::find($id);
-        return view('mahasiswa.profil', compact(['data']));
+        return view('dist.lamanProfil', compact(['data']));
     }
 
     public function update_profil(Request $request, $id)
     {
         $data = User::find($id);
 
-        $validasi = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'gender' => 'required',
-            'jurusan' => 'required',
-            'username' => 'required',
-            'password' => 'required|min:5|',
-            'profil'  => 'image|mimes:jpeg,jpg,png|max:2048',
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+            'email'     => 'required|email',
         ]);
 
-        // Periksa apakah gambar profil baru diunggah
-        if ($request->hasFile('profil')) {
-            // Jika gambar profil baru diunggah, hapus yang lama
-            $file = $data->profil;
-            File::delete($file);
-
-            // Unggah gambar profil baru
-            $namafile = $request->profil->getClientOriginalName();
-            $request->profil->move('profle_picture/', $namafile);
-
-            // Perbarui profil dengan gambar baru
-            $data->profil = 'profle_picture/' . $namafile;
+        if ($validator->fails()) {
+            return back()
+                ->with('failed', 'Profil akun tidak dapat diubah!')
+                ->withInput()
+                ->withErrors($validator);
         }
 
         // Perbarui informasi profil lainnya
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->gender = $request->gender;
-        // $data->jurusan = $request->jurusan;
-        $data->username = $request->username;
-        $data->password = Hash::make($request->password);
 
         // Simpan perubahan
         if ($data->save()) {
-            return redirect()->back()->with('sukses', 'Data Berhasil Diganti');
+            return redirect()->back()->with('message', 'Data berhasil diganti!');
         } else {
-            return redirect()->back()->with('error', 'Gagal mengupdate profil');
+            return redirect()->back()->with('failed', 'Gagal mengubah profil!');
         }
     }
+
+    public function update_foto_profil(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'profil'    => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->with('failed', 'Gagal mengunggah foto!')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        // Periksa apakah gambar profil baru diunggah
+        if ($request->hasFile('profil')) {
+            // Jika gambar profil baru diunggah, hapus yang lama
+            $oldFile = $user->profil;
+            if ($oldFile) {
+                File::delete($oldFile);
+            }
+
+            // Buat nama file baru berdasarkan email pengguna
+            $namafile = $user->email . '.' . $request->profil->getClientOriginalExtension();
+
+            // Unggah gambar profil baru
+            $request->profil->move('profile_picture/', $namafile);
+
+            // Perbarui profil dengan gambar baru
+            $user->profil = 'profile_picture/' . $namafile;
+        }
+
+        // Simpan perubahan
+        if ($user->save()) {
+            return redirect()->back()->with('message', 'Foto profil berhasil diganti!');
+        } else {
+            return redirect()->back()->with('failed', 'Gagal mengubah foto profil!');
+        }
+    }
+
+
+
+
+    public function updatePassword(Request $request, $userId)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password'     => 'required',
+            'new_password'     => 'required|min:5|different:old_password',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        $user = User::find($userId);
+
+        if ($validator->fails()) {
+            return back()
+                ->with('failed', 'Gagal mengubah password!')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        // Validasi password lama
+        if (Hash::check($request->input('old_password'), $user->password)) {
+            // Validasi password baru tidak boleh sama dengan password lama
+            if ($request->input('old_password') === $request->input('new_password')) {
+                return redirect()->back()->with('failed', 'Password baru tidak boleh sama dengan password lama!');
+            }
+
+            // Password lama valid, update password baru
+            $user->password = bcrypt($request->input('new_password'));
+            $user->save();
+
+            return redirect()->back()->with('message', 'Password berhasil diperbarui!');
+        } else {
+            // Password lama tidak valid
+            return redirect()->back()
+                ->withErrors(['old_password' => 'Password lama tidak valid.'])
+                ->with('failed', 'Gagal mengubah password!');
+        }
+    }
+
+
+
 }

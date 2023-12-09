@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['Administrator','Pembimbing','Petani'])->default('Petani');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('profil')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
