@@ -34,16 +34,16 @@
             animation: moveTitle 3s ease infinite;
         } */
 
-        .text-gray-600 {
+        /* .text-gray-600 {
             float: right;
             display: block;
-        }
+        } */
 
-        @media (max-width: 1200px) {
+        /* @media (max-width: 1200px) {
             .text-gray-600 {
                 display: none;
             }
-        }
+        } */
 
         #map {
             width: 100%;
@@ -205,9 +205,10 @@
                             <div class="dropdown ms-auto">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
-                                        {{-- <div class="text-gray-600" id="clock2"></div>
-                                        <p class="text-gray-600">&nbsp; | &nbsp;</p>
-                                        <div class="text-gray-600" id="clock"></div> --}}
+                                        <div class="user-name text-end me-4">
+                                            <div class="text-gray-600" id="clock2"></div>
+                                            <div class="text-gray-600" id="clock"></div>
+                                        </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
                                                 @if (Auth::user()->profil != null)
@@ -225,7 +226,9 @@
                                         <span class="dropdown-header badge bg-primary dropdown-item"
                                             style="font-size: 11px; color: white">{{ auth()->user()->status }}</span>
                                     </li>
-                                    <hr>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <li>
                                         <a href="{{ route('profil', ['id'=>auth()->user()->id]) }}" class="dropdown-item">
                                             <i class="icon-mid bi bi-person me-2"></i> {{ auth()->user()->name }}
@@ -322,7 +325,7 @@
                 title: 'Sukses!',
                 text: "{{ Session::get('message') }}",
                 showConfirmButton: false,
-                timer: 2000
+                timer: 3000
             });
         @endif
     </script>
