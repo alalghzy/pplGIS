@@ -210,7 +210,11 @@
                                         <div class="text-gray-600" id="clock"></div> --}}
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
+                                                @if (Auth::user()->profil != null)
                                                 <img id="userImage" src="{{ asset(Auth::user()->profil) }}" alt="" style="object-fit: cover;">
+                                                @else
+                                                <img src="{{ asset('admin/compiled/jpg/2.jpg') }}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +228,7 @@
                                     <hr>
                                     <li>
                                         <a href="{{ route('profil', ['id'=>auth()->user()->id]) }}" class="dropdown-item">
-                                            <i class="icon-mid bi bi-person me-2"></i> Profil
+                                            <i class="icon-mid bi bi-person me-2"></i> {{ auth()->user()->name }}
                                         </a>
                                     </li>
                                     <li><a id="logout-link" class="dropdown-item" href="{{ route('logout') }}">

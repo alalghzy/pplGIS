@@ -17,7 +17,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Password Sekarang</label>
                                                             <div class="wrap-input100 validate-input input-group">
-                                                                <span class="input-group-text bg-white text-muted">
+                                                                <span class="input-group-text text-muted">
                                                                     <i class="fa-solid fa-lock"></i>
                                                                 </span>
                                                                 <input
@@ -33,7 +33,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Password Baru</label>
                                                             <div class="wrap-input100 validate-input input-group">
-                                                                <span class="input-group-text bg-white text-muted">
+                                                                <span class="input-group-text text-muted">
                                                                     <i class="fa-solid fa-lock"></i>
                                                                 </span>
                                                                 <input
@@ -49,7 +49,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Konfirmasi Password</label>
                                                             <div class="wrap-input100 validate-input input-group">
-                                                                <span class="input-group-text bg-white text-muted">
+                                                                <span class="input-group-text text-muted">
                                                                     <i class="fa-solid fa-lock"></i>
                                                                 </span>
                                                                 <input

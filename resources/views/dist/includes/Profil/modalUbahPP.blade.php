@@ -1,7 +1,7 @@
                                 <!-- Modal Ubah PP-->
                                 <div class="modal fade" id="modalUbahPP" tabindex="-1" aria-labelledby="exampleModalLabel"
                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Foto Profil</h1>
@@ -17,18 +17,45 @@
                                                         @if (auth()->user()->profil != null)
                                                             <center>
                                                                 <img src="{{ asset(Auth::user()->profil) }}"
-                                                                    alt="" class="rounded shadow-lg mb-2"
+                                                                    alt="" class="rounded shadow-lg mb-3"
                                                                     style="object-fit: cover;max-width: 100%; max-height: auto">
                                                             </center>
                                                         @endif
-                                                        <div class="form-group">
-                                                            <label>Unggah foto profil</label>
-                                                            <input class="form-control mt-1" id="formFile"
-                                                                name="profil" type="file">
-                                                            <small style="color: gray">Disarankan untuk gambar ukuran
-                                                                3:4 | Maks. 2Mb | png, jpg,
-                                                                jpeg</small>
+
+                                                        @if (Auth::user()->profil != null)
+                                                        <div class="row">
+                                                            <div class="form-group col-11">
+                                                                <label>Unggah foto profil</label>
+                                                                <input class="form-control" id="formFile"
+                                                                    name="profil" type="file">
+                                                                <small style="color: gray">Disarankan untuk gambar ukuran
+                                                                    1:1 | Maks. 2Mb | png, jpg,
+                                                                    jpeg</small>
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <br>
+                                                                <a href="{{ route('delete.image.profil', ['id'=>auth()->user()->id]) }}"
+                                                                    onclick="return confirm('Apakah Anda ingin menghapus gambar?')">
+                                                                    <button type="button" class="btn btn-danger" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top" title="Hapus Gambar">
+                                                                        <i class="bi bi-trash"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </div>
                                                         </div>
+                                                        @else
+                                                        <div class="row">
+                                                            <div class="form-group col-12">
+                                                                <label>Unggah foto profil</label>
+                                                                <input class="form-control" id="formFile"
+                                                                    name="profil" type="file">
+                                                                <small style="color: gray">Disarankan untuk gambar ukuran
+                                                                    1:1 | Maks. 2Mb | Format png, jpg, dan
+                                                                    jpeg</small>
+                                                            </div>
+                                                        </div>
+                                                        @endif
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"

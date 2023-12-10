@@ -16,8 +16,8 @@
                     <div class="form-group mb-3">
                         <label class="form-label">Nama Pengguna</label>
                         <div class="wrap-input100 validate-input input-group">
-                            <span class="input-group-text bg-white text-muted">
-                                <i class="fa-solid fa-id-badge"></i>
+                            <span class="input-group-text text-muted">
+                                <i class="fa-solid fa-address-card"></i>
                             </span>
                             <input type="text" name="name"
                                 class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
@@ -33,7 +33,7 @@
                     <div class="form-group mb-3">
                         <label class="form-label">Email</label>
                         <div class="wrap-input100 validate-input input-group">
-                            <span class="input-group-text bg-white text-muted">
+                            <span class="input-group-text text-muted">
                                 <i class="fa-solid fa-envelope"></i>
                             </span>
                             <input type="email" name="email"
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label class="form-label">Password</label>
                         <div class="wrap-input100 validate-input input-group">
-                            <span class="input-group-text bg-white text-muted">
+                            <span class="input-group-text text-muted">
                                 <i class="fa-solid fa-lock"></i>
                             </span>
                             <input class="input100 form-control @error('password') is-invalid @enderror"
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label class="form-label">Status</label>
                         <div class="wrap-input100 validate-input input-group">
-                            <span class="input-group-text bg-white text-muted">
+                            <span class="input-group-text text-muted">
                                 <i class="fa-solid fa-angles-right"></i>
                             </span>
                             <select name="status" class="form-control @error('status') is-invalid @enderror">

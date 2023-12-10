@@ -28,7 +28,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-center align-items-center flex-column">
                             <div class="avatar avatar-2xl">
-                                <img id="userImage" src="{{ asset(Auth::user()->profil) }}" alt="" style="object-fit: cover;">
+                                @if (Auth::user()->profil != null)
+                                    <img id="userImage" src="{{ asset(Auth::user()->profil) }}" alt=""
+                                        style="object-fit: cover;">
+                                @else
+                                    <img src="{{ asset('admin/compiled/jpg/2.jpg') }}">
+                                @endif
                             </div>
                             <h3 class="mt-3">{{ $data->name }}</h3>
                             <p class="text-small">{{ $data->status }}</p>
@@ -47,8 +52,8 @@
                                 <hr>
                                 <label class="form-label">Nama</label>
                                 <div class="wrap-input100 validate-input input-group">
-                                    <span class="input-group-text bg-white text-muted">
-                                        <i class="fa-solid fa-id-badge"></i>
+                                    <span class="input-group-text text-muted ">
+                                        <i class="fa-solid fa-address-card"></i>
                                     </span>
                                     <input type="text" name="name"
                                         class="form-control @error('name') is-invalid @enderror" value="{{ $data->name }}"
@@ -61,7 +66,7 @@
                             <div class="form-group mb-3">
                                 <label class="form-label">Email</label>
                                 <div class="wrap-input100 validate-input input-group">
-                                    <span class="input-group-text bg-white text-muted">
+                                    <span class="input-group-text  text-muted">
                                         <i class="fa-solid fa-envelope"></i>
                                     </span>
                                     <input type="email" name="email"
@@ -76,7 +81,7 @@
                             <div class="form-group">
                                 <label class="form-label">Status Akun</label>
                                 <div class="wrap-input100 validate-input input-group">
-                                    <span class="input-group-text bg-white text-muted">
+                                    <span class="input-group-text  text-muted">
                                         <i class="fa-solid fa-user-gear"></i>
                                     </span>
                                     <input type="text" name="status" readonly disabled
@@ -92,7 +97,9 @@
                             <hr>
                             <div class="d-flex mb-3">
                                 <div class="me-auto p-2">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-check"></i> Simpan
+                                    </button>
                                 </div>
                                 <div class="p-2">
                                     <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
@@ -121,24 +128,24 @@
 @endpush
 
 @push('script')
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var avatar = $(".avatar");
-        var userImage = $("#userImage");
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var avatar = $(".avatar");
+            var userImage = $("#userImage");
 
-        var avatarWidth = avatar.width();
-        var avatarHeight = avatar.height();
+            var avatarWidth = avatar.width();
+            var avatarHeight = avatar.height();
 
-        userImage.on("load", function() {
-            var imageWidth = userImage.width();
-            var imageHeight = userImage.height();
+            userImage.on("load", function() {
+                var imageWidth = userImage.width();
+                var imageHeight = userImage.height();
 
-            if (imageWidth < avatarWidth || imageHeight < avatarHeight) {
-                userImage.css("width", "100%");
-                userImage.css("height", "auto");
-            }
+                if (imageWidth < avatarWidth || imageHeight < avatarHeight) {
+                    userImage.css("width", "100%");
+                    userImage.css("height", "auto");
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endpush

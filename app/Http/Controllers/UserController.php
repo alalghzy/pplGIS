@@ -151,7 +151,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         $validator = Validator::make($request->all(), [
-            'profil'    => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'profil' => 'required|image|mimes:jpeg,jpg,png|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -166,13 +166,14 @@ class UserController extends Controller
             // Jika gambar profil baru diunggah, hapus yang lama
             $oldFile = $user->profil;
             if ($oldFile) {
-                File::delete($oldFile);
+                // Gunakan Storage untuk menghapus file
+                Storage::delete($oldFile);
             }
 
             // Buat nama file baru berdasarkan email pengguna
             $namafile = $user->email . '.' . $request->profil->getClientOriginalExtension();
 
-            // Unggah gambar profil baru
+            // Unggah gambar profil baru ke direktori public/profile_picture
             $request->profil->move('profile_picture/', $namafile);
 
             // Perbarui profil dengan gambar baru
@@ -187,8 +188,22 @@ class UserController extends Controller
         }
     }
 
+    public function deleteImage(string $id)
+    {
+        $user = User::findOrFail($id);
 
+        if ($user->profil) {
+            // Gunakan Storage untuk menghapus file
+            Storage::delete('profile_picture/' . $user->image);
 
+            // Kosongkan field profil pada tabel User
+            $user->update(['profil' => null]);
+
+            return redirect()->back()->with('message', 'Foto profil berhasil dihapus!');
+        }
+
+        return redirect()->back()->with('failed', 'Data tidak memiliki foto profil!');
+    }
 
     public function updatePassword(Request $request, $userId)
     {
