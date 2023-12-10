@@ -63,9 +63,14 @@ Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], functi
     Route::get('/delete-image/{id}', [PostController::class, 'deleteImage'])->name('delete.image');
 });
 
+
+Route::group(['middleware' => 'auth'], function () {
 // Route profile
 Route::get('profil/{id}', [UserController::class, 'profil'])->name('profil');
 Route::post('update_profil/{id}', [UserController::class, 'update_profil'])->name('update_profil');
 Route::post('update_foto_profil/{id}', [UserController::class, 'update_foto_profil'])->name('update_foto_profil');
 Route::get('/delete-image-profil/{id}', [UserController::class, 'deleteImage'])->name('delete.image.profil');
 Route::post('/ubah-password/{id}', [UserController::class, 'updatePassword'])->name('ubah_password');
+});
+
+
