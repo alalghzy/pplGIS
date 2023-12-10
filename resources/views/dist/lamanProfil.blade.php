@@ -35,7 +35,7 @@
                                     <img src="{{ asset('admin/compiled/jpg/2.jpg') }}">
                                 @endif
                             </div>
-                            <h3 class="mt-3">{{ $data->name }}</h3>
+                            <h5 class="mt-3">{{ $data->name }}</h5>
                             <p class="text-small">{{ $data->status }}</p>
                         </div>
                     </div>
