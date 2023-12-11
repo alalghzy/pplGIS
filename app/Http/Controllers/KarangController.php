@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Karang;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KarangController extends Controller
 {
@@ -13,8 +14,9 @@ class KarangController extends Controller
      */
     public function index()
     {
-        $karangs = Karang::latest()->get();
-        return view('dist.lamanKarang', compact('karangs'));
+        $karangs = Karang::all();
+        $posts = Post::all();
+        return view('dist.lamanKarang', compact('karangs','posts'));
     }
 
     /**
@@ -30,7 +32,20 @@ class KarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'stasiun'     => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->with('failed', 'Data gagal ditambahkan!')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        Karang::create([
+            'stasiun'        => $request->stasiun,
+        ]);
     }
 
     /**

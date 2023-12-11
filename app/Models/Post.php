@@ -15,15 +15,6 @@ class Post extends Model
 
     protected $guarded = ['id'];
 
-    // protected $fillable = [
-    //     'nama',
-    //     'image',
-    //     'deskripsi',
-    //     'latitude',
-    //     'longitude',
-    //     'kedalaman'
-    // ];
-
     public function karangs()
     {
         return $this->hasMany(Karang::class);

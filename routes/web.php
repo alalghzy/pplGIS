@@ -54,8 +54,7 @@ Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], functi
     Route::resource('/peta', PetaController::class)
         ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-    Route::resource('/karang', KarangController::class)
-        ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
+    Route::resource('/karang', KarangController::class);
 
     Route::delete('/delete-all-users', [UserController::class, 'delete_all']);
     Route::delete('/delete-all-stasiuns', [PostController::class, 'delete_all']);

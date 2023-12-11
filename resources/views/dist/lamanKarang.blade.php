@@ -32,11 +32,132 @@
                                     title="Tambah data">
                                     <i class="bi bi-plus-square fs-5"></i> Tambah Data
                                 </button>
+
                                 <button class="btn btn-danger btn-sm removeAll ms-3" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Hapus semua data yang dipilih">
                                     <i class="bi bi-trash fs-5"></i> Hapus Banyak Data
                                 </button>
-                                {{-- @include('admin.includes.Stasiun.modalTambah') --}}
+                                {{-- @include('dist.includes.Karang.modalTambah') --}}
+
+                                <div class="modal fade" id="modalCreate" aria-hidden="true"
+                                    aria-labelledby="modalCreateLabel" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="modalCreateLabel">Pilih Stasiun</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <form action="{{ route('karang.store') }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold mb-1">Pilih Stasiun</label>
+                                                        <select name="stasiun"
+                                                            class="form-control @error('stasiun') is-invalid @enderror">
+                                                            <option value="">Pilih Stasiun</option>
+                                                            @foreach ($posts as $item)
+                                                                <option value="{{ $item->id }}"> {{ $item->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('stasiun')
+                                                            <div class="alert alert-danger mt-2">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                                                    data-bs-toggle="modal">Input data terumbu karang</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
+                                    aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Input data
+                                                    terumbu karang</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <form action="{{ route('stasiun.store') }}" method="POST"
+                                                    enctype="multipart/form-data">
+
+                                                    @csrf
+
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold mb-1">Nama Terumbu Karang</label>
+                                                        <input type="text"
+                                                            class="form-control @error('nama') is-invalid @enderror"
+                                                            name="nama" value="{{ old('nama') }}"
+                                                            placeholder="Masukkan nama terumbu karang">
+
+                                                        <!-- error message untuk nama -->
+                                                        @error('nama')
+                                                            <div class="alert alert-danger mt-2">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold mb-1">Status</label>
+                                                        <select name="status"
+                                                            class="form-control @error('status') is-invalid @enderror">
+                                                            <option value="">Pilih Status</option>
+                                                            <option value="Karang Hidup">
+                                                                Karang Hidup
+                                                            </option>
+                                                            <option value="Karang Mati">
+                                                                Karang Mati
+                                                            </option>
+                                                        </select>
+
+                                                        <!-- error message untuk latitude -->
+                                                        @error('latitude')
+                                                            <div class="alert alert-danger mt-2">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        <label class="font-weight-bold mb-1">Jumlah</label>
+                                                        <input type="number"
+                                                            class="form-control @error('jumlah') is-invalid @enderror"
+                                                            name="jumlah" value="{{ old('jumlah') }}"
+                                                            placeholder="Masukkan jumlah">
+                                                        <!-- error message untuk jumlah -->
+                                                        @error('jumlah')
+                                                            <div class="alert alert-danger mt-2">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-danger shadow-sm"
+                                                    data-bs-target="#modalCreate" data-bs-toggle="modal">
+                                                    <i class="fa-solid fa-angle-left"></i> Kembali
+                                                </button>
+                                                <button type="submit" class="btn btn-success shadow-sm"><i
+                                                        class="fa-regular fa-square-plus"></i> Tambah Data</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body table-responsive p-3">
                                 <table class="table table-hover table-bordered" id="table-data">
@@ -48,7 +169,6 @@
                                             <th>Nama Stasiun</th>
                                             <th>Status</th>
                                             <th>Jenis Marga</th>
-                                            <th>User</th>
                                             <th>Waktu</th>
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
@@ -56,15 +176,15 @@
                                     @if ($karangs->count())
                                         @foreach ($karangs as $key => $post)
                                             <tr id="tr_{{ $post->id }}">
-                                                <td style="width: 10px"><input type="checkbox" class="checkbox" data-id="{{ $post->id }}">
+                                                <td style="width: 10px"><input type="checkbox" class="checkbox"
+                                                        data-id="{{ $post->id }}">
                                                 </td>
                                                 <td style="width: 10px">{{ $loop->iteration }}</td>
                                                 <td>{{ $post->nama }}</td>
                                                 <td>{{ $post->post->nama }}</td>
                                                 <td>{{ $post->status }}</td>
                                                 <td>{{ $post->jenis_marga }}</td>
-                                                <td>{{ $post->user->name }}</td>
-                                                <td>{{ $post->tanggal }}</td>
+                                                <td>{{ $post->updated_at }}</td>
                                                 <td class="text-center" style="width: 140px">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="btn-group fs-5">
