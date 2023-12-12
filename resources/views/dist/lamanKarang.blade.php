@@ -203,9 +203,9 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- @include('admin.includes.Stasiun.modalLihat')
-                                                    @include('admin.includes.Stasiun.modalEdit')
-                                                    @include('admin.includes.Stasiun.modalHapus') --}}
+                                                    @include('dist.includes.Karang.modalLihat')
+                                                    @include('dist.includes.Karang.modalEdit')
+                                                    @include('dist.includes.Karang.modalHapus')
                                                 </tr>
                                             @endforeach
                                         @else
@@ -335,15 +335,44 @@
             {{-- Input Angka --}}
             <script>
                 function validateNumberInput(input) {
-                    // Hapus karakter selain digit, titik, dan tanda minus
-                    input.value = input.value.replace(/[^0-9.-]/g, '');
-
-                    // Hapus tanda minus jika lebih dari satu, dan pastikan hanya satu di awal
-                    input.value = input.value.replace(/^-+/, '-');
+                    // Hapus karakter selain digit dan titik
+                    input.value = input.value.replace(/[^0-9.]/g, '');
 
                     // Hapus titik jika lebih dari satu
                     input.value = input.value.replace(/(\..*\.)/g, '$1');
+
+                    // Batasi panjang input menjadi 4 karakter termasuk 2 angka di belakang koma
+                    if (input.value.length > 5) {
+                        input.value = input.value.substring(0, 5);
+                    }
+
+                    // Pastikan format angka di belakang koma
+                    var parts = input.value.split('.');
+                    if (parts.length > 1) {
+                        parts[1] = parts[1].substring(0, 2); // Batasi 2 angka di belakang koma
+                        input.value = parts.join('.');
+                    }
+
+                    // Pastikan nilai tidak negatif
+                    if (parseFloat(input.value) < 0) {
+                        input.value = '';
+                    }
                 }
+
+                // function isNumberKey(evt) {
+                //     var charCode = (evt.which) ? evt.which : event.keyCode;
+                //     // Memastikan bahwa tanda minus dan plus tidak ditekan secara langsung
+                //     if (charCode !== 45 && charCode !== 43) {
+                //         return true;
+                //     } else {
+                //         return false;
+                //     }
+                // }
+
+                // function isMinusOrPlusKey(event) {
+                //     // Mendeteksi kode tombol "-" (minus) dan "+" (plus)
+                //     return !["-", "+"].includes(event.key);
+                // }
 
                 function hitungKarangMati() {
                     const dcValue = parseFloat(document.getElementById('dc').value) || 0;

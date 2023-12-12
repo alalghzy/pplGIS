@@ -7,12 +7,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda ingin menghapus data {{ $post->nama }}?</p>
+                <p>Apakah Anda ingin menghapus data terumbu karang {{ $post->post->nama }}?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary shadow-sm" data-bs-dismiss="modal"><i
                         class="fa-solid fa-angle-left"></i> Kembali</button>
-                <form action="{{ route('stasiun.destroy', $post->id) }}" method="POST">
+                <form action="{{ route('karang.destroy', $post->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger shadow-sm"> <i class="fa-solid fa-trash-can"></i>

@@ -23,17 +23,15 @@
                                     @endif
 
                                     <h4>
-                                        {{ $post->nama }}
-                                        <br><span style="font-size: 13px; color: darkgray;"> Diupdate oleh {{$post->pengguna}} pada {{$post->updated_at}}</span>
+                                        {{ $post->post->nama }}
+                                        <br><span style="font-size: 13px; color: darkgray;"> Diupdate oleh {{$post->user->name}} pada {{$post->updated_at}}</span>
                                     </h4>
                                     <hr>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-primary">Latitude</button>
-                                        <button type="button" class="btn btn-primary">{{ $post->latitude }}</button>
-                                        <button type="button" class="btn btn-danger">Longitude</button>
-                                        <button type="button" class="btn btn-danger">{{ $post->longitude }}</button>
-                                        <button type="button" class="btn btn-success">Kedalaman</button>
-                                        <button type="button" class="btn btn-success">{{ $post->kedalaman }}</button>
+                                        <button type="button" class="btn btn-primary">Karang Hidup</button>
+                                        <button type="button" class="btn btn-primary">{{ $post->karang_hidup }}</button>
+                                        <button type="button" class="btn btn-danger">Karang Mati</button>
+                                        <button type="button" class="btn btn-danger">{{ $post->karang_mati }}</button>
                                     </div>
                                 </div>
                             </div>

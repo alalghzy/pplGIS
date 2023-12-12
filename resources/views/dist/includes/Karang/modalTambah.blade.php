@@ -119,7 +119,7 @@
 
                      <div class="modal-footer">
                          <button type="button" class="btn btn-success shadow-sm" data-bs-toggle="modal"
-                             data-bs-target="#exampleModalToggle2">
+                             data-bs-target="#modalCreate2">
                              <i class="fa-regular fa-square-plus"></i> Lanjut ke Input data terumbu karang
                          </button>
                      </div>
@@ -130,7 +130,7 @@
  </div>
 
  <!-- Modal Kedua (Input data terumbu karang) -->
- <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+ <div class="modal fade" id="modalCreate2" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
      tabindex="-1">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
@@ -398,9 +398,9 @@
 
                      <div class="btn-group">
                          <a href="#" class="btn btn-dark active" aria-current="page">Karang Hidup</a>
-                         <a href="#" class="btn btn-light"><span id="KarangHidup"></span></a>
+                         <a href="#" class="btn btn-light"><span id="KarangHidup"></span>%</a>
                          <a href="#" class="btn btn-dark active" aria-current="page">Karang Mati</a>
-                         <a href="#" class="btn btn-light"><span id="KarangMati"></span></a>
+                         <a href="#" class="btn btn-light"><span id="KarangMati"></span>%</a>
                      </div>
 
                      {{-- <h4>Karang Hidup = <span id="KarangHidup"></span> | Karang Mati = <span id="KarangMati"></span></h4> --}}

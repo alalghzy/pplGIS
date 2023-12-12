@@ -121,8 +121,12 @@ class KarangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Karang $karang)
+    public function destroy(string $id)
     {
-        //
+        $post = Karang::findOrFail($id);
+
+        $post->delete();
+
+        return redirect()->route('karang.index')->with('message', 'Data berhasil dihapus!');
     }
 }
