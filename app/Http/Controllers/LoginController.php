@@ -155,7 +155,7 @@ class LoginController extends Controller
                 'email' => $request->email
             ])->delete();
 
-            return redirect()->route('login')->with('success', 'Password berhasil direset!');
+            return redirect()->route('login.index')->with('success', 'Password berhasil direset!');
         }
     }
 }

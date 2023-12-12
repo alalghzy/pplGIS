@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admins/css/main.css') }} ">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/vali/css/main.css') }} ">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -97,9 +97,9 @@
         </div>
     </section>
     <!-- Essential javascripts for application to work-->
-    <script src=" {{ asset('admins/js/jquery-3.7.0.min.js') }} "></script>
-    <script src="{{ asset('admins/js/bootstrap.min.js') }}  "></script>
-    <script src="{{ asset('admins/js/main.js') }}  "></script>
+    <script src=" {{ asset('admin/vali/js/jquery-3.7.0.min.js') }} "></script>
+    <script src="{{ asset('admin/vali/js/bootstrap.min.js') }}  "></script>
+    <script src="{{ asset('admin/vali/js/main.js') }}  "></script>
     <script type="text/javascript">
         // Login Page Flipbox control
         $('.login-content [data-toggle="flip"]').click(function() {
