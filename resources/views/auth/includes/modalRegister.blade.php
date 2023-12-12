@@ -31,7 +31,7 @@
                             <span class="input-group-text bg-white text-muted">
                                 <i class="bi bi-chevron-double-right"></i>
                             </span>
-                            <select name="status" class="form-control @error('status') is-invalid @enderror">
+                            <select name="status" class="form-select form-control @error('status') is-invalid @enderror">
                                 <option value="Pembimbing" @if (old('status') == 'Pembimbing') selected @endif>
                                     Pembimbing
                                 </option>

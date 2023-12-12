@@ -215,4 +215,9 @@
         });
     </script>
 
+    <script>
+        function validateNumberInput(input) {
+            input.value = input.value.replace(/[^\d.-]/g, ''); // Menghapus karakter selain angka, titik, dan minus
+        }
+    </script>
 @endpush

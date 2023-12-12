@@ -53,7 +53,7 @@
                             <span class="input-group-text text-muted">
                                 <i class="fa-solid fa-angles-right"></i>
                             </span>
-                            <select name="status" class="form-control @error('status') is-invalid @enderror">
+                            <select name="status" class="form-select form-control @error('status') is-invalid @enderror">
                                 <option value="{{$post->status}}" @if (old('status') == '$post->status') selected @endif>
                                     {{$post->status}}
                                 </option>
