@@ -37,135 +37,16 @@
                                     data-bs-placement="top" title="Hapus semua data yang dipilih">
                                     <i class="bi bi-trash fs-5"></i> Hapus Banyak Data
                                 </button>
-                                {{-- @include('dist.includes.Karang.modalTambah') --}}
-
-                                <div class="modal fade" id="modalCreate" aria-hidden="true"
-                                    aria-labelledby="modalCreateLabel" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="modalCreateLabel">Pilih Stasiun</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <form action="{{ route('karang.store') }}" method="POST"
-                                                    enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <label class="font-weight-bold mb-1">Pilih Stasiun</label>
-                                                        <select name="stasiun"
-                                                            class="form-control @error('stasiun') is-invalid @enderror">
-                                                            <option value="">Pilih Stasiun</option>
-                                                            @foreach ($posts as $item)
-                                                                <option value="{{ $item->id }}"> {{ $item->nama }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('stasiun')
-                                                            <div class="alert alert-danger mt-2">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                                    data-bs-toggle="modal">Input data terumbu karang</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
-                                    aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Input data
-                                                    terumbu karang</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <form action="{{ route('stasiun.store') }}" method="POST"
-                                                    enctype="multipart/form-data">
-
-                                                    @csrf
-
-                                                    <div class="form-group">
-                                                        <label class="font-weight-bold mb-1">Nama Terumbu Karang</label>
-                                                        <input type="text"
-                                                            class="form-control @error('nama') is-invalid @enderror"
-                                                            name="nama" value="{{ old('nama') }}"
-                                                            placeholder="Masukkan nama terumbu karang">
-
-                                                        <!-- error message untuk nama -->
-                                                        @error('nama')
-                                                            <div class="alert alert-danger mt-2">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="font-weight-bold mb-1">Status</label>
-                                                        <select name="status"
-                                                            class="form-control @error('status') is-invalid @enderror">
-                                                            <option value="">Pilih Status</option>
-                                                            <option value="Karang Hidup">
-                                                                Karang Hidup
-                                                            </option>
-                                                            <option value="Karang Mati">
-                                                                Karang Mati
-                                                            </option>
-                                                        </select>
-
-                                                        <!-- error message untuk latitude -->
-                                                        @error('latitude')
-                                                            <div class="alert alert-danger mt-2">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-
-                                                    <div class="form-group mb-3">
-                                                        <label class="font-weight-bold mb-1">Jumlah</label>
-                                                        <input type="number"
-                                                            class="form-control @error('jumlah') is-invalid @enderror"
-                                                            name="jumlah" value="{{ old('jumlah') }}"
-                                                            placeholder="Masukkan jumlah">
-                                                        <!-- error message untuk jumlah -->
-                                                        @error('jumlah')
-                                                            <div class="alert alert-danger mt-2">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-danger shadow-sm"
-                                                    data-bs-target="#modalCreate" data-bs-toggle="modal">
-                                                    <i class="fa-solid fa-angle-left"></i> Kembali
-                                                </button>
-                                                <button type="submit" class="btn btn-success shadow-sm"><i
-                                                        class="fa-regular fa-square-plus"></i> Tambah Data</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('dist.includes.Karang.modalTambah')
                             </div>
-                            <div class="card-body table-responsive p-3">
+
+                            {{-- <div class="card-body table-responsive-sm p-3">
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead class="table-primary">
                                         <tr>
                                             <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>
                                             <th style="width: 10px">No</th>
-                                            <th>Nama Terumbu Karang</th>
+                                            <th>Nama Stasiun</th>
                                             <th>Nama Stasiun</th>
                                             <th>Status</th>
                                             <th>Jenis Marga</th>
@@ -212,9 +93,9 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                {{-- @include('admin.includes.Stasiun.modalLihat')
+                                                @include('admin.includes.Stasiun.modalLihat')
                                                 @include('admin.includes.Stasiun.modalEdit')
-                                                @include('admin.includes.Stasiun.modalHapus') --}}
+                                                @include('admin.includes.Stasiun.modalHapus')
                                             </tr>
                                         @endforeach
                                     @else
@@ -228,7 +109,121 @@
                                         </div>
                                     @endif
                                 </table>
+                            </div> --}}
+
+                            <div class="table-responsive table-responsive-sm m-1 p-1">
+                                <table class="table table-hover table-bordered" id="table-data">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="3" style="width: 10px"><input type="checkbox"
+                                                    id="checkboxesMain"></th>
+                                            <th rowspan="3">Nama Stasiun</th>
+                                            <th rowspan="3">Algae</th>
+                                            <th rowspan="3">Abiotik</th>
+                                            <th rowspan="3">Biota Lain</th>
+                                            <th colspan="15" style="text-align: center; justify-content: center">
+                                                Terumbu Karang
+                                            </th>
+                                            <th rowspan="3" class="text-center" style="width: 140px">Aksi</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="13" style="text-align: center; justify-content: center">Karang
+                                                Hidup</th>
+                                            <th colspan="2" style="text-align: center; justify-content: center">Karang
+                                                Mati</th>
+                                        </tr>
+                                        <tr>
+                                            <th>ACB</th>
+                                            <th>ACD</th>
+                                            <th>ACE</th>
+                                            <th>ACS</th>
+                                            <th>ACT</th>
+                                            <th>CB</th>
+                                            <th>CF</th>
+                                            <th>CE</th>
+                                            <th>CM</th>
+                                            <th>CS</th>
+                                            <th>CMR</th>
+                                            <th>CHL</th>
+                                            <th>CME</th>
+                                            <th>DC</th>
+                                            <th>DCA</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        @if ($karangs->count())
+                                            @foreach ($karangs as $key => $post)
+                                                <tr id="tr_{{ $post->id }}">
+                                                    <td style="width: 10px"><input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>{{ $post->post->nama }}</td>
+                                                    <td>{{ $post->algae }}%</td>
+                                                    <td>{{ $post->abiotik }}%</td>
+                                                    <td>{{ $post->biota_lain }}%</td>
+                                                    <td>{{ $post->acb }}%</td>
+                                                    <td>{{ $post->acd }}%</td>
+                                                    <td>{{ $post->ace }}%</td>
+                                                    <td>{{ $post->acs }}%</td>
+                                                    <td>{{ $post->act }}%</td>
+                                                    <td>{{ $post->cb }}%</td>
+                                                    <td>{{ $post->cf }}%</td>
+                                                    <td>{{ $post->ce }}%</td>
+                                                    <td>{{ $post->cm }}%</td>
+                                                    <td>{{ $post->cs }}%</td>
+                                                    <td>{{ $post->cmr }}%</td>
+                                                    <td>{{ $post->chl }}%</td>
+                                                    <td>{{ $post->cme }}%</td>
+                                                    <td>{{ $post->dc }}%</td>
+                                                    <td>{{ $post->dca }}%</td>
+                                                    <td class="text-center" style="width: 140px">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="btn-group fs-5">
+                                                                <button type="button" class="btn btn btn-dark"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modalLihat-{{ $post->id }}"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Lihat Data">
+                                                                    <i class="bi bi-eye"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn btn-primary"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modalEdit-{{ $post->id }}"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Edit Data">
+                                                                    <i class="bi bi-pencil-square fs-6"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn btn-danger"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#hapusdata-{{ $post->id }}"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Hapus Data">
+                                                                    <i class="bi bi-trash fs-6"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    {{-- @include('admin.includes.Stasiun.modalLihat')
+                                                    @include('admin.includes.Stasiun.modalEdit')
+                                                    @include('admin.includes.Stasiun.modalHapus') --}}
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <div class="alert alert-danger">
+                                                Data belum tersedia, silahkan &ensp;
+                                                <button style="font-size: 10px;" type="button"
+                                                    class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#modalCreate" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Edit data">
+                                                    <i class="bi bi-plus-square "></i>
+                                                    Tambah Data
+                                                </button> &ensp;!
+                                            </div>
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -335,5 +330,65 @@
                         }
                     });
                 });
+            </script>
+
+            {{-- Input Angka --}}
+            <script>
+                function validateNumberInput(input) {
+                    // Hapus karakter selain digit, titik, dan tanda minus
+                    input.value = input.value.replace(/[^0-9.-]/g, '');
+
+                    // Hapus tanda minus jika lebih dari satu, dan pastikan hanya satu di awal
+                    input.value = input.value.replace(/^-+/, '-');
+
+                    // Hapus titik jika lebih dari satu
+                    input.value = input.value.replace(/(\..*\.)/g, '$1');
+                }
+
+                function hitungKarangMati() {
+                    const dcValue = parseFloat(document.getElementById('dc').value) || 0;
+                    const dcaValue = parseFloat(document.getElementById('dca').value) || 0;
+
+                    const total = dcValue + dcaValue;
+
+                    document.getElementById('KarangMati').innerText = total.toFixed(2);
+
+                    // Mengupdate nilai input pada HTML
+                    document.getElementsByName('karang_mati')[0].value = total.toFixed(2);
+                }
+
+                function hitungKarangHidup() {
+                    const elementIds = ['acb', 'acd', 'ace', 'acs', 'act', 'cb', 'cf', 'ce', 'cm', 'cs', 'cmr', 'chl', 'cme'];
+                    const total = elementIds.reduce((accumulator, elementId) => {
+                        const value = parseFloat(document.getElementById(elementId).value) || 0;
+                        return accumulator + (isNaN(value) ? 0 : value);
+                    }, 0);
+
+                    document.getElementById('KarangHidup').innerText = total.toFixed(2);
+
+                    // Mengupdate nilai input pada HTML
+                    document.getElementsByName('karang_hidup')[0].value = total.toFixed(2);
+                }
+
+
+                function isNumberKey(evt) {
+                    var charCode = (evt.which) ? evt.which : event.keyCode;
+
+                    // Memperbolehkan angka, tanda desimal, tanda minus, dan tombol backspace
+                    if (
+                        (charCode >= 48 && charCode <= 57) || // Angka
+                        charCode === 46 || // Tanda desimal
+                        charCode === 45 || // Tanda minus
+                        charCode === 8 // Tombol backspace
+                    ) {
+                        // Memastikan hanya satu tanda minus yang diperbolehkan pada posisi awal
+                        if (charCode === 45 && evt.target.selectionStart !== 0) {
+                            return false;
+                        }
+                        return true;
+                    }
+
+                    return true;
+                }
             </script>
         @endpush

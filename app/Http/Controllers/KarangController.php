@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Karang;
 use App\Models\Post;
+use App\Models\Karang;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class KarangController extends Controller
@@ -16,7 +17,7 @@ class KarangController extends Controller
     {
         $karangs = Karang::all();
         $posts = Post::all();
-        return view('dist.lamanKarang', compact('karangs','posts'));
+        return view('dist.lamanKarang', compact('karangs', 'posts'));
     }
 
     /**
@@ -33,7 +34,28 @@ class KarangController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'stasiun'     => 'required',
+            'post_id'       => 'required|exists:posts,id',
+            'user_id'       => 'required|exists:users,id',
+            'algae'         => 'required|numeric',
+            'abiotik'       => 'required|numeric',
+            'biota_lain'    => 'required|numeric',
+            'acb'           => 'required|numeric',
+            'acd'           => 'required|numeric',
+            'ace'           => 'required|numeric',
+            'acs'           => 'required|numeric',
+            'act'           => 'required|numeric',
+            'cb'            => 'required|numeric',
+            'cf'            => 'required|numeric',
+            'ce'            => 'required|numeric',
+            'cm'            => 'required|numeric',
+            'cs'            => 'required|numeric',
+            'cmr'           => 'required|numeric',
+            'chl'           => 'required|numeric',
+            'cme'           => 'required|numeric',
+            'dc'            => 'required|numeric',
+            'dca'           => 'required|numeric',
+            'karang_hidup'  => 'required|numeric',
+            'karang_mati'   => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -43,9 +65,33 @@ class KarangController extends Controller
                 ->withErrors($validator);
         }
 
+        // Simpan data ke database
         Karang::create([
-            'stasiun'        => $request->stasiun,
+            'post_id'       => $request->post_id,
+            'user_id'       => $request->user_id,
+            'algae'         => $request->algae,
+            'abiotik'       => $request->abiotik,
+            'biota_lain'    => $request->biota_lain,
+            'acb'           => $request->acb,
+            'acd'           => $request->acd,
+            'ace'           => $request->ace,
+            'acs'           => $request->acs,
+            'act'           => $request->act,
+            'cb'            => $request->cb,
+            'cf'            => $request->cf,
+            'ce'            => $request->ce,
+            'cm'            => $request->cm,
+            'cs'            => $request->cs,
+            'cmr'           => $request->cmr,
+            'chl'           => $request->chl,
+            'cme'           => $request->cme,
+            'dc'            => $request->dc,
+            'dca'           => $request->dca,
+            'karang_hidup'  => $request->karang_hidup,
+            'karang_mati'   => $request->karang_mati,
         ]);
+
+        return redirect()->route('karang.index')->with('message', 'Data berhasil ditambahkan');
     }
 
     /**

@@ -55,18 +55,18 @@
                     </div>
                     <div class="form-group">
                         <label for="latitude" class="font-weight-bold mb-1">Latitude</label>
-                        <input type="number" id="latitude"
+                        <input type="text" id="latitude"
                             class="form-control @error('latitude') is-invalid @enderror" name="latitude"
-                            value="{{ old('latitude', $post->latitude) }}" placeholder="Masukkan koordinat lintang">
+                            value="{{ old('latitude', $post->latitude) }}" placeholder="Masukkan koordinat lintang" oninput="validateNumberInput(this)">
                         @error('latitude')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="longitude" class="font-weight-bold mb-1">Longitude</label>
-                        <input type="number" id="longitude"
+                        <input type="text" id="longitude"
                             class="form-control @error('longitude') is-invalid @enderror" name="longitude"
-                            value="{{ old('longitude', $post->longitude) }}" placeholder="Masukkan koordinat bujur">
+                            value="{{ old('longitude', $post->longitude) }}" placeholder="Masukkan koordinat bujur" oninput="validateNumberInput(this)">
                         @error('longitude')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
