@@ -24,12 +24,14 @@
 
                                     <h4>
                                         {{ $post->post->nama }}
-                                        <br><span style="font-size: 13px; color: darkgray;"> Diupdate oleh {{$post->user->name}} pada {{$post->updated_at}}</span>
+                                        <br><span style="font-size: 13px; color: darkgray;"> Diupdate oleh
+                                            {{ $post->user->name }} pada {{ $post->updated_at }}</span>
                                     </h4>
                                     <hr>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                         <button type="button" class="btn btn-primary">Karang Hidup</button>
-                                        <button type="button" class="btn btn-primary">{{ $post->karang_hidup }}</button>
+                                        <button type="button"
+                                            class="btn btn-primary">{{ $post->karang_hidup }}</button>
                                         <button type="button" class="btn btn-danger">Karang Mati</button>
                                         <button type="button" class="btn btn-danger">{{ $post->karang_mati }}</button>
                                     </div>
@@ -40,12 +42,12 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="submit" class="btn btn-warning shadow-sm" data-bs-toggle="tooltip"
-                    data-bs-placement="top" title="Lihat Selengkapnya">
-                    <a style="color: white" href="">
+                <a style="color: white" href="{{ route('detail.stasiun', ['id' => $post->post->id]) }}">
+                    <button type="button" class="btn btn-warning shadow-xl" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Lihat Selengkapnya">
                         <i class="fa-solid fa-angles-right" style="color: black;"></i>
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
         </div>
     </div>

@@ -42,12 +42,12 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
+                <a style="color: white" href="{{ route('detail.stasiun', ['id'=> $post->id ]) }}">
                 <button type="submit" class="btn btn-warning shadow-sm" data-bs-toggle="tooltip"
                     data-bs-placement="top" title="Lihat Selengkapnya">
-                    <a style="color: white" href="">
                         <i class="fa-solid fa-angles-right" style="color: black;"></i>
-                    </a>
                 </button>
+            </a>
             </div>
         </div>
     </div>

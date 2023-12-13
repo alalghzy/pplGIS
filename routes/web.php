@@ -73,3 +73,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/delete-image-profil/{id}', [UserController::class, 'deleteImage'])->name('delete.image.profil');
     Route::post('/ubah-password/{id}', [UserController::class, 'updatePassword'])->name('ubah_password');
 });
+
+Route::get('/detail-stasiun/{id}', [PostController::class, 'show'])->name('detail.stasiun');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Karang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -115,10 +116,32 @@ class PostController extends Controller
         return back()->with('message', 'Data berhasil ditambahkan!');
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
-        //
+        $post = Post::with('karangs')->findOrFail($id);
+        $posts = Post::all();
+
+        // Mengambil data dari tabel karangs
+        $karangsData = $post->karangs->first();
+
+        // Menyusun data untuk dikirim ke view
+        $chartData = null;
+
+        // Pastikan $karangsData tidak null sebelum mengambil nilai-nilai spesifik
+        if ($karangsData) {
+            $chartData = [
+                'karang_hidup' => $karangsData->karang_hidup,
+                'karang_mati' => $karangsData->karang_mati,
+                'algae' => $karangsData->algae,
+                'abiotik' => $karangsData->abiotik,
+                'biota_lain' => $karangsData->biota_lain,
+            ];
+        }
+
+        return view('dist.lamanDetail', compact('post', 'posts', 'chartData'));
     }
+
+
 
     public function edit(string $id)
     {

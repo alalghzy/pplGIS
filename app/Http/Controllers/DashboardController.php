@@ -15,13 +15,15 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $users      = User::whereIn('status', ['Petani', 'Pembimbing'])->count();
-        $posts      = Post::count();
-        $karangs    = Karang::count();
+        $karangs = Post::with('karangs:id,karang_hidup,karang_mati,algae,biota_lain,abiotik')->get();
+        $usersCount     = User::whereIn('status', ['Petani', 'Pembimbing'])->count();
+        $postsCount     = Post::count();
+        $karangsCount   = Karang::count();
 
-        return view('dist.dashboard', compact('posts', 'users', 'karangs'))
-            ->with('success', 'Kamu berhasil Login!');
+        return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'karangs'));
     }
+
+
 
 
     /**
