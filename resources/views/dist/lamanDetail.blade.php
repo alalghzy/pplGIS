@@ -203,6 +203,7 @@
                             download: '<i class="fa-solid fa-bars" style="color: #cfcfcf;"></i>'
                         }
                     },
+
                 },
                 grid: {
                     row: {
@@ -213,7 +214,7 @@
                     }
                 },
                 labels: ['Karang Hidup', 'Karang Mati', 'Algae', 'Abiotik', 'Biota Lain'],
-                colors: ['#33FF71', '#FF5733', '#FFC300', '#A933FF', '#33B5FF'],
+                colors: ['#008FFB', '#FF4560', '#FFC300', '#A933FF', '#3eb650'],
                 legend: {
                     position: 'bottom', // Set posisi legenda di bagian bawah
                 },
@@ -226,6 +227,7 @@
                         return value.toFixed(2) + '%';
                     }
                 },
+
                 responsive: [{
                     breakpoint: 500,
                     options: {

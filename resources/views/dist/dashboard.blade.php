@@ -136,17 +136,7 @@
             <div class="col-11 col-lg-11">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Statistik Data</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="chart-profile-visit"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-11 col-lg-11">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Statistik Data</h4>
+                        <h4>Perbandingan Statistik Terumbu Karang</h4>
                     </div>
                     <div class="card-body">
                         <div id="chart"></div>
@@ -163,35 +153,63 @@
     <script src=" {{ asset('admin/static/js/pages/dashboard.js') }} "></script>
 
     <script>
+        // Ambil data dari controller
+        var seriesData = @json($seriesData);
+        var labels = @json($labels);
+
         var options = {
-            series: [{
-                name: 'series1',
-                data: [31, 40, 28, 51, 42, 109, 100]
-            }, {
-                name: 'series2',
-                data: [11, 32, 45, 32, 34, 52, 41]
-            }],
+            series: [
+                {
+                    name: 'Karang Hidup',
+                    data: seriesData.karang_hidup
+                },
+                {
+                    name: 'Karang Mati',
+                    data: seriesData.karang_mati
+                },
+                {
+                    name: 'Algae',
+                    data: seriesData.algae
+                },
+                {
+                    name: 'Biota Lain',
+                    data: seriesData.biota_lain
+                },
+                {
+                    name: 'Abiotik',
+                    data: seriesData.abiotik
+                }
+            ],
             chart: {
                 height: 350,
-                type: 'area'
+                type: 'area',
+                toolbar: {
+                    show: true // Menyembunyikan toolbar
+                }
             },
             dataLabels: {
-                enabled: false
+                enabled: true
             },
             stroke: {
                 curve: 'smooth'
             },
             xaxis: {
                 type: 'string',
-                categories: ["Stasiun 1", "Stasiun 2", "Stasiun 3", "Stasiun 4", "Stasiun 6", "Stasiun 7", "Stasiun 8"]
+                categories: labels.nama
             },
+            yaxis: {
+                max: 100
+            },
+            colors: ['#008FFB', '#FF4560', '#FFC300', '#3eb650', '#A933FF' ], // Ganti dengan warna yang diinginkan
             tooltip: {
                 enabled: true,
-                formatter: undefined,
+                formatter: function (val, opts) {
+                    return opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + "%";
+                },
                 offsetY: 0,
                 style: {
-                    fontSize: 0,
-                    fontFamily: 0,
+                    fontSize: '12px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
                 },
             },
         };
@@ -199,6 +217,8 @@
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     </script>
+
+
 @endpush
 
 @push('style')

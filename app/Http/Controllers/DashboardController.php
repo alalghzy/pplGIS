@@ -15,14 +15,36 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $karangs = Post::with('karangs:id,karang_hidup,karang_mati,algae,biota_lain,abiotik')->get();
-        $usersCount     = User::whereIn('status', ['Petani', 'Pembimbing'])->count();
-        $postsCount     = Post::count();
-        $karangsCount   = Karang::count();
+        $usersCount = User::whereIn('status', ['Petani', 'Pembimbing'])->count();
+        $postsCount = Post::count();
+        $karangsCount = Karang::count();
 
-        return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'karangs'));
+        $karangs = Karang::with('post')->get();
+
+        $seriesData = [
+            'karang_hidup' => [],
+            'karang_mati' => [],
+            'algae' => [],
+            'biota_lain' => [],
+            'abiotik' => [],
+        ];
+
+        $labels = [
+            'nama' => [],
+        ];
+
+        foreach ($karangs as $karang) {
+            $labels['nama'][] = $karang->post->nama;
+
+            $seriesData['karang_hidup'][] = $karang->karang_hidup;
+            $seriesData['karang_mati'][] = $karang->karang_mati;
+            $seriesData['algae'][] = $karang->algae;
+            $seriesData['biota_lain'][] = $karang->biota_lain;
+            $seriesData['abiotik'][] = $karang->abiotik;
+        }
+
+        return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'seriesData', 'karangs', 'labels'));
     }
-
 
 
 
