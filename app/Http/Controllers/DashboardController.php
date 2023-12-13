@@ -43,8 +43,12 @@ class DashboardController extends Controller
             $seriesData['abiotik'][] = $karang->abiotik;
         }
 
+        // Urutkan nama stasiun berdasarkan abjad
+        sort($labels['nama'], SORT_STRING);
+
         return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'seriesData', 'karangs', 'labels'));
     }
+
 
 
 
