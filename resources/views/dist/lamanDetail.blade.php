@@ -149,14 +149,12 @@
                     }
                 }
             </script>
-
-
-
-
-
         </div>
 
-        <div class="card col-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Diagram Tutupan Komunitas Karang {{ $post->nama }}</h4>
+            </div>
             <div class="card-body">
                 <div id="chart"></div>
             </div>
@@ -182,8 +180,8 @@
                     {{ $chartData['biota_lain'] }}
                 ],
                 chart: {
-                    width: 500,
-                    type: 'donut',
+                    width: 300,
+                    type: 'pie',
                     animations: {
                         enabled: true,
                         easing: 'linear',
