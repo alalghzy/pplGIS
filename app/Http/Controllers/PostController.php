@@ -18,9 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('nama', 'asc')->get();
         return view('dist.lamanStasiun', compact('posts'));
     }
+
 
     /**
      * Show the form for creating a new resource.
