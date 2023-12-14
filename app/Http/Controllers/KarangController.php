@@ -15,10 +15,15 @@ class KarangController extends Controller
      */
     public function index()
     {
-        $karangs = Karang::all();
-        $posts = Post::all();
+        $karangs = Karang::join('posts', 'karangs.post_id', '=', 'posts.id')
+                        ->orderBy('posts.nama', 'asc')
+                        ->get();
+
+        $posts = Post::orderBy('nama', 'asc')->get();
         return view('dist.lamanKarang', compact('karangs', 'posts'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -129,4 +134,26 @@ class KarangController extends Controller
 
         return redirect()->route('karang.index')->with('message', 'Data berhasil dihapus!');
     }
+
+    public function delete_all(Request $request)
+    {
+        try {
+            // Ambil array ID yang akan dihapus dari request
+            $idsToDelete = $request->input('ids');
+
+            // Periksa apakah array ID tidak kosong sebelum melakukan penghapusan
+            if (!empty($idsToDelete)) {
+                // Hapus data berdasarkan ID
+                Karang::whereIn('id', $idsToDelete)->delete();
+
+                return response()->json(['status' => true, 'message' => 'Data berhasil dihapus.']);
+            } else {
+                return response()->json(['status' => false, 'message' => 'Tidak ada ID yang diberikan untuk penghapusan.']);
+            }
+        } catch (\Exception $e) {
+            // Tangani kesalahan jika terjadi
+            return response()->json(['status' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+        }
+    }
+
 }

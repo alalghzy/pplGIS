@@ -40,83 +40,13 @@
                                 @include('dist.includes.Karang.modalTambah')
                             </div>
 
-                            {{-- <div class="card-body table-responsive-sm p-3">
-                                <table class="table table-hover table-bordered" id="table-data">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>
-                                            <th style="width: 10px">No</th>
-                                            <th>Nama Stasiun</th>
-                                            <th>Nama Stasiun</th>
-                                            <th>Status</th>
-                                            <th>Jenis Marga</th>
-                                            <th>Waktu</th>
-                                            <th style="text-align: center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    @if ($karangs->count())
-                                        @foreach ($karangs as $key => $post)
-                                            <tr id="tr_{{ $post->id }}">
-                                                <td style="width: 10px"><input type="checkbox" class="checkbox"
-                                                        data-id="{{ $post->id }}">
-                                                </td>
-                                                <td style="width: 10px">{{ $loop->iteration }}</td>
-                                                <td>{{ $post->nama }}</td>
-                                                <td>{{ $post->post->nama }}</td>
-                                                <td>{{ $post->status }}</td>
-                                                <td>{{ $post->jenis_marga }}</td>
-                                                <td>{{ $post->updated_at }}</td>
-                                                <td class="text-center" style="width: 140px">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="btn-group fs-5">
-                                                            <button type="button" class="btn btn btn-dark"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#modalLihat-{{ $post->id }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Lihat Data">
-                                                                <i class="bi bi-eye"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn btn-primary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#modalEdit-{{ $post->id }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Edit Data">
-                                                                <i class="bi bi-pencil-square fs-6"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn btn-danger"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#hapusdata-{{ $post->id }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Hapus Data">
-                                                                <i class="bi bi-trash fs-6"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                @include('admin.includes.Stasiun.modalLihat')
-                                                @include('admin.includes.Stasiun.modalEdit')
-                                                @include('admin.includes.Stasiun.modalHapus')
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <div class="alert alert-danger">
-                                            Data belum tersedia, silahkan &ensp;<button style="font-size: 10px;"
-                                                type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#modalCreate" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Edit data"><i
-                                                    class="bi bi-plus-square "></i>
-                                                Tambah Data</button> &ensp;!
-                                        </div>
-                                    @endif
-                                </table>
-                            </div> --}}
-
-                            <div class="table-responsive table-responsive-sm m-1 p-1">
+                            <div class="card-body table-responsive m-1 p-1">
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead>
                                         <tr>
-                                            <th rowspan="3" style="width: 10px"><input type="checkbox"
-                                                    id="checkboxesMain"></th>
+                                            <th rowspan="3" style="width: 10px">
+                                                <input type="checkbox" id="checkboxesMain">
+                                            </th>
                                             <th rowspan="3">Nama Stasiun</th>
                                             <th rowspan="3">Algae</th>
                                             <th rowspan="3">Abiotik</th>
@@ -127,10 +57,12 @@
                                             <th rowspan="3" class="text-center" style="width: 140px">Aksi</th>
                                         </tr>
                                         <tr>
-                                            <th colspan="13" style="text-align: center; justify-content: center">Karang
-                                                Hidup</th>
-                                            <th colspan="2" style="text-align: center; justify-content: center">Karang
-                                                Mati</th>
+                                            <th colspan="13" style="text-align: center; justify-content: center">
+                                                Karang Hidup
+                                            </th>
+                                            <th colspan="2" style="text-align: center; justify-content: center">
+                                                Karang Mati
+                                            </th>
                                         </tr>
                                         <tr>
                                             <th>ACB</th>
@@ -149,13 +81,13 @@
                                             <th>DC</th>
                                             <th>DCA</th>
                                         </tr>
-
                                     </thead>
-                                    <tbody>
+                                    <tbody class="table-group-divider">
                                         @if ($karangs->count())
                                             @foreach ($karangs as $key => $post)
                                                 <tr id="tr_{{ $post->id }}">
-                                                    <td style="width: 10px"><input type="checkbox" class="checkbox">
+                                                    <td style="width: 10px">
+                                                        <input type="checkbox" class="checkbox">
                                                     </td>
                                                     <td>{{ $post->post->nama }}</td>
                                                     <td>{{ $post->algae }}%</td>
@@ -249,25 +181,23 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $('#checkboxesMain').on('click', function(e) {
-                        if ($(this).is(':checked', true)) {
-                            $(".checkbox").prop('checked', true);
-                        } else {
-                            $(".checkbox").prop('checked', false);
-                        }
+                        $(".checkbox").prop('checked', $(this).prop('checked'));
                     });
+
                     $('.checkbox').on('click', function() {
-                        if ($('.checkbox:checked').length == $('.checkbox').length) {
+                        if ($('.checkbox:checked').length === $('.checkbox').length) {
                             $('#checkboxesMain').prop('checked', true);
                         } else {
                             $('#checkboxesMain').prop('checked', false);
                         }
                     });
+
                     $('.removeAll').on('click', function(e) {
-                        var studentIdArr = [];
-                        $(".checkbox:checked").each(function() {
-                            studentIdArr.push($(this).attr('data-id'));
-                        });
-                        if (studentIdArr.length <= 0) {
+                        var ids = $(".checkbox:checked").map(function() {
+                            return $(this).closest('tr').attr('id').replace('tr_', '');
+                        }).get();
+
+                        if (ids.length <= 0) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal!',
@@ -285,20 +215,19 @@
                                 cancelButtonText: 'Batal'
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    var stuId = studentIdArr.join(",");
                                     $.ajax({
-                                        url: "{{ url('laman/delete-all') }}",
+                                        url: "{{ url('/laman/delete-all-karangs') }}",
                                         type: 'DELETE',
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
                                                 'content')
                                         },
-                                        data: 'ids=' + stuId,
+                                        data: {
+                                            ids: ids
+                                        },
                                         success: function(data) {
-                                            if (data['status'] == true) {
-                                                $(".checkbox:checked").each(function() {
-                                                    $(this).parents("tr").remove();
-                                                });
+                                            if (data['status']) {
+                                                $(".checkbox:checked").closest("tr").remove();
                                                 Swal.fire({
                                                     icon: 'success',
                                                     title: 'Sukses!',
@@ -321,7 +250,7 @@
                                             Swal.fire({
                                                 icon: 'error',
                                                 title: 'Oops...',
-                                                text: data.responseText
+                                                text: data.responseJSON.message
                                             });
                                         }
                                     });
@@ -331,6 +260,7 @@
                     });
                 });
             </script>
+
 
             {{-- Input Angka --}}
             <script>

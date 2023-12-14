@@ -198,13 +198,18 @@
                 categories: labels.nama
             },
             yaxis: {
-                max: 100
+                max: 100,
+                labels: {
+                    formatter: function (val) {
+                        return val.toFixed(2) + "%"; // Mengubah ke format persentase dengan dua desimal
+                    }
+                }
             },
-            colors: ['#008FFB', '#FF4560', '#FFC300', '#3eb650', '#A933FF' ], // Ganti dengan warna yang diinginkan
+            colors: ['#008FFB', '#FF4560', '#FFC300', '#3eb650', '#A933FF'], // Ganti dengan warna yang diinginkan
             tooltip: {
                 enabled: true,
                 formatter: function (val, opts) {
-                    return opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + "%";
+                    return val.toFixed(2) + "%"; // Mengubah ke format persentase dengan dua desimal
                 },
                 offsetY: 0,
                 style: {
@@ -217,6 +222,7 @@
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     </script>
+
 
 
 @endpush

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('karang_id');
             $table->string('image');
             $table->string('nama');
             $table->string('latitude');
@@ -22,7 +21,6 @@ return new class extends Migration
             $table->string('pengguna');
             $table->timestamps();
 
-            // $table->foreign('karang_id')->references('id')->on('karangs')->onDelete('cascade');
         });
     }
 

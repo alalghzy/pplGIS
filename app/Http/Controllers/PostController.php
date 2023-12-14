@@ -18,8 +18,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('nama', 'asc')->get();
-        return view('dist.lamanStasiun', compact('posts'));
+
+        $post = Post::with('karangs')->get();
+        $posts = Post::all();
+        $stasiun = Post::orderBy('nama', 'asc')->get();
+        return view('dist.lamanStasiun', compact('stasiun', 'post', 'posts'));
     }
 
 
@@ -74,7 +77,8 @@ class PostController extends Controller
             if ($existingPost) {
                 return back()
                     ->with('failed', 'Data koordinat sudah ada!')
-                    ->withInput();
+                    ->withInput()
+                    ->withErrors($validator);
             }
 
             Post::create([
@@ -101,7 +105,8 @@ class PostController extends Controller
             if ($existingPost) {
                 return back()
                     ->with('failed', 'Data koordinat sudah ada!')
-                    ->withInput();
+                    ->withInput()
+                    ->withErrors($validator);
             }
 
             Post::create([
@@ -131,11 +136,11 @@ class PostController extends Controller
         // Pastikan $karangsData tidak null sebelum mengambil nilai-nilai spesifik
         if ($karangsData) {
             $chartData = [
-                'karang_hidup' => $karangsData->karang_hidup,
-                'karang_mati' => $karangsData->karang_mati,
-                'algae' => $karangsData->algae,
-                'abiotik' => $karangsData->abiotik,
-                'biota_lain' => $karangsData->biota_lain,
+                'karang_hidup'  => $karangsData->karang_hidup,
+                'karang_mati'   => $karangsData->karang_mati,
+                'algae'         => $karangsData->algae,
+                'abiotik'       => $karangsData->abiotik,
+                'biota_lain'    => $karangsData->biota_lain,
             ];
         }
 

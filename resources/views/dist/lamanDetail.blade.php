@@ -42,9 +42,10 @@
             </ul>
         </div>
 
-        <div class="card col-8" id="map">
+        <div class="card col-8" id="map"></div>
             <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
             <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
+
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     var locations = [
@@ -60,7 +61,7 @@
                     ];
 
                     // Ganti ID di bawah ini sesuai dengan ID yang diinginkan
-                    var targetLocationId = 1; // Ganti dengan ID yang diinginkan
+                    var targetLocationId = {{ $post->id }}; // Ganti dengan ID yang diinginkan
 
                     var targetLocation = locations.find(function(location) {
                         return location.idPost === targetLocationId;
@@ -149,7 +150,6 @@
                     }
                 }
             </script>
-        </div>
 
         <div class="card">
             <div class="card-header">

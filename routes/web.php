@@ -60,6 +60,7 @@ Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], functi
 
     Route::delete('/delete-all-users', [UserController::class, 'delete_all']);
     Route::delete('/delete-all-stasiuns', [PostController::class, 'delete_all']);
+    Route::delete('/delete-all-karangs', [KarangController::class, 'delete_all']);
 
     Route::get('/delete-image/{id}', [PostController::class, 'deleteImage'])->name('delete.image');
 });

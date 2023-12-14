@@ -35,7 +35,6 @@ class DashboardController extends Controller
 
         foreach ($karangs as $karang) {
             $labels['nama'][] = $karang->post->nama;
-
             $seriesData['karang_hidup'][] = $karang->karang_hidup;
             $seriesData['karang_mati'][] = $karang->karang_mati;
             $seriesData['algae'][] = $karang->algae;
