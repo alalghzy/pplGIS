@@ -40,7 +40,7 @@ Route::post('/password/reset', [LoginController::class, 'update_password'])->nam
 Route::resource('/', HomeController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-Route::group(['prefix' => 'laman', 'middleware' => ['auth'], 'as' => ''], function () {
+Route::group(['prefix' => 'laman', 'middleware' => 'status:Administrator,Petani,Pembimbing', 'as' => ''], function () {
 
     Route::group(['middleware' => 'status:Administrator'], function () {
         Route::resource('/data-pengguna', UserController::class);
@@ -73,6 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update_foto_profil/{id}', [UserController::class, 'update_foto_profil'])->name('update_foto_profil');
     Route::get('/delete-image-profil/{id}', [UserController::class, 'deleteImage'])->name('delete.image.profil');
     Route::post('/ubah-password/{id}', [UserController::class, 'updatePassword'])->name('ubah_password');
+    Route::get('/cek_login', [DashboardController::class, 'cek_login'])->name('dashboard.cek_login');
 });
 
 Route::get('/detail-stasiun/{id}', [PostController::class, 'show'])->name('detail.stasiun');

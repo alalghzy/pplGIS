@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Karang;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -46,6 +47,18 @@ class DashboardController extends Controller
         sort($labels['nama'], SORT_STRING);
 
         return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'seriesData', 'karangs', 'labels'));
+    }
+
+    public function cek_login()
+    {
+        $status = Auth::user()->status;
+
+        if ($status == 'Tidak Ada') {
+            Auth::logout();
+            return redirect()->back()->with('cek_login', 'Harap menunggu konfirmasi dari Admin!');
+        } else {
+            return redirect()->route('dashboard.index')->with('success', 'Kamu berhasil login!');
+        }
     }
 
 

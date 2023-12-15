@@ -21,6 +21,12 @@
 @endsection
 
 @section('content')
+    @if ($hasNullStatus)
+        <div class="alert alert-danger alert-dismissible show fade">
+            <i class="fa-solid fa-triangle-exclamation"></i> Ada pengguna yang belum memiliki status!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="page-content">
         <section class="row">
             <div class="col-12 col-lg-12">

@@ -25,20 +25,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group mb-3">
+                    <div class="form-group mb-3" hidden>
                         <label class="form-label">Status Akun</label>
                         <div class="wrap-input100 validate-input input-group">
                             <span class="input-group-text bg-white text-muted">
                                 <i class="bi bi-chevron-double-right"></i>
                             </span>
-                            <select name="status" class="form-select form-control @error('status') is-invalid @enderror">
-                                <option value="Pembimbing" @if (old('status') == 'Pembimbing') selected @endif>
-                                    Pembimbing
-                                </option>
-                                <option value="Petani" @if (old('status') == 'Petani') selected @endif>
-                                    Petani
-                                </option>
-                            </select>
+                            <input type="status" name="status"
+                                class="form-control @error('status') is-invalid @enderror" value="Tidak Ada"
+                                placeholder="Isi dengan status yang valid">
                             @error('status')
                                 <div class="invalid-feedback">
                                     {{ $message }}

@@ -18,8 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->whereIn('status', ['Petani', 'Pembimbing'])->paginate(50);
-        return view('dist.lamanPengguna', compact('users'));
+        $users = User::latest()->whereIn('status', ['Petani', 'Pembimbing', 'Tidak Ada'])->paginate(50);
+        $hasNullStatus = $users->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanPengguna', compact('users', 'hasNullStatus'));
     }
 
     /**

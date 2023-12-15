@@ -152,8 +152,21 @@
                 icon: 'success',
                 title: 'Sukses!',
                 text: "{{ Session::get('success') }}",
-                showConfirmButton: false,
-                timer: 2000
+                showConfirmButton: true,
+            });
+            @elseif (Session::has('daftar'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil daftar akun!',
+                text: "{{ Session::get('daftar') }}",
+                showConfirmButton: true,
+            });
+            @elseif (Session::has('cek_login'))
+            Swal.fire({
+                icon: 'warning',
+                title: 'Belum Mendapat Status!',
+                text: "{{ Session::get('cek_login') }}",
+                showConfirmButton: true,
             });
         @elseif ($message = Session::get('logout'))
             Swal.fire(
