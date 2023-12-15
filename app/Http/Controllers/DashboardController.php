@@ -46,7 +46,10 @@ class DashboardController extends Controller
         // Urutkan nama stasiun berdasarkan abjad
         sort($labels['nama'], SORT_STRING);
 
-        return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'seriesData', 'karangs', 'labels'));
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.dashboard', compact('postsCount', 'usersCount', 'karangsCount', 'seriesData', 'karangs', 'labels', 'hasNullStatus',  ));
     }
 
     public function cek_login()

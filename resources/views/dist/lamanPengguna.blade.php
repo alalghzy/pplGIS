@@ -22,7 +22,7 @@
 
 @section('content')
     @if ($hasNullStatus)
-        <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert alert-light-danger color-danger alert-dismissible show fade">
             <i class="fa-solid fa-triangle-exclamation"></i> Ada pengguna yang belum memiliki status!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

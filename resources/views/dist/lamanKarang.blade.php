@@ -84,7 +84,7 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @if ($karangs->count())
-                                            @foreach ($karangs as $key => $post)
+                                            @foreach ($karangs as $post)
                                                 <tr id="tr_{{ $post->id }}">
                                                     <td style="width: 10px">
                                                         <input type="checkbox" class="checkbox">
@@ -264,6 +264,39 @@
 
             {{-- Input Angka --}}
             <script>
+                function validateInputAndCalculate() {
+                    // Mendapatkan nilai input dari algae, abiotik, dan biota_lain
+                    const algaeValue = parseFloat(document.getElementsByName('algae')[0].value) || 0;
+                    const abiotikValue = parseFloat(document.getElementsByName('abiotik')[0].value) || 0;
+                    const biotaLainValue = parseFloat(document.getElementsByName('biota_lain')[0].value) || 0;
+                    const acbValue = parseFloat(document.getElementsByName('acb')[0].value) || 0;
+                    const acdValue = parseFloat(document.getElementsByName('acd')[0].value) || 0;
+                    const aceValue = parseFloat(document.getElementsByName('ace')[0].value) || 0;
+                    const acsValue = parseFloat(document.getElementsByName('acs')[0].value) || 0;
+                    const actValue = parseFloat(document.getElementsByName('acb')[0].value) || 0;
+                    const cbValue = parseFloat(document.getElementsByName('cb')[0].value) || 0;
+                    const ceValue = parseFloat(document.getElementsByName('ce')[0].value) || 0;
+                    const cfValue = parseFloat(document.getElementsByName('cf')[0].value) || 0;
+                    const cmValue = parseFloat(document.getElementsByName('cm')[0].value) || 0;
+                    const csValue = parseFloat(document.getElementsByName('cs')[0].value) || 0;
+                    const cmrValue = parseFloat(document.getElementsByName('cmr')[0].value) || 0;
+                    const chlValue = parseFloat(document.getElementsByName('chl')[0].value) || 0;
+                    const cmeValue = parseFloat(document.getElementsByName('cme')[0].value) || 0;
+                    const dcValue = parseFloat(document.getElementsByName('dc')[0].value) || 0;
+                    const dcaValue = parseFloat(document.getElementsByName('dca')[0].value) || 0;
+
+                    // Menghitung total persentase
+                    const totalPercentage = algaeValue + abiotikValue + biotaLainValue + acbValue + acdValue + aceValue + acsValue + actValue + cbValue + ceValue + cfValue + cmValue + csValue + cmrValue + chlValue + cmeValue + dcValue + dcaValue;
+
+                    // Validasi total persentase tidak boleh lebih dari 100
+                    if (totalPercentage > 100) {
+                        alert('Data salah! Total persentase melebihi 100%.');
+                        return false;
+                    }
+
+                    return true;
+                }
+
                 function validateNumberInput(input) {
                     // Hapus karakter selain digit dan titik
                     input.value = input.value.replace(/[^0-9.]/g, '');
@@ -287,22 +320,13 @@
                     if (parseFloat(input.value) < 0) {
                         input.value = '';
                     }
+
+                    // Validasi total persentase saat ini
+                    if (!validateInputAndCalculate()) {
+                        // Hapus nilai input yang tidak valid
+                        input.value = '';
+                    }
                 }
-
-                // function isNumberKey(evt) {
-                //     var charCode = (evt.which) ? evt.which : event.keyCode;
-                //     // Memastikan bahwa tanda minus dan plus tidak ditekan secara langsung
-                //     if (charCode !== 45 && charCode !== 43) {
-                //         return true;
-                //     } else {
-                //         return false;
-                //     }
-                // }
-
-                // function isMinusOrPlusKey(event) {
-                //     // Mendeteksi kode tombol "-" (minus) dan "+" (plus)
-                //     return !["-", "+"].includes(event.key);
-                // }
 
                 function hitungKarangMati() {
                     const dcValue = parseFloat(document.getElementById('dc').value) || 0;
@@ -329,7 +353,6 @@
                     document.getElementsByName('karang_hidup')[0].value = total.toFixed(2);
                 }
 
-
                 function isNumberKey(evt) {
                     var charCode = (evt.which) ? evt.which : event.keyCode;
 
@@ -349,5 +372,7 @@
 
                     return true;
                 }
+
+
             </script>
         @endpush

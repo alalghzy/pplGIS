@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Karang;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -15,12 +16,16 @@ class KarangController extends Controller
      */
     public function index()
     {
-        $karangs = Karang::join('posts', 'karangs.post_id', '=', 'posts.id')
-                        ->orderBy('posts.nama', 'asc')
-                        ->get();
+        $karangs = Karang::with('post')->get()->sortBy(function($karang) {
+            return $karang->post->nama;
+        });
 
         $posts = Post::orderBy('nama', 'asc')->get();
-        return view('dist.lamanKarang', compact('karangs', 'posts'));
+
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanKarang', compact('karangs', 'posts', 'hasNullStatus'));
     }
 
 
@@ -39,7 +44,7 @@ class KarangController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'post_id'       => 'required|exists:posts,id',
+            'post_id'       => 'required|exists:posts,id|unique:karangs,post_id',
             'user_id'       => 'required|exists:users,id',
             'algae'         => 'required|numeric',
             'abiotik'       => 'required|numeric',
@@ -65,9 +70,17 @@ class KarangController extends Controller
 
         if ($validator->fails()) {
             return back()
-                ->with('failed', 'Data gagal ditambahkan!')
+                ->with('failed',  $validator->errors()->first())
                 ->withInput()
                 ->withErrors($validator);
+        }
+
+        // Menghitung total persentase
+        $totalPercentage = $request->algae + $request->abiotik + $request->biota_lain + $request->karang_hidup + $request->karang_mati;
+
+        // Validasi total persentase tidak boleh lebih dari 100
+        if ($totalPercentage > 100) {
+            return back()->with('failed', 'Total persentase melebihi 100%')->withInput();
         }
 
         // Simpan data ke database
@@ -155,5 +168,4 @@ class KarangController extends Controller
             return response()->json(['status' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
     }
-
 }

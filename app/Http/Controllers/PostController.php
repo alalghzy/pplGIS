@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Karang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,11 @@ class PostController extends Controller
         $post = Post::with('karangs')->get();
         $posts = Post::all();
         $stasiun = Post::orderBy('nama', 'asc')->get();
-        return view('dist.lamanStasiun', compact('stasiun', 'post', 'posts'));
+
+        $users = User::latest()->whereIn('status', ['Petani', 'Pembimbing', 'Tidak Ada'])->paginate(50);
+        $hasNullStatus = $users->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanStasiun', compact('stasiun', 'post', 'posts', 'hasNullStatus'));
     }
 
 

@@ -24,46 +24,20 @@
                          @enderror
                      </div>
 
-                     <div class="form-group" hidden>
-                        <label class="font-weight-bold mb-1">karang_hidup</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control @error('karang_hidup') is-invalid @enderror"
-                                name="karang_hidup" placeholder="Masukkan data karang_hidup">
-                            <span class="input-group-text">%</span>
-                        </div>
-                        @error('karang_hidup')
-                            <div class="alert alert-danger mt-2">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-
-                    <div class="form-group" hidden>
-                        <label class="font-weight-bold mb-1">karang_mati</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control @error('karang_mati') is-invalid @enderror"
-                                name="karang_mati" placeholder="Masukkan data karang_mati">
-                            <span class="input-group-text">%</span>
-                        </div>
-                        @error('karang_mati')
-                            <div class="alert alert-danger mt-2">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
                      <div class="form-group">
-                         <label class="font-weight-bold mb-1">Pilih Stasiun</label>
-                         <select name="post_id" class="form-control form-select @error('post_id') is-invalid @enderror">
-                             <option value="">Pilih Stasiun</option>
-                             @foreach ($posts as $item)
-                                 <option value="{{ $item->id }}">
-                                     {{ $item->nama }}
-                                 </option>
-                             @endforeach
-                         </select>
-                     </div>
+                        <label class="font-weight-bold mb-1">Pilih Stasiun</label>
+                        <select name="post_id" class="form-control form-select @error('post_id') is-invalid @enderror">
+                            <option value="">Pilih Stasiun</option>
+                            @foreach ($posts as $item)
+                                <option value="{{ $item->id }}" >
+                                    {{ $item->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('post_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                      <div class="form-group">
                          <label class="font-weight-bold mb-1">Algae (dalam %)</label>
@@ -110,8 +84,8 @@
  </div>
 
  <!-- Modal Kedua (Input data terumbu karang) -->
- <div class="modal fade" id="modalCreate2" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-     tabindex="-1">
+ <div class="modal fade" id="modalCreate2" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true"
+     aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
              <div class="modal-header">
@@ -239,7 +213,7 @@
                              <label class="font-weight-bold mb-1">CS (dalam %)</label>
                              <div class="input-group mb-3">
                                  <input type="text" class="form-control @error('cs') is-invalid @enderror"
-                                     name="cs" id="cs" value="{{ old('cs') }}"
+                                     name="cs" id="cs"
                                      placeholder="Masukkan data"
                                      oninput="validateNumberInput(this); hitungKarangHidup()"
                                      onkeydown="return isNumberKey(event)">
@@ -290,8 +264,8 @@
                          <div class="form-group">
                              <label class="font-weight-bold mb-1">DC (dalam %)</label>
                              <div class="input-group mb-3">
-                                 <input type="text" class="form-control @error('dc') is-invalid @enderror" name="dc" id="dc"
-                                     placeholder="Masukkan data"
+                                 <input type="text" class="form-control @error('dc') is-invalid @enderror"
+                                     name="dc" id="dc"  value="{{ old('dc') }}" placeholder="Masukkan data"
                                      oninput="validateNumberInput(this); hitungKarangMati()"
                                      onkeydown="return isNumberKey(event)">
                                  <span class="input-group-text">%</span>
@@ -301,13 +275,42 @@
                          <div class="form-group">
                              <label class="font-weight-bold mb-1">DCA (dalam %)</label>
                              <div class="input-group mb-3">
-                                 <input type="text" class="form-control @error('dca') is-invalid @enderror" name="dca" id="dca"
-                                     placeholder="Masukkan data"
+                                 <input type="text" class="form-control @error('dca') is-invalid @enderror"
+                                     name="dca" id="dca" placeholder="Masukkan data"
                                      oninput="validateNumberInput(this); hitungKarangMati()"
                                      onkeydown="return isNumberKey(event)">
                                  <span class="input-group-text">%</span>
                              </div>
                          </div>
+
+                         <div class="form-group" hidden>
+                            <label class="font-weight-bold mb-1">karang_hidup</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control @error('karang_hidup') is-invalid @enderror"
+                                    name="karang_hidup" placeholder="Masukkan data karang_hidup">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            @error('karang_hidup')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="form-group" hidden>
+                            <label class="font-weight-bold mb-1">karang_mati</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control @error('karang_mati') is-invalid @enderror"
+                                    name="karang_mati" placeholder="Masukkan data karang_mati">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            @error('karang_mati')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                      </div>
 
@@ -326,9 +329,9 @@
                      <a class="btn btn-danger shadow-sm" data-bs-target="#modalCreate" data-bs-toggle="modal">
                          <i class="fa-solid fa-angle-left"></i> Kembali
                      </a>
-                     <button type="submit" class="btn btn-success shadow-sm">
-                         <i class="fa-regular fa-square-plus"></i> Tambah Data
-                     </button>
+                     <button type="submit" class="btn btn-success shadow-sm" id="tambahDataBtn">
+                        <i class="fa-regular fa-square-plus"></i> Tambah Data
+                    </button>
                      </form>
 
                  </div>

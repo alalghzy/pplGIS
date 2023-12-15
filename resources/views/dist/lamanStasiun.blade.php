@@ -52,8 +52,8 @@
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    @if ($posts->count())
-                                        @foreach ($posts as $key => $post)
+                                    @if ($stasiun->count())
+                                        @foreach ($stasiun as $post)
                                             <tr id="tr_{{ $post->id }}">
                                                 <td style="width: 10px"><input type="checkbox" class="checkbox"
                                                         data-id="{{ $post->id }}">

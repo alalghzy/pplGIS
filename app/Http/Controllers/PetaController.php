@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Peta;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PetaController extends Controller
@@ -12,10 +13,11 @@ class PetaController extends Controller
      */
     public function index()
     {
-        //get posts
+
         $posts = Peta::latest()->paginate(10);
-        //render view with posts
-        return view('dist.lamanPeta', compact('posts'));
+        $users = User::latest()->whereIn('status', ['Petani', 'Pembimbing', 'Tidak Ada'])->paginate(50);
+        $hasNullStatus = $users->contains('status', 'Tidak Ada');
+        return view('dist.lamanPeta', compact('posts', 'hasNullStatus'));
     }
 
     /**

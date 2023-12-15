@@ -38,6 +38,9 @@
                                             <a href="{{ route('data-pengguna.index') }}">
                                                 <button class="btn btn-warning">
                                                     Data Pengguna
+                                                    @if ($hasNullStatus)
+                                                    <i class="fa-solid fa-triangle-exclamation" style="color: #ff5c5c;"></i>
+                                                    @endif
                                                 </button>
                                             </a>
                                             <button class=" btn btn-primary font-semibold purecounter"
@@ -116,28 +119,28 @@
                     </div>
 
                 </div>
-                {{-- <div id="content">
-                    <br>
-                    <br>
-                    <center><img src="" alt="Logo Pulau Tikus" width="150px"></center>
-                    <br>
-                    <h2>
-                        <center><b>SISTEM INFORMASI GEOGRAFIS</b></center>
-                    </h2>
-                    <h2>
-                        <center><b>PULAU TIKUS KOTA BENGKULU</b> </center>
-                    </h2>
-                    <h2>
-                        <center><a href=""><button class="btn btn-primary" type="button" href="/">Lihat
-                                    Web</button></a></center>
-                    </h2>
-                </div> --}}
             </div>
             <div class="col-11 col-lg-11">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Perbandingan Statistik Terumbu Karang</h4>
+                        <h4>Perbandingan Statistik Terumbu Karang per Stasiun</h4>
                     </div>
+                    @if ($karangsCount == 0)
+                    <div class="alert alert-light-danger color-danger alert-dismissible show fade mx-4">
+                        <p>
+                            <i class="fa-solid fa-triangle-exclamation"></i> Data terumbu karang belum tersedia!
+
+                            <a href="{{ route('karang.index') }}">
+                                <button style="font-size: 13px;"
+                                type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modalCreate" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Edit data"><i class="bi bi-plus-square "></i>
+                                Tambah Data</button>
+                            </a>
+                        </p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <div class="card-body">
                         <div id="chart"></div>
                     </div>

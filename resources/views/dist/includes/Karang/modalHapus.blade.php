@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda ingin menghapus data terumbu karang {{ $post->post->nama }}?</p>
+                <p>Apakah Anda ingin menghapus data terumbu karang {{ $post->nama }}?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary shadow-sm" data-bs-dismiss="modal"><i
