@@ -149,7 +149,10 @@ class PostController extends Controller
             ];
         }
 
-        return view('dist.lamanDetail', compact('post', 'posts', 'chartData'));
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanDetail', compact('post', 'posts', 'chartData', 'hasNullStatus'));
     }
 
 
