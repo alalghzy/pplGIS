@@ -102,16 +102,19 @@
                             arcgisLayer.addTo(map);
 
                             var locations = [
-                                @foreach ($posts as $item)
-                                    {
-                                        latitude: {{ $item->latitude }},
-                                        longitude: {{ $item->longitude }},
-                                        kedalaman: {{ $item->kedalaman }},
-                                        idPost: {{ $item->id }},
-                                        title: "<center><b>{{ $item->nama }}</b> ({{ $item->kedalaman }} meter) <br/> {{ $item->latitude }}, {{ $item->longitude }}</center>",
-                                    },
-                                @endforeach
-                            ];
+    @foreach ($posts as $item)
+        {
+            image: "{{ $item->image }}",
+            latitude: {{ $item->latitude }},
+            longitude: {{ $item->longitude }},
+            kedalaman: {{ $item->kedalaman }},
+            idPost: {{ $item->id }},
+            title: "<center>@if ($item->image) <img src=\"{{ asset('storage/posts/' . $item->image) }}\" style=\"max-height: 500px; max-width: 90%\"> @endif</center>" + "<center><b>{{ $item->nama }}</b> ({{ $item->kedalaman }} meter) <br/> {{ $item->latitude }}, {{ $item->longitude }}</center>",
+        },
+    @endforeach
+];
+        
+
 
                             for (var i = 0; i < locations.length; i++) {
                                 var location = locations[i];

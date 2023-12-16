@@ -49,11 +49,8 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
-                <a class="shadow-sm" style="color: white" href="{{ route('detail.stasiun', ['id' => $post->post->id]) }}">
-                    <button type="button" class="btn btn-warning shadow-lg" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Lihat Selengkapnya">
-                        <i class="fa-solid fa-angles-right" style="color: black;"></i>
-                    </button>
+                <a style="color: white" href="{{ route('detail.stasiun', ['id' => $post->post->id]) }}">
+                    <button class="btn btn-primary">Lihat Detail Data</button>
                 </a>
             </div>
         </div>

@@ -64,7 +64,7 @@
 
     <div class="modal fade" id="terumbuData-{{ $item->id }}" aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Data Terumbu {{ $item->post->nama }}</h1>
@@ -75,20 +75,23 @@
                     <center>
                         <div class="btn-group shadow-sm" role="group" aria-label="Basic mixed styles example">
                             <button type="button" class="btn btn-primary">Karang Hidup</button>
-                            <button type="button" class="btn btn-primary">{{ $item->karang_hidup }}</button>
+                            <button type="button" class="btn btn-primary">{{ $item->karang_hidup }}%</button>
                             <button type="button" class="btn btn-danger">Karang Mati</button>
-                            <button type="button" class="btn btn-danger">{{ $item->karang_mati }}</button>
+                            <button type="button" class="btn btn-danger">{{ $item->karang_mati }}%</button>
                             <button type="button" class="btn btn-warning">Algae</button>
-                            <button type="button" class="btn btn-warning">{{ $item->algae }}</button>
+                            <button type="button" class="btn btn-warning">{{ $item->algae }}%</button>
                             <button type="button" class="btn btn-success">Biota Lain</button>
-                            <button type="button" class="btn btn-success">{{ $item->biota_lain }}</button>
+                            <button type="button" class="btn btn-success">{{ $item->biota_lain }}%</button>
                             <button type="button" class="btn btn-dark">Abiotik</button>
-                            <button type="button" class="btn btn-dark">{{ $item->abiotik }}</button>
+                            <button type="button" class="btn btn-dark">{{ $item->abiotik }}%</button>
                         </div>
                     </center>
 
                 </div>
                 <div class="modal-footer">
+                    <a style="color: white" href="{{ route('detail.stasiun', ['id' => $item->post->id]) }}">
+                        <button class="btn btn-primary">Lihat Detail Data</button>
+                    </a>
                     <button class="btn btn-warning" data-bs-target="#locationModal-{{ $item->post->id }}"
                         data-bs-toggle="modal"data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Lihat data terumbu karang">
