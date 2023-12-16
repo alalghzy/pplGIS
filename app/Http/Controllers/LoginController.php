@@ -39,7 +39,7 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
             return back()
-            ->with('failed', $validator->errors()->first())
+                ->with('failed', $validator->errors()->first())
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -52,7 +52,7 @@ class LoginController extends Controller
         if (Auth::attempt($data)) {
             return redirect()->route('dashboard.cek_login');
         } else {
-            return redirect()->route('login.index')->with('failed', $validator->errors()->first());
+            return redirect()->route('login.index')->with('failed', 'Password salah!');
         }
     }
 
