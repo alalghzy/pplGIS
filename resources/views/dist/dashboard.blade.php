@@ -26,7 +26,7 @@
 
                     @if (auth()->user()->status == 'Administrator')
                         <div class="col-6 col-lg-4 col-md-6">
-                            <div class="card">
+                            <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
                                         <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-2 d-flex justify-content-start ">
@@ -55,7 +55,7 @@
                     @endif
 
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-11 col-xl-12 col-xxl-2 d-flex justify-content-start ">
@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-2 d-flex justify-content-start ">
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="col-11 col-lg-11">
-                <div class="card">
+                <div class="card shadow-sm">
                     <div class="card-header">
                         <h4>Perbandingan Statistik Terumbu Karang per Stasiun</h4>
                     </div>
