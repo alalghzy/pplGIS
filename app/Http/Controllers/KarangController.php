@@ -246,4 +246,9 @@ class KarangController extends Controller
             return response()->json(['status' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
     }
+
+    public function download()
+    {
+        
+    }
 }

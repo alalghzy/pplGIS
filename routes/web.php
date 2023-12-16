@@ -77,3 +77,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/detail-stasiun/{id}', [PostController::class, 'show'])->name('detail.stasiun');
+
+Route::get('/download-excel', [KarangController::class, 'download'])->name('download.excel');

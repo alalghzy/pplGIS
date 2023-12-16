@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                    < Kembali
+                    Tutup
                 </button>
             </div>
         </div>
