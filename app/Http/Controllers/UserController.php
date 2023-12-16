@@ -117,7 +117,9 @@ class UserController extends Controller
     public function profil($id)
     {
         $data = User::find($id);
-        return view('dist.lamanProfil', compact(['data']));
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+        return view('dist.lamanProfil', compact('data', 'hasNullStatus'));
     }
 
     public function update_profil(Request $request, $id)
