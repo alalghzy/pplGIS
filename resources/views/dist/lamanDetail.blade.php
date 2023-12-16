@@ -299,12 +299,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-12 col-xl-12">
+                    <div class="col-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
                                 <h4>Data Stasiun {{ $post->nama }}</h4>
-
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -342,156 +342,45 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-4 col-xl-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Gambar {{ $post->nama }}</h4>
+                            </div>
+                            @if ($post->image != '')
+                                <div class="card-body">
+                                    <!-- Button trigger modal -->
+                                    <a data-bs-toggle="modal" data-bs-target="#exampleModal">
 
+                                        <center>
+                                            <img src="{{ asset('storage/posts/' . $post->image) }}"
+                                                class="rounded shadow-lg mb-4" style="max-height: 500px; max-width: 90%"
+                                                alt="{{ $post->image }}">
+                                        </center>
+                                    </a>
+                                    @include('dist.includes.Detail.modalLihatGambar')
+                                </div>
+                            @else
+                            <div
+                            class="alert alert-light-danger color-danger alert-dismissible show fade m-3 p-3">
+                            <i class="fa-solid fa-triangle-exclamation"></i> <span
+                                style="font-size:12px">Gambar belum tersedia!</span>
+
+                            <a href="{{ route('stasiun.index') }}">
+                                <button class="btn btn-success" style="font-size: 10px;" type="button">
+                                    <i class="bi bi-plus-square "></i>
+                                    Tambah Data</button>
+                            </a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
         </section>
     </div>
 @endsection
-
-{{-- @section('content')
-    <section class="row">
-        <div class="page-content">
-            <ul>
-                <li>
-                    {{ $post->nama }}
-                </li>
-                <li>
-                    {{ $post->latitude }}
-                </li>
-                <li>
-                    {{ $post->longitude }}
-                </li>
-                <li>
-                    {{ $post->kedalaman }}
-                </li>
-                @foreach ($post->karangs as $item)
-                    <li>
-                        {{ $item->algae }}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-
-        <div class="card col-8" id="map"></div>
-            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-            <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var locations = [
-                        @foreach ($posts as $item)
-                            {
-                                latitude: {{ $item->latitude }},
-                                longitude: {{ $item->longitude }},
-                                kedalaman: {{ $item->kedalaman }},
-                                idPost: {{ $item->id }},
-                                title: "<center><b>{{ $item->nama }}</b> ({{ $item->kedalaman }} meter) <br/> {{ $item->latitude }}, {{ $item->longitude }}</center>",
-                            },
-                        @endforeach
-                    ];
-
-                    // Ganti ID di bawah ini sesuai dengan ID yang diinginkan
-                    var targetLocationId = {{ $post->id }}; // Ganti dengan ID yang diinginkan
-
-                    var targetLocation = locations.find(function(location) {
-                        return location.idPost === targetLocationId;
-                    });
-
-                    if (targetLocation) {
-                        var myLatlng = L.latLng(targetLocation.latitude, targetLocation.longitude);
-                        var map = L.map('map').setView(myLatlng, 15);
-
-                        // Menggunakan layer peta satelit dari ArcGIS Imagery
-                        var arcgisLayer = L.tileLayer(
-                            'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                                attribution: 'Tiles &copy; Esri &mdash; Source: Esri',
-                                maxZoom: 18,
-                            });
-
-                        arcgisLayer.addTo(map);
-
-                        var contentString = '<div id="content">' +
-                            '<div id="siteNotice">' +
-                            '</div>' +
-                            '<h1 id="firstHeading" class="firstHeading">{{ $post->nama }}</h1>' +
-                            '<div id="bodyContent">' +
-                            '<p>{{ $post->kedalaman }}</p>' +
-                            '</div>' +
-                            '</div>';
-
-                        var marker = L.marker(myLatlng, {
-                            title: 'Maps Info',
-                            icon: getIcon(targetLocation.kedalaman)
-                        }).addTo(map);
-
-                        marker.bindPopup(contentString);
-
-                        // Tambahkan event listener untuk menampilkan modal saat marker diklik
-                        marker.on('click', createMarkerClickHandler(targetLocation));
-                    } else {
-                        console.error('Location with ID ' + targetLocationId + ' not found.');
-                    }
-                });
-
-                function createMarkerClickHandler(location) {
-                    return function(e) {
-                        var id = location.idPost;
-                        $('#locationTitle-' + id).text(e.target.getPopup().getContent());
-                        $('#locationModal-' + id).modal('show');
-                    };
-                }
-
-                function getIcon(kedalaman) {
-                    if (kedalaman <= 3) {
-                        return L.icon({
-                            iconUrl: '{{ asset('img/3.png') }}',
-                            iconSize: [20, 27],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [-6, -32]
-                        });
-                    } else if (kedalaman >= 4 && kedalaman <= 6) {
-                        return L.icon({
-                            iconUrl: '{{ asset('img/6.png') }}',
-                            iconSize: [20, 27],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [-6, -32]
-                        });
-                    } else if (kedalaman >= 7 && kedalaman <= 9) {
-                        return L.icon({
-                            iconUrl: '{{ asset('img/9.png') }}',
-                            iconSize: [20, 27],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [-6, -32]
-                        });
-                    } else if (kedalaman >= 10 && kedalaman <= 12) {
-                        return L.icon({
-                            iconUrl: '{{ asset('img/12.png') }}',
-                            iconSize: [20, 27],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [-6, -32]
-                        });
-                    } else {
-                        return L.icon({
-                            iconUrl: '{{ asset('img/location.png') }}',
-                            iconSize: [20, 27],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [-6, -32]
-                        });
-                    }
-                }
-            </script>
-
-        <div class="card">
-            <div class="card-header">
-                <h4>Diagram Tutupan Komunitas Karang {{ $post->nama }}</h4>
-            </div>
-            <div class="card-body">
-                <div id="chart"></div>
-            </div>
-        </div>
-
-
-    </section>
-@endsection --}}
 
 @push('script')
     <!-- Need: Apexcharts -->
