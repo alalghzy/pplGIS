@@ -174,9 +174,9 @@
                         </li>
 
                         <li class="sidebar-item ">
-                            <a href="" class='sidebar-link'>
+                            <a href="{{ route('laporan') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-break-fill"></i>
-                                <span>Laporan</span>
+                                <span>Laporan Data Karang</span>
                             </a>
                         </li>
 

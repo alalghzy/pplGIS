@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Karang;
 use Illuminate\Http\Request;
+use App\Exports\KarangExport;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 class KarangController extends Controller
@@ -247,8 +250,33 @@ class KarangController extends Controller
         }
     }
 
+    public function laporan()
+    {
+        $karangs = Karang::with('post')->get()->sortBy(function($karang) {
+            return $karang->post->nama;
+        });
+
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanLaporan', compact('karangs', 'hasNullStatus'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new KarangExport, 'data-karang-' . Carbon::now()->timestamp. '.xlsx');
+    }
+
     public function download()
     {
-        
+        $karangs = Karang::with('post')->get()->sortBy(function($karang) {
+            return $karang->post->nama;
+        });
+
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.downloads.pdf', compact('karangs', 'hasNullStatus'));
     }
+
 }
