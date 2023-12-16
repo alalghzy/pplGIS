@@ -27,10 +27,10 @@
 @section('content')
     <section>
         <div class="col-12 col-xl-12">
-            <div class="card">
+            <div class="card shadow-sm">
                 <div class="m-1">
-
                 </div>
+
                 <div class="rounded" id="map" style="height:450px;">
 
                     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -39,7 +39,7 @@
                         function initialize() {
                             var map = L.map('map', {
                                 center: [-3.838195020251307, 102.1797480229322],
-                                zoom: 17,
+                                zoom: 15,
                                 scrollWheelZoom: true // Aktifkan zoom dengan kombinasi Ctrl + scroll
                             });
 
@@ -194,4 +194,8 @@
 
         @include('dist.includes.Peta.modalPeta')
     </section>
+@endsection
+
+@section('script')
+
 @endsection
