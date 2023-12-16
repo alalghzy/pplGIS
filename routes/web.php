@@ -43,24 +43,30 @@ Route::resource('/', HomeController::class)
 Route::group(['prefix' => 'laman', 'middleware' => 'status:Administrator,Petani,Pembimbing', 'as' => ''], function () {
 
     Route::group(['middleware' => 'status:Administrator'], function () {
+
+        // Route manajemen pengguna
         Route::resource('/data-pengguna', UserController::class);
+        Route::delete('/delete-all-users', [UserController::class, 'delete_all']);
     });
 
+    // Route dashboard
     Route::resource('/dashboard', DashboardController::class)
         ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
+    // Route stasiun
     Route::resource('/stasiun', PostController::class);
+    Route::delete('/delete-all-stasiuns', [PostController::class, 'delete_all']);
+    Route::get('/delete-image/{id}', [PostController::class, 'deleteImage'])->name('delete.image');
+    Route::get('/detail-stasiun/{id}', [PostController::class, 'show'])->name('detail.stasiun');
 
+    // Route laman karang
+    Route::resource('/karang', KarangController::class);
+    Route::delete('/delete-all-karangs', [KarangController::class, 'delete_all']);
+
+    // Route laman peta
     Route::resource('/peta', PetaController::class)
         ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
-    Route::resource('/karang', KarangController::class);
-
-    Route::delete('/delete-all-users', [UserController::class, 'delete_all']);
-    Route::delete('/delete-all-stasiuns', [PostController::class, 'delete_all']);
-    Route::delete('/delete-all-karangs', [KarangController::class, 'delete_all']);
-
-    Route::get('/delete-image/{id}', [PostController::class, 'deleteImage'])->name('delete.image');
 
     // Route profile
     Route::get('profil/{id}', [UserController::class, 'profil'])->name('profil');
@@ -75,8 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/cek_login', [DashboardController::class, 'cek_login'])->name('dashboard.cek_login');
 
-    Route::get('/detail-stasiun/{id}', [PostController::class, 'show'])->name('detail.stasiun');
-
+    //Route cetak data
     Route::get('laporan', [KarangController::class, 'laporan'])->name('laporan');
     Route::get('export-excel', [KarangController::class, 'export'])->name('export');
     Route::get('/download-pdf', [KarangController::class, 'download'])->name('download');
