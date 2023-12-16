@@ -369,9 +369,9 @@
                                 style="font-size:12px">Gambar belum tersedia!</span><br>
 
                             <a href="{{ route('stasiun.index') }}">
-                                <button class="btn btn-primary" style="font-size: 10px; width: 100px" type="button">
+                                <button class="btn btn-primary" style="font-size: 10px; width: 120px" type="button">
                                     <i class="bi bi-pencil-square"></i>
-                                    Edit Data
+                                    Tambah Gambar
                                 </button>
                             </a>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
