@@ -143,10 +143,10 @@
                                                     <i class="fa-solid fa-lock"></i>
                                                 </span>
                                                 <input
-                                                    class="input100 form-control @error('old_password') is-invalid @enderror"
-                                                    id="old_password" name="old_password" type="password"
+                                                    class="input100 form-control @error('password_sekarang') is-invalid @enderror"
+                                                    id="password_sekarang" name="password_sekarang" type="password"
                                                     placeholder="Masukkan password sekarang" required>
-                                                @error('old_password')
+                                                @error('password_sekarang')
                                                 @enderror
                                             </div>
                                         </div>
@@ -158,10 +158,10 @@
                                                     <i class="fa-solid fa-lock"></i>
                                                 </span>
                                                 <input
-                                                    class="input100 form-control @error('new_password') is-invalid @enderror"
-                                                    id="new_password" name="new_password" type="password"
+                                                    class="input100 form-control @error('password_baru') is-invalid @enderror"
+                                                    id="password_baru" name="password_baru" type="password"
                                                     placeholder="Masukkan password baru" required>
-                                                @error('new_password')
+                                                @error('password_baru')
                                                 @enderror
                                             </div>
                                         </div>
@@ -173,10 +173,10 @@
                                                     <i class="fa-solid fa-lock"></i>
                                                 </span>
                                                 <input
-                                                    class="input100 form-control @error('confirm_password') is-invalid @enderror"
-                                                    id="confirm_password" type="password" name="confirm_password"
+                                                    class="input100 form-control @error('konfirmasi_password') is-invalid @enderror"
+                                                    id="konfirmasi_password" type="password" name="konfirmasi_password"
                                                     placeholder="Konfirmasi password baru" required>
-                                                @error('confirm_password')
+                                                @error('konfirmasi_password')
                                                 @enderror
                                             </div>
                                         </div>

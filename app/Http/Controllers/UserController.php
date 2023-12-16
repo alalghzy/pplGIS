@@ -212,36 +212,36 @@ class UserController extends Controller
     public function updatePassword(Request $request, $userId)
     {
         $validator = Validator::make($request->all(), [
-            'old_password'     => 'required',
-            'new_password'     => 'required|min:5|different:old_password',
-            'confirm_password' => 'required|same:new_password',
+            'password_sekarang'     => 'required',
+            'password_baru'     => 'required|min:5|different:password_sekarang',
+            'konfirmasi_password' => 'required|same:password_baru',
         ]);
 
         $user = User::find($userId);
 
         if ($validator->fails()) {
             return back()
-                ->with('failed', 'Gagal mengubah password!')
+            ->with('failed', $validator->errors()->first())
                 ->withInput()
                 ->withErrors($validator);
         }
 
         // Validasi password lama
-        if (Hash::check($request->input('old_password'), $user->password)) {
+        if (Hash::check($request->input('password_sekarang'), $user->password)) {
             // Validasi password baru tidak boleh sama dengan password lama
-            if ($request->input('old_password') === $request->input('new_password')) {
+            if ($request->input('password_sekarang') === $request->input('password_baru')) {
                 return redirect()->back()->with('failed', 'Password baru tidak boleh sama dengan password lama!');
             }
 
             // Password lama valid, update password baru
-            $user->password = bcrypt($request->input('new_password'));
+            $user->password = bcrypt($request->input('password_baru'));
             $user->save();
 
             return redirect()->back()->with('message', 'Password berhasil diperbarui!');
         } else {
             // Password lama tidak valid
             return redirect()->back()
-                ->withErrors(['old_password' => 'Password lama tidak valid.'])
+                ->withErrors(['password_sekarang' => 'Password lama tidak valid.'])
                 ->with('failed', 'Gagal mengubah password!');
         }
     }
