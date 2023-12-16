@@ -135,10 +135,10 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    @include('dist.includes.Karang.modalLihat')
-                                                    @include('dist.includes.Karang.modalEdit')
-                                                    @include('dist.includes.Karang.modalHapus')
                                                 </tr>
+                                                @include('dist.includes.Karang.modalLihat')
+                                                @include('dist.includes.Karang.modalEdit')
+                                                @include('dist.includes.Karang.modalHapus')
                                             @endforeach
                                         @else
                                             <div class="alert alert-danger">
@@ -286,7 +286,9 @@
                     const dcaValue = parseFloat(document.getElementsByName('dca')[0].value) || 0;
 
                     // Menghitung total persentase
-                    const totalPercentage = algaeValue + abiotikValue + biotaLainValue + acbValue + acdValue + aceValue + acsValue + actValue + cbValue + ceValue + cfValue + cmValue + csValue + cmrValue + chlValue + cmeValue + dcValue + dcaValue;
+                    const totalPercentage = algaeValue + abiotikValue + biotaLainValue + acbValue + acdValue + aceValue + acsValue +
+                        actValue + cbValue + ceValue + cfValue + cmValue + csValue + cmrValue + chlValue + cmeValue + dcValue +
+                        dcaValue;
 
                     // Validasi total persentase tidak boleh lebih dari 100
                     if (totalPercentage > 100) {
@@ -372,7 +374,70 @@
 
                     return true;
                 }
+            </script>
 
+            <script>
 
+                function hitungKarangHidups(postId) {
+                    var acbInput = document.getElementById('edit_acb_' + postId );
+                    var acdInput = document.getElementById('edit_acd_' + postId );
+                    var aceInput = document.getElementById('edit_ace_' + postId );
+                    var acsInput = document.getElementById('edit_acs_' + postId );
+                    var actInput = document.getElementById('edit_act_' + postId );
+                    var cbInput = document.getElementById('edit_cb_' + postId );
+                    var ceInput = document.getElementById('edit_ce_' + postId );
+                    var cfInput = document.getElementById('edit_cf_' + postId );
+                    var cmInput = document.getElementById('edit_cm_' + postId );
+                    var csInput = document.getElementById('edit_cs_' + postId );
+                    var cmrInput = document.getElementById('edit_cmr_' + postId );
+                    var chlInput = document.getElementById('edit_chl_' + postId );
+                    var cmeInput = document.getElementById('edit_cme_' + postId );
+                    var karangHidupInput = document.getElementById('edit_karang_hidup_' + postId );
+                    var karangHidupSpan = document.getElementById('edit_KarangHidup_' + postId );
+
+                    var acbValue = parseFloat(acbInput.value) || 0;
+                    var acdValue = parseFloat(acdInput.value) || 0;
+                    var aceValue = parseFloat(aceInput.value) || 0;
+                    var acsValue = parseFloat(acsInput.value) || 0;
+                    var actValue = parseFloat(actInput.value) || 0;
+                    var cbValue = parseFloat(cbInput.value) || 0;
+                    var ceValue = parseFloat(ceInput.value) || 0;
+                    var cfValue = parseFloat(cfInput.value) || 0;
+                    var cmValue = parseFloat(cmInput.value) || 0;
+                    var csValue = parseFloat(csInput.value) || 0;
+                    var cmrValue = parseFloat(cmrInput.value) || 0;
+                    var chlValue = parseFloat(chlInput.value) || 0;
+                    var cmeValue = parseFloat(cmeInput.value) || 0;
+
+                    // Menghitung total
+                    var total = acbValue + acdValue + aceValue + acsValue + actValue + cbValue + ceValue + cfValue + cmValue +
+                        csValue + cmrValue + chlValue + cmeValue;
+
+                    // Memasukkan hasil ke dalam elemen input karang_mati
+                    karangHidupInput.value = total.toFixed(2);
+
+                    // Memasukkan hasil ke dalam elemen span dengan id "KarangMati"
+                    karangHidupSpan.innerText = total.toFixed(2);
+                }
+
+                function hitungKarangMatis(postId) {
+                    // Mengambil nilai dari input dc dan dca
+                    var dcInput = document.getElementById('edit_dc_' + postId );
+                    var dcaInput = document.getElementById('edit_dca_' + postId );
+                    var karangMatiInput = document.getElementById('edit_karang_mati_' + postId );
+                    var karangMatiSpan = document.getElementById('edit_KarangMati_' + postId );
+
+                    var dcValue = parseFloat(dcInput.value) || 0;
+                    var dcaValue = parseFloat(dcaInput.value) || 0;
+
+                    // Menghitung total
+                    var total = dcValue + dcaValue;
+
+                    // Memasukkan hasil ke dalam elemen input karang_mati
+                    karangMatiInput.value = total.toFixed(2);
+
+                    // Memasukkan hasil ke dalam elemen span dengan id "KarangMati"
+                    karangMatiSpan.innerText = total.toFixed(2);
+                }
             </script>
         @endpush

@@ -117,7 +117,7 @@
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-8">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <h4>Lokasi Tutupan Komunitas Karang {{ $post->nama }}</h4>
                             </div>
@@ -239,7 +239,7 @@
                         <div class="row">
 
                             <div class="col-12">
-                                <div class="card">
+                                <div class="card shadow-sm">
                                     <div class="card-body py-4 px-4">
                                         <div class="d-flex align-items-center">
                                             {{-- <div class="avatar avatar-xl">
@@ -264,14 +264,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <div class="card">
+                            <div class="col-12 ">
+                                <div class="card shadow-sm">
                                     <div class="card-header">
                                         <h4>Diagram Lingkarang</h4>
                                     </div>
                                     @if ($chartData != null)
                                         <center>
-                                            <div class="card-body">
+                                            <div class="card-body ">
                                                 <div id="chart"></div>
                                             </div>
                                         </center>
@@ -302,7 +302,7 @@
 
                 <div class="row">
                     <div class="col-8 col-xl-8">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <h4>Data Stasiun {{ $post->nama }}</h4>
                             </div>
@@ -343,7 +343,7 @@
                         </div>
                     </div>
                     <div class="col-4 col-xl-4">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <h4>Gambar {{ $post->nama }}</h4>
                             </div>
@@ -354,7 +354,7 @@
 
                                         <center>
                                             <img src="{{ asset('storage/posts/' . $post->image) }}"
-                                                class="rounded shadow-lg mb-4" style="max-height: 500px; max-width: 90%"
+                                                class="rounded shadow-lg mb-4 shadow" style="max-height: 500px; max-width: 90%"
                                                 alt="{{ $post->image }}">
                                         </center>
                                     </a>

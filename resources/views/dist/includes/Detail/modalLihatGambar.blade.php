@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <center>
-                    <img src="{{ asset('storage/posts/' . $post->image) }}" class="rounded shadow-lg mb-4"
+                    <img src="{{ asset('storage/posts/' . $post->image) }}" class="rounded shadow-lg mb-4 shadow-lg"
                         style="max-height: 80%; max-width: 80%" alt="{{ $post->image }}">
                 </center>
             </div>

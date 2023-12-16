@@ -49,7 +49,7 @@ class KarangSeeder extends Seeder
                 'cmr'           => '0.00',
                 'chl'           => '0.00',
                 'cme'           => '0.00',
-                'dc'            => '38.64',
+                'dc'            => '38.54',
                 'dca'           => '36.80',
             ],
             [

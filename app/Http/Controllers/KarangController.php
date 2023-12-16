@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Karang;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class KarangController extends Controller
@@ -80,7 +81,10 @@ class KarangController extends Controller
 
         // Validasi total persentase tidak boleh lebih dari 100
         if ($totalPercentage > 100) {
-            return back()->with('failed', 'Total persentase melebihi 100%')->withInput();
+            return back()->with('failed', 'Total persentase lebih dari 100%')->withInput();
+        }
+        if ($totalPercentage < 100) {
+            return back()->with('failed', 'Total persentase kurang dari 100%')->withInput();
         }
 
         // Simpan data ke database
@@ -131,10 +135,84 @@ class KarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Karang $karang)
+    public function update(Request $request, string $id)
     {
-        //
+
+        $user = Auth::user()->name;
+
+        $validator = Validator::make($request->all(), [
+            'post_id'       => 'required|exists:posts,id|unique:karangs,post_id,' . $id,
+            'user_id'       => 'required|exists:users,id',
+            'algae'         => 'required|numeric',
+            'abiotik'       => 'required|numeric',
+            'biota_lain'    => 'required|numeric',
+            'acb'           => 'required|numeric',
+            'acd'           => 'required|numeric',
+            'ace'           => 'required|numeric',
+            'acs'           => 'required|numeric',
+            'act'           => 'required|numeric',
+            'cb'            => 'required|numeric',
+            'cf'            => 'required|numeric',
+            'ce'            => 'required|numeric',
+            'cm'            => 'required|numeric',
+            'cs'            => 'required|numeric',
+            'cmr'           => 'required|numeric',
+            'chl'           => 'required|numeric',
+            'cme'           => 'required|numeric',
+            'dc'            => 'required|numeric',
+            'dca'           => 'required|numeric',
+            'karang_hidup'  => 'required|numeric',
+            'karang_mati'   => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->with('failed',  $validator->errors()->first())
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        // Menghitung total persentase
+        $totalPercentage = $request->algae + $request->abiotik + $request->biota_lain + $request->karang_hidup + $request->karang_mati;
+
+        // Validasi total persentase tidak boleh lebih dari 100
+        if ($totalPercentage > 100) {
+            return back()->with('failed', 'Total persentase lebih dari 100%')->withInput();
+        }
+        if ($totalPercentage < 100) {
+            return back()->with('failed', 'Total persentase kurang dari 100%')->withInput();
+        }
+
+        // Update data ke database
+        $karang = Karang::findOrFail($id);
+        $karang->update([
+            'post_id'       => $request->post_id,
+            'user_id'       => $request->user_id,
+            'algae'         => $request->algae,
+            'abiotik'       => $request->abiotik,
+            'biota_lain'    => $request->biota_lain,
+            'acb'           => $request->acb,
+            'acd'           => $request->acd,
+            'ace'           => $request->ace,
+            'acs'           => $request->acs,
+            'act'           => $request->act,
+            'cb'            => $request->cb,
+            'cf'            => $request->cf,
+            'ce'            => $request->ce,
+            'cm'            => $request->cm,
+            'cs'            => $request->cs,
+            'cmr'           => $request->cmr,
+            'chl'           => $request->chl,
+            'cme'           => $request->cme,
+            'dc'            => $request->dc,
+            'dca'           => $request->dca,
+            'karang_hidup'  => $request->karang_hidup,
+            'karang_mati'   => $request->karang_mati,
+        ]);
+
+        return redirect()->route('karang.index')->with('message', 'Data berhasil diperbarui');
     }
+
 
     /**
      * Remove the specified resource from storage.
