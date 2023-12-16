@@ -350,7 +350,7 @@
                             @if ($post->image != '')
                                 <div class="card-body">
                                     <!-- Button trigger modal -->
-                                    <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <a data-bs-toggle="modal" data-bs-target="#lihatGambar">
 
                                         <center>
                                             <img src="{{ asset('storage/posts/' . $post->image) }}"
