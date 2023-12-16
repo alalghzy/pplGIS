@@ -25,7 +25,7 @@
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-12 col-xl-12">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
