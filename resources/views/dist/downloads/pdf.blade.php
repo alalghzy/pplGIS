@@ -44,9 +44,17 @@
 
                 {{-- Tampilkan nama hari dalam bahasa Indonesia --}}
                 <h7 class="ms-auto">
-                    <span>
-                        {{ Auth::user()->name }}
-                    </span>
+
+                    @if (Auth::check())
+                        <span>
+                            {{ Auth::user()->name }}
+                        </span>
+                    @else
+                        <span>
+                            SIG Pulau Tikus
+                        </span>
+                    @endif
+
                     <br>
                     <span>
                         {{ translateDay(Carbon::now()->format('l')) }}, {{ Carbon::now()->format('d-m-Y H:i:s') }}

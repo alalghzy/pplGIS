@@ -80,9 +80,10 @@ Route::group(['prefix' => 'laman', 'middleware' => 'status:Administrator,Petani,
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/cek_login', [DashboardController::class, 'cek_login'])->name('dashboard.cek_login');
+    
+});
 
     //Route cetak data
-    Route::get('laporan', [KarangController::class, 'laporan'])->name('laporan');
-    Route::get('export-excel', [KarangController::class, 'export'])->name('export');
+    Route::get('/laporan', [KarangController::class, 'laporan'])->name('laporan');
+    Route::get('/export-excel', [KarangController::class, 'export'])->name('export');
     Route::get('/download-pdf', [KarangController::class, 'download'])->name('download');
-});
