@@ -279,7 +279,7 @@
                                         <div
                                             class="alert alert-light-danger color-danger alert-dismissible show fade m-4 p-3">
                                             <i class="fa-solid fa-triangle-exclamation"></i> <span
-                                                style="font-size:13px">Data belum tersedia!</span>
+                                                style="font-size:13px">Data belum tersedia!</span><br>
 
                                             <a href="{{ route('karang.index') }}">
                                                 <button style="font-size: 10px;" type="button"
@@ -287,10 +287,12 @@
                                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Edit data"><i
                                                         class="bi bi-plus-square "></i>
-                                                    Tambah Data</button>
+                                                    Tambah Data
+                                                </button>
                                             </a>
                                             <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
+                                                aria-label="Close">
+                                            </button>
                                         </div>
                                     @endif
                                 </div>
@@ -364,12 +366,13 @@
                             <div
                             class="alert alert-light-danger color-danger alert-dismissible show fade m-3 p-3">
                             <i class="fa-solid fa-triangle-exclamation"></i> <span
-                                style="font-size:12px">Gambar belum tersedia!</span>
+                                style="font-size:12px">Gambar belum tersedia!</span><br>
 
                             <a href="{{ route('stasiun.index') }}">
-                                <button class="btn btn-primary" style="font-size: 10px;" type="button">
+                                <button class="btn btn-primary" style="font-size: 10px; width: 100px" type="button">
                                     <i class="bi bi-pencil-square"></i>
-                                    Edit Data</button>
+                                    Edit Data
+                                </button>
                             </a>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
                                 aria-label="Close"></button>
