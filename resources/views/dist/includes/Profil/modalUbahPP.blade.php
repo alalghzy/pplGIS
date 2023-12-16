@@ -14,7 +14,7 @@
                                                         action="{{ route('update_foto_profil', ['id' => auth()->user()->id]) }}"
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
-                                                        
+
                                                         @if (auth()->user()->profil != null)
                                                             <center>
                                                                 <img src="{{ asset(Auth::user()->profil) }}"
