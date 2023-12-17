@@ -53,7 +53,8 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                         <div class="stats-icon red mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Coral" width="32px">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Coral"
+                                                width="32px">
                                                 <g data-name="Layer 3" fill="#fcfcfc" class="color000000 svgShape">
                                                     <path
                                                         d="M11.67 31H8.56a1 1 0 0 1-.92-.6A63.48 63.48 0 0 1 4 19.76a63.88 63.88 0 0 1-1.6-10 1 1 0 0 1 .74-1l.32 1 .24 1-.24-1 .94-.07A61.33 61.33 0 0 0 6 19.29 61.81 61.81 0 0 0 9.21 29h2.46a1 1 0 1 1 0 2zM11.69 15.06a1 1 0 0 1-.95-.7c-.62-1.9-1.34-3.79-2.14-5.61a1 1 0 0 1 .55-1.54h0a1 1 0 0 1 1.16.56c.86 1.94 1.63 4 2.3 6A1 1 0 0 1 12 15 1.06 1.06 0 0 1 11.69 15.06z"
@@ -185,9 +186,9 @@
                             <div class="card-header">
                                 <h4>Lokasi Tutupan Komunitas Karang {{ $post->nama }}</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body rounded-4">
 
-                                <div class="rounded-4" id="map" style="max-width: auto; max-height: 375px"></div>
+                                <div class="rounded-3" id="map" style="max-width: auto; max-height: 375px"></div>
                                 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
                                 <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
 
@@ -214,7 +215,11 @@
 
                                         if (targetLocation) {
                                             var myLatlng = L.latLng(targetLocation.latitude, targetLocation.longitude);
-                                            var map = L.map('map').setView(myLatlng, 15);
+                                            var map = L.map('map', {
+                                                center: myLatlng,
+                                                zoom: 15,
+                                                scrollWheelZoom: false // Menonaktifkan zoom menggunakan roda mouse
+                                            });
 
                                             // Menggunakan layer peta satelit dari ArcGIS Imagery
                                             var arcgisLayer = L.tileLayer(

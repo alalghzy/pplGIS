@@ -24,6 +24,11 @@ use App\Http\Controllers\PostController;
 //     return view('admin.lamanData');
 // });
 
+
+// Route Langding Page
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/detail-terumbu-karang/{id}', [HomeController::class, 'show'])->name('detail.terumbu.karang');
+
 // Route Authenticate
 Route::resource('/login', LoginController::class)
     ->except('edit', 'create', 'show', 'destroy', 'update',);
@@ -35,10 +40,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/forget_password', [LoginController::class, 'send_request_reset'])->name('send_request_reset');
 Route::get('/password/reset{token}', [LoginController::class, 'reset_password'])->name('reset_password');
 Route::post('/password/reset', [LoginController::class, 'update_password'])->name('password_reset');
-
-// Route Langding Page
-Route::resource('/', HomeController::class)
-    ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
 
 Route::group(['prefix' => 'laman', 'middleware' => 'status:Administrator,Petani,Pembimbing', 'as' => ''], function () {
 
@@ -80,10 +81,9 @@ Route::group(['prefix' => 'laman', 'middleware' => 'status:Administrator,Petani,
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/cek_login', [DashboardController::class, 'cek_login'])->name('dashboard.cek_login');
-    
 });
 
-    //Route cetak data
-    Route::get('/laporan', [KarangController::class, 'laporan'])->name('laporan');
-    Route::get('/export-excel', [KarangController::class, 'export'])->name('export');
-    Route::get('/download-pdf', [KarangController::class, 'download'])->name('download');
+//Route cetak data
+Route::get('/laporan', [KarangController::class, 'laporan'])->name('laporan');
+Route::get('/export-excel', [KarangController::class, 'export'])->name('export');
+Route::get('/download-pdf', [KarangController::class, 'download'])->name('download');
