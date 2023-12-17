@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title>Reset Password Akun</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <body>
@@ -18,7 +20,7 @@
         <div class="cover"></div>
     </section>
     <section class="login-content">
-        <div class="logo">
+        <div class="logo" data-aos="fade-up" data-aos-delay="70">
             <h2
                 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
                 Reset Password
@@ -38,7 +40,7 @@
             </div>
         </div>
         @endif
-        <div class="login-box">
+        <div class="login-box" data-aos="fade-up" data-aos-delay="170">
             <form class="login-form" action="{{ route('password_reset') }}" method="POST">
                 @csrf
                 <div class="mb-3">
@@ -96,6 +98,11 @@
             </form>
         </div>
     </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <!-- Essential javascripts for application to work-->
     <script src=" {{ asset('admin/vali/js/jquery-3.7.0.min.js') }} "></script>
     <script src="{{ asset('admin/vali/js/bootstrap.min.js') }}  "></script>

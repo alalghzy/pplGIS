@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nama')
-    <div class="page-title">
+    <div class="page-title" data-aos="fade-up" data-aos-delay="100">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Laporan Data Terumbu Karang</h3>

@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('auth/css/main.css') }} ">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -47,7 +50,7 @@
         <div class="cover"></div>
     </section>
     <section class="login-content">
-        <div class="logo">
+        <div class="logo" data-aos="fade-up" data-aos-delay="70">
             <h1
                 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
                 <a href="/" style="color: white; text-decoration: none"><strong><span class="topic"><i
@@ -68,7 +71,7 @@
                 </div>
             </div>
         @endif
-        <div class="login-box">
+        <div class="login-box" data-aos="fade-up" data-aos-delay="200">
             <form class="login-form" action="{{ route('login.store') }}" method="POST">
                 @csrf
                 <h3 class="login-head"><i class="bi bi-person me-2"></i>Login Akun</h3>
@@ -154,14 +157,14 @@
                 text: "{{ Session::get('success') }}",
                 showConfirmButton: true,
             });
-            @elseif (Session::has('daftar'))
+        @elseif (Session::has('daftar'))
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil daftar akun!',
                 text: "{{ Session::get('daftar') }}",
                 showConfirmButton: true,
             });
-            @elseif (Session::has('cek_login'))
+        @elseif (Session::has('cek_login'))
             Swal.fire({
                 icon: 'warning',
                 title: 'Belum Mendapat Status!',
@@ -175,6 +178,11 @@
                 'warning'
             )
         @endif
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
     </script>
 </body>
 

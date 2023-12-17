@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('admin/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <style>
         /* @keyframes moveTitle {
             0% {
@@ -141,7 +143,7 @@
                                         <a href="{{ route('data-pengguna.index') }}" class="submenu-link">
                                             Pengguna
                                             @if ($hasNullStatus)
-                                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff5c5c;"></i>
+                                                <i class="fa-solid fa-triangle-exclamation" style="color: #ff5c5c;"></i>
                                             @endif
                                         </a>
                                     </li>
@@ -270,6 +272,11 @@
             </footer>
         </div>
     </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
     <script src="{{ asset('admin/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('admin/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>

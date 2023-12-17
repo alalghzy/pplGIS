@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nama')
-    <div class="page-title">
+    <div class="page-title" data-aos="fade-up" data-aos-delay="100">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Dashboard</h3>
@@ -21,7 +21,7 @@
 @section('content')
     <div class="page-content">
         <section class="row">
-            <div class="col-12 col-lg-12">
+            <div class="col-12 col-lg-12" data-aos="fade-up" data-aos-delay="30">
                 <div class="row justify-content-start">
 
                     @if (auth()->user()->status == 'Administrator')
@@ -141,7 +141,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <div class="card-body">
+                    <div class="card-body" data-aos="fade-up" data-aos-delay="10">
                         <div id="chart"></div>
                     </div>
                 </div>
