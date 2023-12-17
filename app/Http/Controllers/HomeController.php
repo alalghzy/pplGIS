@@ -22,7 +22,11 @@ class HomeController extends Controller
         $posts = Post::orderBy('nama', 'asc')->get();
 
         $postsCount = Post::count();
+<<<<<<< HEAD
         return view('home.home', compact('postsCount', 'karangs', 'posts', 'karang','post'));
+=======
+        return view('layouts.home', compact('postsCount', 'posts'));
+>>>>>>> ab52576ca9d8e3082a5016547488d5155058564b
 
     }
 
