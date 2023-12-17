@@ -157,7 +157,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-7 pt-4 pt-lg-0 content mt-5" data-aos="fade-left" data-aos-offset="300">
+                    <div class="col-lg-7 pt-4 pt-lg-0 content mt-5" data-aos="fade-left" data-aos-offset="400">
                         <h3>Pulau Terumbu Karang</h3>
                         <p style="text-align: justify">
                             Untuk nama pulau ini konon diambil dari bentuknya yang mungil dan menyerupai tikus.
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-5" data-aos="fade-left" data-aos-offset="400">
+                    <div class="col-lg-5 mt-5" data-aos="fade-left" data-aos-offset="500">
                         <center>
                             <div class="card rounded-3 shadow-sm">
                                 <img src="{{ asset('img/landing/pulau2.jpg') }}" class=" rounded-3" style="width: 100%"
