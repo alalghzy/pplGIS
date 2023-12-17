@@ -16,7 +16,7 @@ class HomeController extends Controller
 
         // count data
         $postsCount = Post::count();
-        return view('home.home', compact('postsCount', 'posts'));
+        return view('layouts.home', compact('postsCount', 'posts'));
 
     }
 
