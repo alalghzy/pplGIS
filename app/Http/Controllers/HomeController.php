@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Karang;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,33 @@ class HomeController extends Controller
         $posts = Post::orderBy('nama', 'asc')->get();
 
         $postsCount = Post::count();
+        $karangsCount = Karang::count();
 
-        return view('layouts.home', compact('postsCount', 'karangs', 'posts', 'karang','post'));
+        $seriesData = [
+            'karang_hidup' => [],
+            'karang_mati' => [],
+            'algae' => [],
+            'biota_lain' => [],
+            'abiotik' => [],
+        ];
+
+        $labels = [
+            'nama' => [],
+        ];
+
+        foreach ($karangs as $karang) {
+            $labels['nama'][] = $karang->post->nama;
+            $seriesData['karang_hidup'][] = $karang->karang_hidup;
+            $seriesData['karang_mati'][] = $karang->karang_mati;
+            $seriesData['algae'][] = $karang->algae;
+            $seriesData['biota_lain'][] = $karang->biota_lain;
+            $seriesData['abiotik'][] = $karang->abiotik;
+        }
+
+        // Urutkan nama stasiun berdasarkan abjad
+        sort($labels['nama'], SORT_STRING);
+
+        return view('home.home', compact('postsCount', 'seriesData', 'karangs', 'labels', 'posts', 'karang', 'post', 'karangsCount'));
 
     }
 
@@ -46,9 +72,32 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $post = Post::with('karangs')->findOrFail($id);
+        $posts = Post::all();
+
+        // Mengambil data dari tabel karangs
+        $karangsData = $post->karangs->first();
+
+        // Menyusun data untuk dikirim ke view
+        $chartData = null;
+
+        // Pastikan $karangsData tidak null sebelum mengambil nilai-nilai spesifik
+        if ($karangsData) {
+            $chartData = [
+                'karang_hidup'  => $karangsData->karang_hidup,
+                'karang_mati'   => $karangsData->karang_mati,
+                'algae'         => $karangsData->algae,
+                'abiotik'       => $karangsData->abiotik,
+                'biota_lain'    => $karangsData->biota_lain,
+            ];
+        }
+
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('home.dataDetail', compact('post', 'posts', 'chartData', 'hasNullStatus', 'karangsData'));
     }
 
     /**
