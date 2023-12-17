@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\Karang;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,12 +12,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // get posts
-        $posts = Post::latest()->paginate(10);
+        $karangs = Karang::with('post')->get()->sortBy(function($karang) {
+            return $karang->post->nama;
+        });
 
-        // count data
+        $karang = Karang::all();
+        $post = Post::with('karangs')->get();
+
+        $posts = Post::orderBy('nama', 'asc')->get();
+
         $postsCount = Post::count();
-        return view('home.home', compact('postsCount', 'posts'));
+        return view('home.home', compact('postsCount', 'karangs', 'posts', 'karang','post'));
 
     }
 

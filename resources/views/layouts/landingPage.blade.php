@@ -22,6 +22,7 @@
     <link href="{{ asset('home/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('home/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
     <!-- Template Main CSS File -->
     <link href="{{ asset('home/css/style.css') }}" rel="stylesheet">
 
@@ -29,6 +30,10 @@
 
     <!-- Datatables CSS-->
     <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css">
+
+    {{-- Leaflet CSS --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-fullscreen/dist/leaflet.fullscreen.css" />
 
     <style>
         #hero {
@@ -154,7 +159,7 @@
                 <li>
                     <a href="#tentangkami" class="nav-link scrollto">
                         <i class="bi bi-code-slash"></i> <span>Tentang Kami</span>
-                        </a>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ route('dashboard.index') }}" class="nav-link scrollto">
@@ -206,6 +211,8 @@
     <script src="{{ asset('home/vendor/waypoints/noframework.waypoints.js') }}"></script>
     <script src="{{ asset('home/vendor/php-email-form/validate.js') }}"></script>
 
+    {{-- Leaflet JS --}}
+
     <!-- Template Main JS File -->
     <script src="{{ asset('home/js/main.js') }}"></script>
 
@@ -230,9 +237,9 @@
     <script type="text/javascript" src=" {{ asset('admin/vali/js/plugins/jquery.dataTables.min.js') }} "></script>
     <script type="text/javascript">
         $('#table-data').DataTable({
-    "lengthMenu": [5, 10, 20, 30, 50],
-    "pageLength": 5
-});
+            "lengthMenu": [5, 10, 20, 30, 50],
+            "pageLength": 5
+        });
     </script>
 
 </body>
