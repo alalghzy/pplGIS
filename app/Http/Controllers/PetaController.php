@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karang;
 use App\Models\Peta;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PetaController extends Controller
@@ -12,10 +15,21 @@ class PetaController extends Controller
      */
     public function index()
     {
-        //get posts
-        $posts = Peta::latest()->paginate(10);
-        //render view with posts
-        return view('dist.lamanPeta', compact('posts'));
+
+        $karangs = Karang::with('post')->get()->sortBy(function($karang) {
+            return $karang->post->nama;
+        });
+
+        $karang = Karang::all();
+
+        $post = Post::with('karangs')->get();
+
+        $posts = Post::orderBy('nama', 'asc')->get();
+
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanPeta', compact('karangs', 'posts', 'karang','post' , 'hasNullStatus'));
     }
 
     /**
@@ -31,24 +45,7 @@ class PetaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama'     => 'required',
-            'latitude'   => 'required',
-            'longitude'   => 'required',
-        ]);
-
-
-        //create post
-        Peta::create([
-            'nama'     => $request->nama,
-            'latitude'   => $request->latitude,
-            'longitude'   => $request->longitude,
-        ]);
-
-        //redirect to index
-        return redirect()->route('peta.index')->with(['success' => 'Data Berhasil Disimpan!']);
-
-        // dd($request->all());
+        //
     }
 
     /**
@@ -64,11 +61,7 @@ class PetaController extends Controller
      */
     public function edit(string $id)
     {
-        // Find post by 'id' or throw an exception if not found
-        $post = Peta::findOrFail($id);
-
-        // Render view with post
-        return view('dist.index', compact('post'));
+        //
     }
 
     /**
@@ -76,24 +69,7 @@ class PetaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //validate form
-        $this->validate($request, [
-            'nama'     => 'required',
-            'latitude'   => 'required',
-            'longitude'   => 'required',
-        ]);
-
-        //get post by ID
-        $post = Peta::findOrFail($id);
-
-        $post->update([
-            'nama'     => $request->nama,
-            'latitude'   => $request->latitude,
-            'longitude'   => $request->longitude,
-        ]);
-
-        //redirect to index
-        return redirect()->route('admin.index')->with(['success' => 'Data Berhasil Diubah!']);
+        //
     }
 
     /**
@@ -101,14 +77,6 @@ class PetaController extends Controller
      */
     public function destroy(string $id)
     {
-        //get post by ID
-        $post = Peta::findOrFail($id);
-
-
-        //delete post
-        $post->delete();
-
-        //redirect to index
-        return redirect()->route('admin.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        //
     }
 }

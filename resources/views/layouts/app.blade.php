@@ -49,22 +49,17 @@
             width: 100%;
             height: 450px;
             z-index: 1;
-            /* Atur nilai z-index */
             position: relative;
-            /* Diperlukan untuk menggunakan z-index */
         }
 
         #overlayElement {
-            /* Gaya untuk elemen yang berada di depan peta */
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(255, 255, 255, 0.8);
-            /* Contoh latar belakang semi-transparan */
             z-index: 2;
-            /* Nilai z-index yang lebih tinggi */
         }
     </style>
     @stack('style')
@@ -135,13 +130,20 @@
                             class="sidebar-item has-sub {{ Route::is('stasiun.*', 'data-pengguna.*', 'karang.*') ? 'active' : '' }}">
                             <a href="#" class="sidebar-link">
                                 <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Manajemen Data</span>
+                                <span>
+                                    Manajemen Data
+                                </span>
                             </a>
 
                             <ul class="submenu">
                                 @if (auth()->user()->status == 'Administrator')
                                     <li class="submenu-item {{ Route::is('data-pengguna.index') ? 'active' : '' }}">
-                                        <a href="{{ route('data-pengguna.index') }}" class="submenu-link">Pengguna</a>
+                                        <a href="{{ route('data-pengguna.index') }}" class="submenu-link">
+                                            Pengguna
+                                            @if ($hasNullStatus)
+                                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff5c5c;"></i>
+                                            @endif
+                                        </a>
                                     </li>
 
                                     <li class="submenu-item {{ Route::is('stasiun.index') ? 'active' : '' }}">
@@ -172,9 +174,9 @@
                         </li>
 
                         <li class="sidebar-item ">
-                            <a href="" class='sidebar-link'>
+                            <a href="{{ route('laporan') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-break-fill"></i>
-                                <span>Laporan</span>
+                                <span>Laporan Data Karang</span>
                             </a>
                         </li>
 
@@ -185,6 +187,7 @@
                                 <span>Logout</span>
                             </a>
                         </li> --}}
+
                     </ul>
                 </div>
             </div>
@@ -203,18 +206,20 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <div class="dropdown ms-auto">
-                                <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a href="#" data-bs-toggle="dropdown" aria-expanded="false"
+                                    class="nav-item dropdown">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-4">
                                             <div class="text-gray-600" id="clock2"></div>
                                             <div class="text-gray-600" id="clock"></div>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
-                                            <div class="avatar avatar-md">
+                                            <div class="avatar avatar-md nav-link active">
                                                 @if (Auth::user()->profil != null)
-                                                <img id="userImage" src="{{ asset(Auth::user()->profil) }}" alt="" style="object-fit: cover;">
+                                                    <img id="userImage" src="{{ asset(Auth::user()->profil) }}"
+                                                        alt="" style="object-fit: cover;">
                                                 @else
-                                                <img src="{{ asset('admin/compiled/jpg/2.jpg') }}">
+                                                    <img src="{{ asset('admin/compiled/jpg/2.jpg') }}">
                                                 @endif
                                             </div>
                                         </div>
@@ -230,7 +235,8 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li>
-                                        <a href="{{ route('profil', ['id'=>auth()->user()->id]) }}" class="dropdown-item">
+                                        <a href="{{ route('profil', ['id' => auth()->user()->id]) }}"
+                                            class="dropdown-item">
                                             <i class="icon-mid bi bi-person me-2"></i> {{ auth()->user()->name }}
                                         </a>
                                     </li>

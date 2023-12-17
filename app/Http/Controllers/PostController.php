@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Karang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +19,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
-        return view('dist.lamanStasiun', compact('posts'));
+
+        $post = Post::with('karangs')->get();
+        $posts = Post::all();
+        $stasiun = Post::orderBy('nama', 'asc')->get();
+
+        $users = User::latest()->whereIn('status', ['Petani', 'Pembimbing', 'Tidak Ada'])->paginate(50);
+        $hasNullStatus = $users->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanStasiun', compact('stasiun', 'post', 'posts', 'hasNullStatus'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +82,8 @@ class PostController extends Controller
             if ($existingPost) {
                 return back()
                     ->with('failed', 'Data koordinat sudah ada!')
-                    ->withInput();
+                    ->withInput()
+                    ->withErrors($validator);
             }
 
             Post::create([
@@ -99,7 +110,8 @@ class PostController extends Controller
             if ($existingPost) {
                 return back()
                     ->with('failed', 'Data koordinat sudah ada!')
-                    ->withInput();
+                    ->withInput()
+                    ->withErrors($validator);
             }
 
             Post::create([
@@ -115,10 +127,35 @@ class PostController extends Controller
         return back()->with('message', 'Data berhasil ditambahkan!');
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
-        //
+        $post = Post::with('karangs')->findOrFail($id);
+        $posts = Post::all();
+
+        // Mengambil data dari tabel karangs
+        $karangsData = $post->karangs->first();
+
+        // Menyusun data untuk dikirim ke view
+        $chartData = null;
+
+        // Pastikan $karangsData tidak null sebelum mengambil nilai-nilai spesifik
+        if ($karangsData) {
+            $chartData = [
+                'karang_hidup'  => $karangsData->karang_hidup,
+                'karang_mati'   => $karangsData->karang_mati,
+                'algae'         => $karangsData->algae,
+                'abiotik'       => $karangsData->abiotik,
+                'biota_lain'    => $karangsData->biota_lain,
+            ];
+        }
+
+        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $hasNullStatus = $notif->contains('status', 'Tidak Ada');
+
+        return view('dist.lamanDetail', compact('post', 'posts', 'chartData', 'hasNullStatus', 'karangsData'));
     }
+
+
 
     public function edit(string $id)
     {

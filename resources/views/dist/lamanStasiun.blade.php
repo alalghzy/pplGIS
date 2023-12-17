@@ -26,7 +26,7 @@
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-12 col-xl-12">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -52,8 +52,8 @@
                                             <th style="text-align: center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    @if ($posts->count())
-                                        @foreach ($posts as $key => $post)
+                                    @if ($stasiun->count())
+                                        @foreach ($stasiun as $post)
                                             <tr id="tr_{{ $post->id }}">
                                                 <td style="width: 10px"><input type="checkbox" class="checkbox"
                                                         data-id="{{ $post->id }}">
@@ -215,46 +215,9 @@
         });
     </script>
 
-<script>
-    function validateNumberInput(input) {
-        // Hapus karakter selain digit dan titik
-        input.value = input.value.replace(/[^0-9.]/g, '');
-
-        // Hapus titik jika lebih dari satu
-        input.value = input.value.replace(/(\..*\.)/g, '$1');
-
-        // Batasi panjang input menjadi 4 karakter termasuk 2 angka di belakang koma
-        if (input.value.length > 4) {
-            input.value = input.value.substring(0, 4);
+    <script>
+        function validateNumberInput(input) {
+            input.value = input.value.replace(/[^\d.-]/g, ''); // Menghapus karakter selain angka, titik, dan minus
         }
-
-        // Pastikan format angka di belakang koma
-        var parts = input.value.split('.');
-        if (parts.length > 1) {
-            parts[1] = parts[1].substring(0, 2); // Batasi 2 angka di belakang koma
-            input.value = parts.join('.');
-        }
-
-        // Pastikan nilai tidak negatif
-        if (parseFloat(input.value) < 0) {
-            input.value = '';
-        }
-    }
-
-    function isNumberKey(evt) {
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        // Memastikan bahwa tanda minus dan plus tidak ditekan secara langsung
-        if (charCode !== 45 && charCode !== 43) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function isMinusOrPlusKey(event) {
-        // Mendeteksi kode tombol "-" (minus) dan "+" (plus)
-        return !["-", "+"].includes(event.key);
-    }
-</script>
-
+    </script>
 @endpush

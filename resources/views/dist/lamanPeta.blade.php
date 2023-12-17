@@ -15,7 +15,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/laman/admin"><i class="bi bi-house"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page">Peta Persebaran</li>
                     </ol>
                 </nav>
@@ -27,10 +27,10 @@
 @section('content')
     <section>
         <div class="col-12 col-xl-12">
-            <div class="card">
+            <div class="card shadow-sm">
                 <div class="m-1">
-
                 </div>
+
                 <div class="rounded" id="map" style="height:450px;">
 
                     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -39,7 +39,7 @@
                         function initialize() {
                             var map = L.map('map', {
                                 center: [-3.838195020251307, 102.1797480229322],
-                                zoom: 17,
+                                zoom: 15,
                                 scrollWheelZoom: true // Aktifkan zoom dengan kombinasi Ctrl + scroll
                             });
 
@@ -102,16 +102,19 @@
                             arcgisLayer.addTo(map);
 
                             var locations = [
-                                @foreach ($posts as $item)
-                                    {
-                                        latitude: {{ $item->latitude }},
-                                        longitude: {{ $item->longitude }},
-                                        kedalaman: {{ $item->kedalaman }},
-                                        idPost: {{ $item->id }},
-                                        title: "<center><b>{{ $item->nama }}</b> ({{ $item->kedalaman }} meter) <br/> {{ $item->latitude }}, {{ $item->longitude }}</center>",
-                                    },
-                                @endforeach
-                            ];
+    @foreach ($posts as $item)
+        {
+            image: "{{ $item->image }}",
+            latitude: {{ $item->latitude }},
+            longitude: {{ $item->longitude }},
+            kedalaman: {{ $item->kedalaman }},
+            idPost: {{ $item->id }},
+            title: "<center>@if ($item->image) <img src=\"{{ asset('storage/posts/' . $item->image) }}\" style=\"max-height: 500px; max-width: 90%\"> @endif</center>" + "<center><b>{{ $item->nama }}</b> ({{ $item->kedalaman }} meter) <br/> {{ $item->latitude }}, {{ $item->longitude }}</center>",
+        },
+    @endforeach
+];
+
+
 
                             for (var i = 0; i < locations.length; i++) {
                                 var location = locations[i];
@@ -194,4 +197,8 @@
 
         @include('dist.includes.Peta.modalPeta')
     </section>
+@endsection
+
+@section('script')
+
 @endsection

@@ -26,22 +26,26 @@
 
                     @if (auth()->user()->status == 'Administrator')
                         <div class="col-6 col-lg-4 col-md-6">
-                            <div class="card">
+                            <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
-                                        <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-2 d-flex justify-content-start ">
                                             <div class="stats-icon purple mb-2">
                                                 <i class="iconly-boldProfile"></i>
                                             </div>
                                         </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-6">
                                             <a href="{{ route('data-pengguna.index') }}">
                                                 <button class="btn btn-warning">
                                                     Data Pengguna
+                                                    @if ($hasNullStatus)
+                                                    <i class="fa-solid fa-triangle-exclamation" style="color: #ff5c5c;"></i>
+                                                    @endif
                                                 </button>
                                             </a>
-                                            <button class=" btn btn-primary font-semibold purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="{{ $users }}" data-purecounter-duration="1">
+                                            <button class=" btn btn-primary font-semibold purecounter"
+                                                data-purecounter-start="0" data-purecounter-end="{{ $usersCount }}"
+                                                data-purecounter-duration="1">
                                             </button>
                                         </div>
                                     </div>
@@ -51,10 +55,10 @@
                     @endif
 
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
-                                    <div class="col-md-4 col-lg-11 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                    <div class="col-md-4 col-lg-11 col-xl-12 col-xxl-2 d-flex justify-content-start ">
                                         <div class="stats-icon green mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" id="Box"
                                                 width="30" height="30">
@@ -68,14 +72,15 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-6">
                                         <a href="{{ route('stasiun.index') }}">
                                             <button class="btn btn-warning ">
                                                 Data Stasiun
                                             </button>
                                         </a>
                                         <button class="btn btn-success font-semibold purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $posts }}" data-purecounter-duration="1"></button>
+                                            data-purecounter-end="{{ $postsCount }}"
+                                            data-purecounter-duration="1"></button>
                                     </div>
                                 </div>
                             </div>
@@ -83,10 +88,10 @@
                     </div>
 
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-2 d-flex justify-content-start ">
                                         <div class="stats-icon red mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="Coral"
                                                 width="30" height="30">
@@ -97,7 +102,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
                                         <a href="{{ route('karang.index') }}">
                                             <button class="btn btn-warning ">
                                                 Data Terumbu Karang
@@ -105,7 +110,8 @@
                                         </a>
 
                                         <button class="btn btn-danger font-semibold purecounter" data-purecounter-start="0"
-                                            data-purecounter-end="{{ $karangs }}" data-purecounter-duration="1"></button>
+                                            data-purecounter-end="{{ $karangsCount }}"
+                                            data-purecounter-duration="1"></button>
                                     </div>
                                 </div>
                             </div>
@@ -113,41 +119,115 @@
                     </div>
 
                 </div>
-                {{-- <div id="content">
-                    <br>
-                    <br>
-                    <center><img src="" alt="Logo Pulau Tikus" width="150px"></center>
-                    <br>
-                    <h2>
-                        <center><b>SISTEM INFORMASI GEOGRAFIS</b></center>
-                    </h2>
-                    <h2>
-                        <center><b>PULAU TIKUS KOTA BENGKULU</b> </center>
-                    </h2>
-                    <h2>
-                        <center><a href=""><button class="btn btn-primary" type="button" href="/">Lihat
-                                    Web</button></a></center>
-                    </h2>
-                </div> --}}
             </div>
             <div class="col-11 col-lg-11">
-                <div class="card">
+                <div class="card shadow-sm">
                     <div class="card-header">
-                        <h4>Statistik Data</h4>
+                        <h4>Perbandingan Statistik Terumbu Karang per Stasiun</h4>
                     </div>
+                    @if ($karangsCount == 0)
+                    <div class="alert alert-light-danger color-danger alert-dismissible show fade mx-4">
+                        <p>
+                            <i class="fa-solid fa-triangle-exclamation"></i> Data terumbu karang belum tersedia!
+
+                            <a href="{{ route('karang.index') }}">
+                                <button style="font-size: 13px;"
+                                type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modalCreate" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Edit data"><i class="bi bi-plus-square "></i>
+                                Tambah Data</button>
+                            </a>
+                        </p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <div class="card-body">
-                        <div id="chart-profile-visit"></div>
+                        <div id="chart"></div>
                     </div>
                 </div>
             </div>
-            <section>
+        </section>
     </div>
 @endsection
 
 @push('script')
     <!-- Need: Apexcharts -->
-    <script src=" {{ asset('admin/extensions/apexcharts/apexcharts.min.js') }} "></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src=" {{ asset('admin/static/js/pages/dashboard.js') }} "></script>
+
+    <script>
+        // Ambil data dari controller
+        var seriesData = @json($seriesData);
+        var labels = @json($labels);
+
+        var options = {
+            series: [
+                {
+                    name: 'Karang Hidup',
+                    data: seriesData.karang_hidup
+                },
+                {
+                    name: 'Karang Mati',
+                    data: seriesData.karang_mati
+                },
+                {
+                    name: 'Algae',
+                    data: seriesData.algae
+                },
+                {
+                    name: 'Biota Lain',
+                    data: seriesData.biota_lain
+                },
+                {
+                    name: 'Abiotik',
+                    data: seriesData.abiotik
+                }
+            ],
+            chart: {
+                height: 350,
+                type: 'area',
+                toolbar: {
+                    show: true // Menyembunyikan toolbar
+                }
+            },
+            dataLabels: {
+                enabled: true
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            xaxis: {
+                type: 'string',
+                categories: labels.nama
+            },
+            yaxis: {
+                max: 100,
+                labels: {
+                    formatter: function (val) {
+                        return val.toFixed(2) + "%"; // Mengubah ke format persentase dengan dua desimal
+                    }
+                }
+            },
+            colors: ['#008FFB', '#FF4560', '#FFC300', '#3eb650', '#A933FF'], // Ganti dengan warna yang diinginkan
+            tooltip: {
+                enabled: true,
+                formatter: function (val, opts) {
+                    return val.toFixed(2) + "%"; // Mengubah ke format persentase dengan dua desimal
+                },
+                offsetY: 0,
+                style: {
+                    fontSize: '12px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                },
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+
+
+
 @endpush
 
 @push('style')

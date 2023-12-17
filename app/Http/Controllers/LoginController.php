@@ -39,7 +39,7 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
             return back()
-            ->with('failed', $validator->errors()->first())
+                ->with('failed', $validator->errors()->first())
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -50,9 +50,9 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            return redirect()->route('dashboard.index')->with('success', 'Kamu berhasil login!');
+            return redirect()->route('dashboard.cek_login');
         } else {
-            return redirect()->route('login.index')->with('failed', 'Email atau kata sandi salah!');
+            return redirect()->route('login.index')->with('failed', 'Password salah!');
         }
     }
 
@@ -61,7 +61,7 @@ class LoginController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'              => 'required',
-            'status'            => 'required',
+            'status'            => '',
             'email'             => ['required', 'unique:users'],
             'password'          => 'required',
             'confirm_password'  => 'required|same:password',
@@ -69,7 +69,7 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
             return back()
-                ->with('failed', 'Akun gagal ditambahkan!')
+                ->with('failed', $validator->errors()->first())
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -80,7 +80,7 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('login.index')->with('success', 'Berhasil daftar akun!');
+        return redirect()->route('login.index')->with('daftar', 'Harap menunggu konfirmasi dari Admin!');
     }
 
     public function send_request_reset(Request $request)
@@ -155,7 +155,7 @@ class LoginController extends Controller
                 'email' => $request->email
             ])->delete();
 
-            return redirect()->route('login')->with('success', 'Password berhasil direset!');
+            return redirect()->route('login.index')->with('success', 'Password berhasil direset!');
         }
     }
 }

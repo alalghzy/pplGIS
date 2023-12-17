@@ -10,7 +10,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/laman/admin"><i class="bi bi-house"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bi bi-house"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page">Manajemen Data / Data Terumbu Karang</li>
                     </ol>
                 </nav>
@@ -25,7 +25,7 @@
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-12 col-xl-12">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -40,83 +40,13 @@
                                 @include('dist.includes.Karang.modalTambah')
                             </div>
 
-                            {{-- <div class="card-body table-responsive-sm p-3">
-                                <table class="table table-hover table-bordered" id="table-data">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>
-                                            <th style="width: 10px">No</th>
-                                            <th>Nama Stasiun</th>
-                                            <th>Nama Stasiun</th>
-                                            <th>Status</th>
-                                            <th>Jenis Marga</th>
-                                            <th>Waktu</th>
-                                            <th style="text-align: center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    @if ($karangs->count())
-                                        @foreach ($karangs as $key => $post)
-                                            <tr id="tr_{{ $post->id }}">
-                                                <td style="width: 10px"><input type="checkbox" class="checkbox"
-                                                        data-id="{{ $post->id }}">
-                                                </td>
-                                                <td style="width: 10px">{{ $loop->iteration }}</td>
-                                                <td>{{ $post->nama }}</td>
-                                                <td>{{ $post->post->nama }}</td>
-                                                <td>{{ $post->status }}</td>
-                                                <td>{{ $post->jenis_marga }}</td>
-                                                <td>{{ $post->updated_at }}</td>
-                                                <td class="text-center" style="width: 140px">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="btn-group fs-5">
-                                                            <button type="button" class="btn btn btn-dark"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#modalLihat-{{ $post->id }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Lihat Data">
-                                                                <i class="bi bi-eye"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn btn-primary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#modalEdit-{{ $post->id }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Edit Data">
-                                                                <i class="bi bi-pencil-square fs-6"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn btn-danger"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#hapusdata-{{ $post->id }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Hapus Data">
-                                                                <i class="bi bi-trash fs-6"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                @include('admin.includes.Stasiun.modalLihat')
-                                                @include('admin.includes.Stasiun.modalEdit')
-                                                @include('admin.includes.Stasiun.modalHapus')
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <div class="alert alert-danger">
-                                            Data belum tersedia, silahkan &ensp;<button style="font-size: 10px;"
-                                                type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#modalCreate" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Edit data"><i
-                                                    class="bi bi-plus-square "></i>
-                                                Tambah Data</button> &ensp;!
-                                        </div>
-                                    @endif
-                                </table>
-                            </div> --}}
-
-                            <div class="table-responsive table-responsive-sm m-1 p-1">
+                            <div class="card-body table-responsive m-1 p-1">
                                 <table class="table table-hover table-bordered" id="table-data">
                                     <thead>
                                         <tr>
-                                            <th rowspan="3" style="width: 10px"><input type="checkbox"
-                                                    id="checkboxesMain"></th>
+                                            <th rowspan="3" style="width: 10px">
+                                                <input type="checkbox" id="checkboxesMain">
+                                            </th>
                                             <th rowspan="3">Nama Stasiun</th>
                                             <th rowspan="3">Algae</th>
                                             <th rowspan="3">Abiotik</th>
@@ -127,10 +57,12 @@
                                             <th rowspan="3" class="text-center" style="width: 140px">Aksi</th>
                                         </tr>
                                         <tr>
-                                            <th colspan="13" style="text-align: center; justify-content: center">Karang
-                                                Hidup</th>
-                                            <th colspan="2" style="text-align: center; justify-content: center">Karang
-                                                Mati</th>
+                                            <th colspan="13" style="text-align: center; justify-content: center">
+                                                Karang Hidup
+                                            </th>
+                                            <th colspan="2" style="text-align: center; justify-content: center">
+                                                Karang Mati
+                                            </th>
                                         </tr>
                                         <tr>
                                             <th>ACB</th>
@@ -149,13 +81,13 @@
                                             <th>DC</th>
                                             <th>DCA</th>
                                         </tr>
-
                                     </thead>
-                                    <tbody>
+                                    <tbody class="table-group-divider">
                                         @if ($karangs->count())
-                                            @foreach ($karangs as $key => $post)
+                                            @foreach ($karangs as $post)
                                                 <tr id="tr_{{ $post->id }}">
-                                                    <td style="width: 10px"><input type="checkbox" class="checkbox">
+                                                    <td style="width: 10px">
+                                                        <input type="checkbox" class="checkbox">
                                                     </td>
                                                     <td>{{ $post->post->nama }}</td>
                                                     <td>{{ $post->algae }}%</td>
@@ -203,10 +135,10 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- @include('admin.includes.Stasiun.modalLihat')
-                                                    @include('admin.includes.Stasiun.modalEdit')
-                                                    @include('admin.includes.Stasiun.modalHapus') --}}
                                                 </tr>
+                                                @include('dist.includes.Karang.modalLihat')
+                                                @include('dist.includes.Karang.modalEdit')
+                                                @include('dist.includes.Karang.modalHapus')
                                             @endforeach
                                         @else
                                             <div class="alert alert-danger">
@@ -249,25 +181,23 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     $('#checkboxesMain').on('click', function(e) {
-                        if ($(this).is(':checked', true)) {
-                            $(".checkbox").prop('checked', true);
-                        } else {
-                            $(".checkbox").prop('checked', false);
-                        }
+                        $(".checkbox").prop('checked', $(this).prop('checked'));
                     });
+
                     $('.checkbox').on('click', function() {
-                        if ($('.checkbox:checked').length == $('.checkbox').length) {
+                        if ($('.checkbox:checked').length === $('.checkbox').length) {
                             $('#checkboxesMain').prop('checked', true);
                         } else {
                             $('#checkboxesMain').prop('checked', false);
                         }
                     });
+
                     $('.removeAll').on('click', function(e) {
-                        var studentIdArr = [];
-                        $(".checkbox:checked").each(function() {
-                            studentIdArr.push($(this).attr('data-id'));
-                        });
-                        if (studentIdArr.length <= 0) {
+                        var ids = $(".checkbox:checked").map(function() {
+                            return $(this).closest('tr').attr('id').replace('tr_', '');
+                        }).get();
+
+                        if (ids.length <= 0) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal!',
@@ -285,20 +215,19 @@
                                 cancelButtonText: 'Batal'
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    var stuId = studentIdArr.join(",");
                                     $.ajax({
-                                        url: "{{ url('laman/delete-all') }}",
+                                        url: "{{ url('/laman/delete-all-karangs') }}",
                                         type: 'DELETE',
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
                                                 'content')
                                         },
-                                        data: 'ids=' + stuId,
+                                        data: {
+                                            ids: ids
+                                        },
                                         success: function(data) {
-                                            if (data['status'] == true) {
-                                                $(".checkbox:checked").each(function() {
-                                                    $(this).parents("tr").remove();
-                                                });
+                                            if (data['status']) {
+                                                $(".checkbox:checked").closest("tr").remove();
                                                 Swal.fire({
                                                     icon: 'success',
                                                     title: 'Sukses!',
@@ -321,7 +250,7 @@
                                             Swal.fire({
                                                 icon: 'error',
                                                 title: 'Oops...',
-                                                text: data.responseText
+                                                text: data.responseJSON.message
                                             });
                                         }
                                     });
@@ -332,17 +261,73 @@
                 });
             </script>
 
+
             {{-- Input Angka --}}
             <script>
-                function validateNumberInput(input) {
-                    // Hapus karakter selain digit, titik, dan tanda minus
-                    input.value = input.value.replace(/[^0-9.-]/g, '');
+                function validateInputAndCalculate() {
+                    // Mendapatkan nilai input dari algae, abiotik, dan biota_lain
+                    const algaeValue = parseFloat(document.getElementsByName('algae')[0].value) || 0;
+                    const abiotikValue = parseFloat(document.getElementsByName('abiotik')[0].value) || 0;
+                    const biotaLainValue = parseFloat(document.getElementsByName('biota_lain')[0].value) || 0;
+                    const acbValue = parseFloat(document.getElementsByName('acb')[0].value) || 0;
+                    const acdValue = parseFloat(document.getElementsByName('acd')[0].value) || 0;
+                    const aceValue = parseFloat(document.getElementsByName('ace')[0].value) || 0;
+                    const acsValue = parseFloat(document.getElementsByName('acs')[0].value) || 0;
+                    const actValue = parseFloat(document.getElementsByName('acb')[0].value) || 0;
+                    const cbValue = parseFloat(document.getElementsByName('cb')[0].value) || 0;
+                    const ceValue = parseFloat(document.getElementsByName('ce')[0].value) || 0;
+                    const cfValue = parseFloat(document.getElementsByName('cf')[0].value) || 0;
+                    const cmValue = parseFloat(document.getElementsByName('cm')[0].value) || 0;
+                    const csValue = parseFloat(document.getElementsByName('cs')[0].value) || 0;
+                    const cmrValue = parseFloat(document.getElementsByName('cmr')[0].value) || 0;
+                    const chlValue = parseFloat(document.getElementsByName('chl')[0].value) || 0;
+                    const cmeValue = parseFloat(document.getElementsByName('cme')[0].value) || 0;
+                    const dcValue = parseFloat(document.getElementsByName('dc')[0].value) || 0;
+                    const dcaValue = parseFloat(document.getElementsByName('dca')[0].value) || 0;
 
-                    // Hapus tanda minus jika lebih dari satu, dan pastikan hanya satu di awal
-                    input.value = input.value.replace(/^-+/, '-');
+                    // Menghitung total persentase
+                    const totalPercentage = algaeValue + abiotikValue + biotaLainValue + acbValue + acdValue + aceValue + acsValue +
+                        actValue + cbValue + ceValue + cfValue + cmValue + csValue + cmrValue + chlValue + cmeValue + dcValue +
+                        dcaValue;
+
+                    // Validasi total persentase tidak boleh lebih dari 100
+                    if (totalPercentage > 100) {
+                        alert('Data salah! Total persentase melebihi 100%.');
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                function validateNumberInput(input) {
+                    // Hapus karakter selain digit dan titik
+                    input.value = input.value.replace(/[^0-9.]/g, '');
 
                     // Hapus titik jika lebih dari satu
                     input.value = input.value.replace(/(\..*\.)/g, '$1');
+
+                    // Batasi panjang input menjadi 4 karakter termasuk 2 angka di belakang koma
+                    if (input.value.length > 5) {
+                        input.value = input.value.substring(0, 5);
+                    }
+
+                    // Pastikan format angka di belakang koma
+                    var parts = input.value.split('.');
+                    if (parts.length > 1) {
+                        parts[1] = parts[1].substring(0, 2); // Batasi 2 angka di belakang koma
+                        input.value = parts.join('.');
+                    }
+
+                    // Pastikan nilai tidak negatif
+                    if (parseFloat(input.value) < 0) {
+                        input.value = '';
+                    }
+
+                    // Validasi total persentase saat ini
+                    if (!validateInputAndCalculate()) {
+                        // Hapus nilai input yang tidak valid
+                        input.value = '';
+                    }
                 }
 
                 function hitungKarangMati() {
@@ -370,7 +355,6 @@
                     document.getElementsByName('karang_hidup')[0].value = total.toFixed(2);
                 }
 
-
                 function isNumberKey(evt) {
                     var charCode = (evt.which) ? evt.which : event.keyCode;
 
@@ -389,6 +373,71 @@
                     }
 
                     return true;
+                }
+            </script>
+
+            <script>
+
+                function hitungKarangHidups(postId) {
+                    var acbInput = document.getElementById('edit_acb_' + postId );
+                    var acdInput = document.getElementById('edit_acd_' + postId );
+                    var aceInput = document.getElementById('edit_ace_' + postId );
+                    var acsInput = document.getElementById('edit_acs_' + postId );
+                    var actInput = document.getElementById('edit_act_' + postId );
+                    var cbInput = document.getElementById('edit_cb_' + postId );
+                    var ceInput = document.getElementById('edit_ce_' + postId );
+                    var cfInput = document.getElementById('edit_cf_' + postId );
+                    var cmInput = document.getElementById('edit_cm_' + postId );
+                    var csInput = document.getElementById('edit_cs_' + postId );
+                    var cmrInput = document.getElementById('edit_cmr_' + postId );
+                    var chlInput = document.getElementById('edit_chl_' + postId );
+                    var cmeInput = document.getElementById('edit_cme_' + postId );
+                    var karangHidupInput = document.getElementById('edit_karang_hidup_' + postId );
+                    var karangHidupSpan = document.getElementById('edit_KarangHidup_' + postId );
+
+                    var acbValue = parseFloat(acbInput.value) || 0;
+                    var acdValue = parseFloat(acdInput.value) || 0;
+                    var aceValue = parseFloat(aceInput.value) || 0;
+                    var acsValue = parseFloat(acsInput.value) || 0;
+                    var actValue = parseFloat(actInput.value) || 0;
+                    var cbValue = parseFloat(cbInput.value) || 0;
+                    var ceValue = parseFloat(ceInput.value) || 0;
+                    var cfValue = parseFloat(cfInput.value) || 0;
+                    var cmValue = parseFloat(cmInput.value) || 0;
+                    var csValue = parseFloat(csInput.value) || 0;
+                    var cmrValue = parseFloat(cmrInput.value) || 0;
+                    var chlValue = parseFloat(chlInput.value) || 0;
+                    var cmeValue = parseFloat(cmeInput.value) || 0;
+
+                    // Menghitung total
+                    var total = acbValue + acdValue + aceValue + acsValue + actValue + cbValue + ceValue + cfValue + cmValue +
+                        csValue + cmrValue + chlValue + cmeValue;
+
+                    // Memasukkan hasil ke dalam elemen input karang_mati
+                    karangHidupInput.value = total.toFixed(2);
+
+                    // Memasukkan hasil ke dalam elemen span dengan id "KarangMati"
+                    karangHidupSpan.innerText = total.toFixed(2);
+                }
+
+                function hitungKarangMatis(postId) {
+                    // Mengambil nilai dari input dc dan dca
+                    var dcInput = document.getElementById('edit_dc_' + postId );
+                    var dcaInput = document.getElementById('edit_dca_' + postId );
+                    var karangMatiInput = document.getElementById('edit_karang_mati_' + postId );
+                    var karangMatiSpan = document.getElementById('edit_KarangMati_' + postId );
+
+                    var dcValue = parseFloat(dcInput.value) || 0;
+                    var dcaValue = parseFloat(dcaInput.value) || 0;
+
+                    // Menghitung total
+                    var total = dcValue + dcaValue;
+
+                    // Memasukkan hasil ke dalam elemen input karang_mati
+                    karangMatiInput.value = total.toFixed(2);
+
+                    // Memasukkan hasil ke dalam elemen span dengan id "KarangMati"
+                    karangMatiSpan.innerText = total.toFixed(2);
                 }
             </script>
         @endpush

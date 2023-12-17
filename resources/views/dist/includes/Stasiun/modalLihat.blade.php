@@ -16,8 +16,9 @@
                                 <div class="card-body">
 
                                     @if ($post->image != '')
-                                        <center><img src="{{ asset('storage/posts/' . $post->image) }}"
-                                                class="rounded shadow-lg mb-4" style="max-width: 500px"
+                                        <center>
+                                            <img src="{{ asset('storage/posts/' . $post->image) }}"
+                                                class="rounded shadow-lg mb-4" style="max-height: 500px; max-width: 90%"
                                                 alt="{{ $post->image }}">
                                         </center>
                                     @endif
@@ -42,12 +43,9 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="submit" class="btn btn-warning shadow-sm" data-bs-toggle="tooltip"
-                    data-bs-placement="top" title="Lihat Selengkapnya">
-                    <a style="color: white" href="">
-                        <i class="fa-solid fa-angles-right" style="color: black;"></i>
-                    </a>
-                </button>
+                <a style="color: white" href="{{ route('detail.stasiun', ['id' => $post->id]) }}">
+                    <button class="btn btn-primary">Lihat Detail Data</button>
+                </a>
             </div>
         </div>
     </div>

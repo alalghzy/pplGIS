@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('kedalaman');
             $table->string('pengguna');
             $table->timestamps();
+
         });
     }
 

@@ -21,12 +21,18 @@
 @endsection
 
 @section('content')
+    @if ($hasNullStatus)
+        <div class="alert alert-light-danger color-danger alert-dismissible show fade">
+            <i class="fa-solid fa-triangle-exclamation"></i> Ada pengguna yang belum memiliki status!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="page-content">
         <section class="row">
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-12 col-xl-12">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">
                                 <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top"
