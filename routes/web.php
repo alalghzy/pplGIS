@@ -26,8 +26,8 @@ use App\Http\Controllers\PostController;
 
 
 // Route Langding Page
-Route::resource('/', HomeController::class)
-    ->except('edit', 'create', 'show', 'destroy', 'update', 'store');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/detail-terumbu-karang/{id}', [HomeController::class, 'show'])->name('detail.terumbu.karang');
 
 // Route Authenticate
 Route::resource('/login', LoginController::class)
