@@ -154,7 +154,6 @@
     <!-- Need: Apexcharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src=" {{ asset('admin/static/js/pages/dashboard.js') }} "></script>
-
     <script>
         // Ambil data dari controller
         var seriesData = @json($seriesData);

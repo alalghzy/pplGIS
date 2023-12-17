@@ -96,7 +96,7 @@
 
                 <div class="row ">
 
-                    <div class="col-lg-5 mb-3" data-aos="fade-right" data-aos-offset="400">
+                    <div class="col-lg-5 mb-3" data-aos="fade-right" data-aos-offset="300">
                         <center>
                             <div class="card rounded-3 shadow-sm">
                                 <img src="{{ asset('img/landing/pulau1.jpg') }}" class=" rounded-3" style="width: 100%"
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-5" data-aos="fade-left" data-aos-offset="300">
+                    <div class="col-lg-5 mt-5" data-aos="fade-left" data-aos-offset="400">
                         <center>
                             <div class="card rounded-3 shadow-sm">
                                 <img src="{{ asset('img/landing/pulau2.jpg') }}" class=" rounded-3" style="width: 100%"
@@ -467,7 +467,7 @@
             <div data-aos="fade-up">
                 <h4 class="mt-2">Sistem Informasi Geografis Pulau Tikus </br>Kota Bengkulu</h4>
                 <p>
-                    Mari jaga kelestarian alam kita!
+                    "Mari jaga kelestarian alam kita!"
                 </p>
                 <div class="social-links">
                     <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
