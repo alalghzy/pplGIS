@@ -17,7 +17,7 @@
 
                                     @if ($post->post->image != '')
                                         <center><img src="{{ asset('storage/posts/' . $post->post->image) }}"
-                                                class="rounded shadow-lg mb-4" style="max-width: 500px">
+                                                class="rounded shadow-lg mb-4" style="max-width: 470px">
                                         </center>
                                     @endif
 

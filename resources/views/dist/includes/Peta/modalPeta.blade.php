@@ -20,7 +20,7 @@
                                             <center>
                                                 <img src="{{ asset('storage/posts/' . $item->post->image) }}"
                                                     class="rounded shadow-lg mb-4"
-                                                    style="max-height: 500px; max-width: 90%" alt="{{ $item->image }}">
+                                                    style="max-height: 300px; max-width: 90%" alt="{{ $item->image }}">
                                             </center>
                                         @endif
 
