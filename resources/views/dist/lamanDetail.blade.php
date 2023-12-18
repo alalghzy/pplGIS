@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nama')
-    <div class="page-title">
+    <div class="page-title" data-aos="fade-up" data-aos-delay="100">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
 
@@ -22,9 +22,27 @@
     <div class="page-content">
         <section class="row">
 
+            @if ($chartData)
+            @else
+                <div class="alert alert-light-danger color-danger alert-dismissible show fade">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Data terumbu karang belum ada! &nbsp;
+
+                    <a href="{{ route('karang.index') }}">
+                        <button style="font-size: 10px;" type="button"
+                            class="btn btn-sm btn-success" data-bs-toggle="modal"
+                            data-bs-target="#modalCreate" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Edit data">
+                            <i class="bi bi-plus-square "></i> Tambah Data
+                        </button>
+                    </a>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="col-12 col-lg-12">
                 <div class="row">
-                    <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -47,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-2 col-md-6">
+                    <div class="col-6 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -88,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-2 col-md-6">
+                    <div class="col-6 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -118,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-2 col-md-6">
+                    <div class="col-6 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -151,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="card shadow-sm">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -179,16 +197,18 @@
             <div class="mb-4">
 
             </div>
+
             <div class="col-12 col-lg-12">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-8" data-aos="fade-up" data-aos-delay="100" >
                         <div class="card shadow-sm">
                             <div class="card-header">
                                 <h4>Lokasi Tutupan Komunitas Karang {{ $post->nama }}</h4>
                             </div>
                             <div class="card-body rounded-4">
 
-                                <div class="rounded-3" id="map" style="max-width: auto; max-height: 375px"></div>
+                                <div class="rounded-3" id="map" style="max-width: auto; max-height: 375px">
+                                </div>
                                 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
                                 <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
 
@@ -305,9 +325,9 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="row">
+                        <div class="row" data-aos="fade-up" data-aos-delay="100">
 
-                            <div class="col-12">
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="200">
                                 <div class="card shadow-sm">
                                     <div class="card-body py-4 px-4">
                                         <div class="d-flex align-items-center">
@@ -340,25 +360,29 @@
                                     </div>
 
                                     @if ($chartData)
-                                    <center>
-                                        <div class="card-body">
-                                            <div id="chart"></div>
-                                        </div>
-                                    </center>
-                                @else
-                                    <div class="alert alert-light-danger color-danger alert-dismissible show fade m-4 p-3">
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                        <span style="font-size:13px">Data belum tersedia!</span><br>
+                                        <center>
+                                            <div class="card-body">
+                                                <div id="chart"></div>
+                                            </div>
+                                        </center>
+                                    @else
+                                        <div
+                                            class="alert alert-light-danger color-danger alert-dismissible show fade m-4 p-3">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <span style="font-size:13px">Data belum tersedia!</span><br>
 
-                                        <a href="{{ route('karang.index') }}">
-                                            <button style="font-size: 10px;" type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                    data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
-                                                <i class="bi bi-plus-square "></i> Tambah Data
-                                            </button>
-                                        </a>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                @endif
+                                            <a href="{{ route('karang.index') }}">
+                                                <button style="font-size: 10px;" type="button"
+                                                    class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#modalCreate" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Edit data">
+                                                    <i class="bi bi-plus-square "></i> Tambah Data
+                                                </button>
+                                            </a>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
 
                                 </div>
                             </div>
