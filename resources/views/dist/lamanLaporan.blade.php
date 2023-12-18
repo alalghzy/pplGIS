@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="card-body table-responsive m-1 p-1">
-                        <table class="table table-hover table-bordered" id="table-data">
+                        <table class="table table-hover table-bordered" id="table-data" data-aos="fade-up" data-aos-delay="150">
                             <thead>
                                 <tr>
                                     <th rowspan="3" style="width: 10px">

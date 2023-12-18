@@ -22,7 +22,7 @@
 
 @section('content')
     <div class="page-content">
-        <section class="row">
+        <section class="row" >
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-12 col-xl-12">
@@ -40,7 +40,7 @@
                                 @include('dist.includes.Stasiun.modalTambah')
                             </div>
                             <div class="card-body table-responsive p-3">
-                                <table class="table table-hover table-bordered" id="table-data">
+                                <table class="table table-hover table-bordered" id="table-data" data-aos="fade-up" data-aos-delay="170">
                                     <thead class="table-primary">
                                         <tr>
                                             <th style="width: 10px"><input type="checkbox" id="checkboxesMain"></th>

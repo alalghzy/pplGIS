@@ -46,7 +46,7 @@
                                 @include('dist.includes.Pengguna.modalTambah')
                             </div>
                             <div class="card-body table-responsive p-3">
-                                <table class="table table-hover table-bordered" id="table-data">
+                                <table class="table table-hover table-bordered" id="table-data" data-aos="fade-up" data-aos-delay="170">
                                     <thead class="table-primary">
                                         <tr>
                                             <th style="width: 20px"><input type="checkbox" id="checkboxesMain"></th>

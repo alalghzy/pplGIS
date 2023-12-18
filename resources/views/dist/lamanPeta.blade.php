@@ -26,7 +26,7 @@
 @endsection
 
 @section('content')
-    <section>
+    <section data-aos="fade-up" data-aos-delay="170">
         <div class="col-12 col-xl-12" >
             <div class="card shadow-sm">
                 <div class="m-1">

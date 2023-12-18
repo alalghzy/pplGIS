@@ -24,7 +24,7 @@
     <section class="section">
         <div class="row">
 
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-center align-items-center flex-column">
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-8" data-aos="fade-up" data-aos-delay="250">
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <h5 class="card-title"></h5>
