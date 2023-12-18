@@ -51,7 +51,7 @@
     </header><!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex flex-column justify-content-center shadow-xl">
+    <section id="hero" class="d-flex flex-column justify-content-center shadow-lg">
         <div class="container" data-aos="fade-up-left" data-aos-delay="100">
             <h6 style="color:aliceblue;">Sistem Informasi Geografis & Inventarisasi</h6>
             <h1>Pulau Tikus</h1>
