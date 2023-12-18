@@ -51,7 +51,7 @@
     </header><!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex flex-column justify-content-center">
+    <section id="hero" class="d-flex flex-column justify-content-center shadow-lg">
         <div class="container" data-aos="fade-up-left" data-aos-delay="100">
             <h6 style="color:aliceblue;">Sistem Informasi Geografis & Inventarisasi</h6>
             <h1>Pulau Tikus</h1>
@@ -421,7 +421,7 @@
 
                 <div class="row mt-1">
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <div class="info">
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
@@ -444,12 +444,15 @@
                         </div>
 
                     </div>
+                    <div class="col-lg-1">
+
+                    </div>
 
                     <div class="col-lg-6  mt-lg-0">
 
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.118835139614!2d102.24959697592081!3d-3.784310743461069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b17b6e24583d%3A0xec5038018fd0f369!2sLATUN!5e0!3m2!1sid!2sid!4v1702820532328!5m2!1sid!2sid"
-                            width="800" height="300" style="border:1;" class="rounded-3" allowfullscreen=""
+                            width="600" height="300" style="border:1;" class="rounded-3 shadow-sm" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                     </div>
