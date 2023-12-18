@@ -133,23 +133,12 @@ class PostController extends Controller
         $posts = Post::all();
 
         // Mengambil data dari tabel karangs
-        $karangsData = $post->karangs->first();
+        $karangsData = $post->karangs->first() ?? new Karang();
 
         // Menyusun data untuk dikirim ke view
-        $chartData = null;
+        $chartData = optional($karangsData)->toArray();
 
-        // Pastikan $karangsData tidak null sebelum mengambil nilai-nilai spesifik
-        if ($karangsData) {
-            $chartData = [
-                'karang_hidup'  => $karangsData->karang_hidup,
-                'karang_mati'   => $karangsData->karang_mati,
-                'algae'         => $karangsData->algae,
-                'abiotik'       => $karangsData->abiotik,
-                'biota_lain'    => $karangsData->biota_lain,
-            ];
-        }
-
-        $notif = User::get()->whereIn('status', [ 'Tidak Ada']);
+        $notif = User::get()->whereIn('status', ['Tidak Ada']);
         $hasNullStatus = $notif->contains('status', 'Tidak Ada');
 
         return view('dist.lamanDetail', compact('post', 'posts', 'chartData', 'hasNullStatus', 'karangsData'));

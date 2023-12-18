@@ -338,32 +338,28 @@
                                     <div class="card-header">
                                         <h4>Diagram Lingkarang</h4>
                                     </div>
-                                    @if ($chartData != null)
-                                        <center>
-                                            <div class="card-body ">
-                                                <div id="chart"></div>
-                                            </div>
-                                        </center>
-                                    @else
-                                        <div
-                                            class="alert alert-light-danger color-danger alert-dismissible show fade m-4 p-3">
-                                            <i class="fa-solid fa-triangle-exclamation"></i> <span
-                                                style="font-size:13px">Data belum tersedia!</span><br>
 
-                                            <a href="{{ route('karang.index') }}">
-                                                <button style="font-size: 10px;" type="button"
-                                                    class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                    data-bs-target="#modalCreate" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Edit data"><i
-                                                        class="bi bi-plus-square "></i>
-                                                    Tambah Data
-                                                </button>
-                                            </a>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close">
-                                            </button>
+                                    @if ($chartData)
+                                    <center>
+                                        <div class="card-body">
+                                            <div id="chart"></div>
                                         </div>
-                                    @endif
+                                    </center>
+                                @else
+                                    <div class="alert alert-light-danger color-danger alert-dismissible show fade m-4 p-3">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <span style="font-size:13px">Data belum tersedia!</span><br>
+
+                                        <a href="{{ route('karang.index') }}">
+                                            <button style="font-size: 10px;" type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
+                                                <i class="bi bi-plus-square "></i> Tambah Data
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+
                                 </div>
                             </div>
 
