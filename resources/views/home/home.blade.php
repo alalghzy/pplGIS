@@ -96,7 +96,7 @@
 
                 <div class="row ">
 
-                    <div class="col-lg-5 mb-3" data-aos="fade-right" data-aos-offset="300">
+                    <div class="col-lg-5 mb-3" data-aos="fade-right" data-aos-offset="250">
                         <center>
                             <div class="card rounded-3 shadow-sm">
                                 <img src="{{ asset('img/landing/pulau1.jpg') }}" class=" rounded-3" style="width: 100%"
@@ -104,7 +104,7 @@
                             </div>
                         </center>
                     </div>
-                    <div class="col-lg-7 pt-4 pt-lg-0 content mb-3" data-aos="fade-right" data-aos-offset="400">
+                    <div class="col-lg-7 pt-4 pt-lg-0 content mb-3" data-aos="fade-right" data-aos-offset="300">
                         <h3>
                             Pulau Wisata di Provinsi Bengkulu
                         </h3>
@@ -157,7 +157,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-7 pt-4 pt-lg-0 content mt-5" data-aos="fade-left" data-aos-offset="400">
+                    <div class="col-lg-7 pt-4 pt-lg-0 content mt-5" data-aos="fade-left" data-aos-offset="300">
                         <h3>Pulau Terumbu Karang</h3>
                         <p style="text-align: justify">
                             Untuk nama pulau ini konon diambil dari bentuknya yang mungil dan menyerupai tikus.
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-5" data-aos="fade-left" data-aos-offset="500">
+                    <div class="col-lg-5 mt-5" data-aos="fade-left" data-aos-offset="400">
                         <center>
                             <div class="card rounded-3 shadow-sm">
                                 <img src="{{ asset('img/landing/pulau2.jpg') }}" class=" rounded-3" style="width: 100%"
@@ -195,7 +195,7 @@
 
         <!-- ======= Facts Section ======= -->
         <section id="facts" class="facts">
-            <div class="container" data-aos="fade-up" data-aos-delay="400">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="section-title">
                     <h2></h2>
