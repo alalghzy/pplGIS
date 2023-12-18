@@ -425,7 +425,7 @@
                         <div class="info">
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
-                                <h4>Lokasi:</h4>
+                                <h4>Lokasi Alamat:</h4>
                                 <p>Jl. Bencoolen Kebun Keling, Kecamatan Teluk Segara, Kota Bengkulu, Bengkulu</p>
                             </div>
 

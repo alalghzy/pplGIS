@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('admin/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
         #map {
@@ -92,7 +93,7 @@
 
                 <div class="col-12 col-lg-12">
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                             <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -117,7 +118,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-2 col-md-6">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="200">
                             <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -159,7 +160,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-2 col-md-6">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="300">
                             <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -191,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-2 col-md-6">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="400">
                             <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -226,7 +227,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
                             <div class="card shadow-sm">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -252,7 +253,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-lg-12 mb-4">
+                <div class="col-12 col-lg-12 mb-4" data-aos="fade-up" data-aos-delay="200">
                     <a href="javascript:void(0);" onclick="history.back();" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Kembali" class='sidebar-link'>
                         <button class="badge text-bg-primary shadow-sm"> <i class="bi bi-arrow-90deg-left"></i> &nbsp; Kembali</button>
@@ -261,13 +262,13 @@
                 <div class="col-12 col-lg-12">
                     <div class="row">
                         <div class="col-8">
-                            <div class="card shadow-sm">
-                                <div class="card-header">
+                            <div class="card shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                                <div class="card-header" >
                                     <h4>Lokasi Tutupan Komunitas Karang {{ $post->nama }}</h4>
                                 </div>
                                 <div class="card-body rounded-4">
 
-                                    <div class="rounded-3" id="map" style="max-width: auto; max-height: 375px">
+                                    <div class="rounded-3" id="map" style="max-width: auto; max-height: 375px" data-aos="fade-up" data-aos-delay="200">
                                     </div>
 
                                     <script>
@@ -385,19 +386,10 @@
                         <div class="col-4">
                             <div class="row">
 
-                                <div class="col-12">
+                                <div class="col-12" data-aos="fade-up" data-aos-delay="300">
                                     <div class="card shadow-sm">
                                         <div class="card-body py-4 px-4">
                                             <div class="d-flex align-items-center">
-                                                {{-- <div class="avatar avatar-xl">
-                                                    @if ($karang->user->profil == null)
-                                                        <img src="{{ asset('admin/compiled/jpg/2.jpg') }}">
-                                                    @else
-                                                        <img id="userImage" src="{{ asset($karang->user->profil) }}"
-                                                            style="object-fit: cover;">
-                                                    @endif
-
-                                                </div> --}}
                                                 <div class="name">
                                                     <h6 style="font-size: 17px mb-0">
                                                         Diupdate oleh <b>{{ $post->pengguna }}</b>
@@ -411,7 +403,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 ">
+                                <div class="col-12 " data-aos="fade-up" data-aos-delay="400">
                                     <div class="card shadow-sm">
                                         <div class="card-header">
                                             <h4>Diagram Lingkarang</h4>
@@ -450,7 +442,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-8 col-xl-8">
+                        <div class="col-8 col-xl-8" data-aos="fade-up" data-aos-delay="300" data-aos-offset="-200">
                             <div class="card shadow-sm">
                                 <div class="card-header">
                                     <h4>Data Stasiun {{ $post->nama }}</h4>
@@ -491,7 +483,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 col-xl-4">
+                        <div class="col-4 col-xl-4" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-200">
                             <div class="card shadow-sm">
                                 <div class="card-header">
                                     <h4>Gambar {{ $post->nama }}</h4>
@@ -535,6 +527,12 @@
         </div>
 
     </main><!-- End #main -->
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script src="{{ asset('admin/static/js/components/dark.js') }}"></script>
