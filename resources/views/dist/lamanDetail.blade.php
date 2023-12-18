@@ -24,7 +24,7 @@
 
             @if ($chartData)
             @else
-                <div class="alert alert-light-danger color-danger alert-dismissible show fade">
+                <div class="alert alert-light-danger color-danger alert-dismissible show fade" data-aos="fade-up" data-aos-delay="40">
                     <i class="fa-solid fa-triangle-exclamation"></i> Data terumbu karang belum ada! &nbsp;
 
                     <a href="{{ route('karang.index') }}">
