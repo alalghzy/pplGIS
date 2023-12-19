@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->string('nama');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('kedalaman');
-            $table->string('pengguna');
+            $table->string('image', 100);
+            $table->string('nama', 50);
+            $table->string('latitude', 50);
+            $table->string('longitude', 50);
+            $table->string('kedalaman', 50);
+            $table->string('pengguna', 50);
             $table->timestamps();
 
         });
