@@ -356,7 +356,7 @@
                             <div class="col-12 ">
                                 <div class="card shadow-sm">
                                     <div class="card-header">
-                                        <h4>Diagram Lingkarang</h4>
+                                        <h4>Diagram Lingkaran</h4>
                                     </div>
 
                                     @if ($chartData)

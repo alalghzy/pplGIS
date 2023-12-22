@@ -406,7 +406,7 @@
                                 <div class="col-12 " data-aos="fade-up" data-aos-delay="400">
                                     <div class="card shadow-sm">
                                         <div class="card-header">
-                                            <h4>Diagram Lingkarang</h4>
+                                            <h4>Diagram Lingkaran</h4>
                                         </div>
                                         @if ($chartData != null)
                                             <center>
